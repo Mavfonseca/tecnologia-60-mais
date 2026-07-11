@@ -1,0 +1,69 @@
+---
+import HeaderLink from './HeaderLink.astro';
+import { SITE_TITLE } from '../consts';
+---
+
+<header>
+	<nav>
+		<h2><a href="/">{SITE_TITLE}</a></h2>
+		<div class="internal-links">
+			<HeaderLink href="/">Casa</HeaderLink>
+			<HeaderLink href="/blog">Blog</HeaderLink>
+			<HeaderLink href="/sobre">Sobre</HeaderLink>
+		</div>
+	</nav>
+</header>
+
+<style>
+	header {
+		margin: 0;
+		padding: 1.5em 2em;
+		background: var(--accent-dark); /* Aqui entra a cor de fundo azul escura */
+		box-shadow: 0 4px 12px rgba(var(--black), 20%);
+	}
+	h2 {
+		margin: 0;
+		font-size: 2.2em;
+		font-weight: 800;
+		letter-spacing: -0.02em;
+	}
+	h2 a,
+	h2 a.active {
+		text-decoration: none;
+		color: #ffffff; /* Letras do título em branco para dar contraste */
+	}
+	nav {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+	}
+	nav a {
+		padding: 0.5em 1em;
+		color: #ffffff; /* Letras dos botões em branco */
+		font-size: 1.25em;
+		font-weight: 600;
+		border-bottom: 4px solid transparent;
+		text-decoration: none;
+		border-radius: 8px;
+		transition: all 0.2s ease;
+	}
+	nav a:hover {
+		background: rgba(255, 255, 255, 0.15); /* Fundo levemente claro ao passar o mouse */
+		color: #ffffff;
+	}
+	nav a.active {
+		color: #ffffff;
+		border-bottom-color: #ffffff; /* Linha branca embaixo da página ativa */
+	}
+	.internal-links {
+		display: flex;
+		gap: 1.5em;
+	}
+	
+	@media (max-width: 720px) {
+		nav {
+			flex-direction: column;
+			gap: 1em;
+		}
+	}
+</style>

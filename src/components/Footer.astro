@@ -1,0 +1,26 @@
+---
+const today = new Date();
+---
+
+<footer>
+	<div class="footer-content">
+		&copy; {today.getFullYear()} Tecnologia 60 Mais por Marcos Fonseca.<br>
+        Todos os direitos reservados.
+	</div>
+</footer>
+
+<style>
+	footer {
+		padding: 2.5em 1em;
+		background: var(--accent-dark);
+		color: #ffffff;
+		text-align: center;
+		margin-top: 4em;
+        box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.1);
+	}
+	.footer-content {
+		font-size: 1.2em;
+        line-height: 1.6;
+        font-weight: 500;
+	}
+</style>

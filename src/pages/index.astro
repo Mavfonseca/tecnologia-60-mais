@@ -1,0 +1,36 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
+import '../styles/global.css';
+---
+
+<!doctype html>
+<html lang="pt-BR">
+    <head>
+        <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+    </head>
+    <body>
+        <Header />
+        <main>
+            <h1>Seja bem-vindo ao Tecnologia 60 Mais!</h1>
+            <p>
+                Olá! Aqui, a tecnologia deixa de ser um bicho de sete cabeças e vira sua maior aliada. Eu sou o Marcos Fonseca, e com minhas décadas de experiência em sala de aula, estou aqui para te guiar nessa jornada digital com muita segurança, paciência e simplicidade.
+            </p>
+            <p>
+                Este espaço foi criado especialmente para nós, que queremos aproveitar tudo o que a internet, os celulares e os computadores têm a oferecer, mas sem aquelas complicações e termos técnicos difíceis.
+            </p>
+            <p>O que você vai encontrar por aqui:</p>
+            <ul>
+                <li><strong>Dicas práticas</strong> para usar o celular e o computador no dia a dia.</li>
+                <li><strong>Passo a passo</strong> para navegar na internet e usar aplicativos com total segurança.</li>
+                <li><strong>Tutoriais fáceis</strong> para você não depender da ajuda de ninguém na hora de resolver problemas digitais.</li>
+            </ul>
+            <p>
+                Sinta-se em casa! Acesse o nosso <a href="/blog">Blog</a> no menu superior para ler os artigos mais recentes e vamos aprender juntos.
+            </p>
+        </main>
+        <Footer />
+    </body>
+</html>
