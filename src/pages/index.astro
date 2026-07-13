@@ -4,6 +4,7 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 import fotoMarcos from '../assets/foto-marcos.jpg';
+import dicaSeguranca from '../assets/dica-de-seguranca.jpg';
 ---
 
 <!doctype html>
@@ -258,14 +259,14 @@ import fotoMarcos from '../assets/foto-marcos.jpg';
 					</div>
 
 					<!-- Cartão do meio (Golpes) -->
-					<div class="blog-card">
-						<img src="https://images.unsplash.com/photo-1614064641913-6b71a3062828?auto=format&fit=crop&w=800&q=80" alt="Cadeado Digital de Segurança">
-						<div class="blog-card-content">
-							<h4>Como identificar mensagens falsas e golpes</h4>
-							<p>Nossa aula completa sobre como blindar seu celular contra os perigos da internet.</p>
-							<a href="/blog/golpes-whatsapp/" class="blog-link">Ler Mais &rarr;</a>
-						</div>
+				<div class="blog-card">
+					<img src={dicaSeguranca.src} alt="Cadeado Digital de Segurança no Notebook">
+					<div class="blog-card-content">
+						<h4>Como identificar mensagens falsas e golpes</h4>
+						<p>Nossa aula completa sobre como blindar seu celular contra os perigos da internet.</p>
+						<a href="/blog/golpes-whatsapp/" class="blog-link">Ler Mais &rarr;</a>
 					</div>
+				</div>
 
 					<div class="blog-card">
 						<img src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&w=600&q=80" alt="Aplicativos">
