@@ -2,7 +2,7 @@
 title: 'O Que é o Tecnologia 60 Mais?'
 description: 'Entenda a proposta deste portal de inclusão digital para a geração Prateada...'
 pubDate: 'July 09 2026'
-heroImage: '../../assets/blog-placeholder-about.jpg'
+heroImage: '../../assets/capa-primeiro-passo.jpg'
 ---
 
 **Bem-vindo ao início de uma nova jornada!**
