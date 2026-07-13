@@ -1,36 +1,295 @@
 ---
 import BaseHead from '../components/BaseHead.astro';
-import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
-import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
-import '../styles/global.css';
+import Footer from '../components/Footer.astro';
+import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+import fotoMarcos from '../assets/foto-marcos.jpg';
 ---
 
 <!doctype html>
-<html lang="pt-BR">
-    <head>
-        <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-    </head>
-    <body>
-        <Header />
-        <main>
-            <h1>Seja bem-vindo ao Tecnologia 60 Mais!</h1>
-            <p>
-                Olá! Aqui, a tecnologia deixa de ser um bicho de sete cabeças e vira sua maior aliada. Eu sou o Marcos Fonseca, e com minhas décadas de experiência em sala de aula, estou aqui para te guiar nessa jornada digital com muita segurança, paciência e simplicidade.
-            </p>
-            <p>
-                Este espaço foi criado especialmente para nós, que queremos aproveitar tudo o que a internet, os celulares e os computadores têm a oferecer, mas sem aquelas complicações e termos técnicos difíceis.
-            </p>
-            <p>O que você vai encontrar por aqui:</p>
-            <ul>
-                <li><strong>Dicas práticas</strong> para usar o celular e o computador no dia a dia.</li>
-                <li><strong>Passo a passo</strong> para navegar na internet e usar aplicativos com total segurança.</li>
-                <li><strong>Tutoriais fáceis</strong> para você não depender da ajuda de ninguém na hora de resolver problemas digitais.</li>
-            </ul>
-            <p>
-                Sinta-se em casa! Acesse o nosso <a href="/blog">Blog</a> no menu superior para ler os artigos mais recentes e vamos aprender juntos.
-            </p>
-        </main>
-        <Footer />
-    </body>
+<html lang="pt-br">
+	<head>
+		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+		<style>
+			html, body {
+				margin: 0 !important;
+				padding: 0 !important;
+				width: 100%;
+				overflow-x: hidden;
+				background-color: #f8f9fa;
+				font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+			}
+			
+			main {
+				width: 100%;
+				padding: 0;
+			}
+
+			.hero-section {
+				position: relative;
+				/* Apontando para a sua nova imagem "limpa" na pasta assets */
+				background-image: url('../assets/Imagem-principal-tecnologia-60-mais.jpg');
+				background-size: cover;
+				background-position: center;
+				height: 550px;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				text-align: center;
+				color: white;
+				padding: 0 20px;
+				width: 100vw;
+				margin-left: calc(-50vw + 50%);
+			}
+			.hero-content {
+				max-width: 800px;
+				margin-bottom: 60px;
+			}
+			.hero-content h1 {
+				font-size: 3.8rem;
+				font-weight: 700;
+				margin-bottom: 20px;
+				text-shadow: 2px 2px 8px rgba(0,0,0,0.4);
+			}
+			.hero-content p {
+				font-size: 1.4rem;
+				margin-bottom: 35px;
+				line-height: 1.5;
+				text-shadow: 1px 1px 5px rgba(0,0,0,0.4);
+			}
+			.btn-coral {
+				background-color: #ff7f50;
+				color: white;
+				padding: 16px 45px;
+				border-radius: 35px;
+				text-decoration: none;
+				font-weight: bold;
+				font-size: 1.3rem;
+				display: inline-block;
+				transition: all 0.3s ease;
+				box-shadow: 0 4px 15px rgba(255, 127, 80, 0.4);
+			}
+			.btn-coral:hover {
+				background-color: #e0663a;
+				transform: translateY(-2px);
+			}
+
+			.features-wrapper {
+				max-width: 1100px;
+				margin: -90px auto 60px;
+				padding: 0 20px;
+				display: grid;
+				grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+				gap: 30px;
+				position: relative;
+				z-index: 10;
+			}
+			.feature-card {
+				background: white;
+				border-radius: 20px;
+				padding: 40px 25px;
+				text-align: center;
+				box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+				border-bottom: 5px solid #ff7f50;
+				transition: transform 0.3s ease;
+			}
+			.feature-card:hover {
+				transform: translateY(-5px);
+			}
+			.feature-card img {
+				width: 70px;
+				height: 70px;
+				margin-bottom: 20px;
+			}
+			.feature-card h3 {
+				color: #000080;
+				font-size: 1.5rem;
+				margin-bottom: 15px;
+				font-weight: bold;
+			}
+			.feature-card p {
+				color: #555;
+				font-size: 1.05rem;
+				line-height: 1.5;
+				margin: 0;
+			}
+
+			.blog-section {
+				max-width: 1100px;
+				margin: 80px auto;
+				padding: 0 20px;
+			}
+			.section-title {
+				color: #000080;
+				font-size: 2.2rem;
+				font-weight: bold;
+				margin-bottom: 30px;
+				border-bottom: 3px solid #ff7f50;
+				display: inline-block;
+				padding-bottom: 5px;
+			}
+			.blog-grid {
+				display: grid;
+				grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+				gap: 30px;
+			}
+			.blog-card {
+				background: white;
+				border-radius: 15px;
+				overflow: hidden;
+				box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+			}
+			.blog-card img {
+				width: 100%;
+				height: 220px;
+				object-fit: cover;
+			}
+			.blog-card-content {
+				padding: 25px;
+			}
+			.blog-card-content h4 {
+				color: #111;
+				font-size: 1.3rem;
+				font-weight: bold;
+				margin: 0 0 15px 0;
+				line-height: 1.4;
+			}
+			.blog-card-content p {
+				color: #666;
+				font-size: 1rem;
+				margin-bottom: 20px;
+				line-height: 1.5;
+			}
+			.blog-link {
+				color: #000080;
+				font-weight: bold;
+				text-decoration: none;
+				font-size: 1.05rem;
+			}
+			.blog-link:hover {
+				text-decoration: underline;
+			}
+
+			.about-section {
+				max-width: 1100px;
+				margin: 80px auto 100px;
+				padding: 0 20px;
+				display: flex;
+				align-items: center;
+				gap: 50px;
+			}
+			.about-image {
+				width: 250px;
+				height: 250px;
+				border-radius: 20px;
+				object-fit: cover;
+				box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+			}
+			.about-content h2 {
+				color: #000080;
+				font-size: 2.2rem;
+				font-weight: bold;
+				margin: 0 0 20px 0;
+			}
+			.about-content p {
+				color: #444;
+				font-size: 1.15rem;
+				line-height: 1.7;
+				margin-bottom: 15px;
+			}
+			.about-content a {
+				color: #ff7f50;
+				font-weight: bold;
+				text-decoration: none;
+			}
+			.about-content a:hover {
+				text-decoration: underline;
+			}
+
+			@media (max-width: 768px) {
+				.hero-content h1 { font-size: 2.5rem; }
+				.hero-content p { font-size: 1.1rem; }
+				.features-wrapper { margin-top: -50px; }
+				.about-section { flex-direction: column; text-align: center; }
+			}
+		</style>
+	</head>
+	<body>
+		<Header />
+		
+		<main>
+			<section class="hero-section">
+				<div class="hero-content">
+					<h1>Seja bem-vindo ao Tecnologia 60 Mais!</h1>
+					<p>Tecnologia descomplicada para sua jornada digital, com segurança e paciência. Guia: Marcos Fonseca.</p>
+					<a href="/blog" class="btn-coral">Explore Tutoriais</a>
+				</div>
+			</section>
+
+			<section class="features-wrapper">
+				<div class="feature-card">
+					<img src="https://api.iconify.design/flat-color-icons:calendar.svg" alt="Ícone Calendário">
+					<h3>Dicas Práticas</h3>
+					<p>Pequenas dicas diárias para facilitar o uso do celular e do seu computador em casa.</p>
+				</div>
+				<div class="feature-card">
+					<img src="https://api.iconify.design/flat-color-icons:privacy.svg" alt="Ícone Segurança">
+					<h3>Passo a Passo Seguro</h3>
+					<p>Navegação na internet, bancos e aplicativos com total segurança e confiança.</p>
+				</div>
+				<div class="feature-card">
+					<img src="https://api.iconify.design/flat-color-icons:touchscreen-smartphone.svg" alt="Ícone Independência">
+					<h3>Tutoriais de Independência</h3>
+					<p>Aprenda a resolver problemas digitais sozinho e ser muito mais autônomo.</p>
+				</div>
+			</section>
+
+			<section class="blog-section">
+				<h2 class="section-title">Do Nosso Blog</h2>
+				<div class="blog-grid">
+					
+					<div class="blog-card">
+						<img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=600&q=80" alt="Videochamada">
+						<div class="blog-card-content">
+							<h4>Como fazer uma vídeo-chamada no WhatsApp</h4>
+							<p>Aprenda o passo a passo seguro para se conectar com a família usando a câmera do seu celular.</p>
+							<a href="/blog" class="blog-link">Ler Mais &rarr;</a>
+						</div>
+					</div>
+
+					<!-- Cartão do meio (Golpes) -->
+					<div class="blog-card">
+						<img src="https://images.unsplash.com/photo-1614064641913-6b71a3062828?auto=format&fit=crop&w=800&q=80" alt="Cadeado Digital de Segurança">
+						<div class="blog-card-content">
+							<h4>Como identificar mensagens falsas e golpes</h4>
+							<p>Nossa aula completa sobre como blindar seu celular contra os perigos da internet.</p>
+							<a href="/blog/golpes-whatsapp/" class="blog-link">Ler Mais &rarr;</a>
+						</div>
+					</div>
+
+					<div class="blog-card">
+						<img src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&w=600&q=80" alt="Aplicativos">
+						<div class="blog-card-content">
+							<h4>Descubra novos aplicativos úteis</h4>
+							<p>Ferramentas incríveis gratuitas para saúde, leitura, organização e entretenimento diário.</p>
+							<a href="/blog" class="blog-link">Ler Mais &rarr;</a>
+						</div>
+					</div>
+
+				</div>
+			</section>
+
+			<section class="about-section">
+				<img src={fotoMarcos.src} alt="Marcos Fonseca" class="about-image">
+				<div class="about-content">
+					<h2>Sobre o Guia</h2>
+					<p>Sou o <strong>Marcos Fonseca</strong>. Com décadas de experiência em sala de aula, desenvolvi um método focado inteiramente na paciência e na simplicidade.</p>
+					<p>Minha missão é construir uma ponte segura e acolhedora para que o público 60+ explore o mundo digital com autonomia, sem o medo de apertar o botão errado e aproveitando o melhor que a tecnologia tem a oferecer.</p>
+					<a href="/about">Conheça mais sobre minha história</a>
+				</div>
+			</section>
+
+		</main>
+		<Footer />
+	</body>
 </html>

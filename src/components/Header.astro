@@ -3,67 +3,39 @@ import HeaderLink from './HeaderLink.astro';
 import { SITE_TITLE } from '../consts';
 ---
 
-<header>
-	<nav>
-		<h2><a href="/">{SITE_TITLE}</a></h2>
-		<div class="internal-links">
-			<HeaderLink href="/">Casa</HeaderLink>
-			<HeaderLink href="/blog">Blog</HeaderLink>
-			<HeaderLink href="/sobre">Sobre</HeaderLink>
+<header style="background-color: #000080; color: white; padding: 22px 20px; margin: 0; box-shadow: 0 4px 10px rgba(0,0,0,0.15); width: 100%; box-sizing: border-box;">
+	<nav style="display: flex; align-items: center; justify-content: space-between; max-width: 1100px; margin: 0 auto;">
+		<h2 style="margin: 0; font-size: 1.8rem;">
+			<a href="/" style="color: white; text-decoration: none; font-weight: bold;">Tecnologia 60 Mais</a>
+		</h2>
+		<div class="nav-links" style="display: flex; align-items: center; gap: 30px;">
+			<HeaderLink href="/" style="color: white; text-decoration: none; font-size: 1.1rem; font-weight: bold;">Casa</HeaderLink>
+			<HeaderLink href="/blog" style="color: white; text-decoration: none; font-size: 1.1rem; font-weight: bold;">Blog</HeaderLink>
+			<HeaderLink href="/about" style="color: white; text-decoration: none; font-size: 1.1rem; font-weight: bold;">Sobre</HeaderLink>
+			
+			<!-- Botão de Login -->
+			<a href="#" style="border: 2px solid white; padding: 8px 20px; border-radius: 20px; color: white; text-decoration: none; font-weight: bold; transition: all 0.3s ease;">Login</a>
 		</div>
 	</nav>
 </header>
 
 <style>
-	header {
-		margin: 0;
-		padding: 1.5em 2em;
-		background: var(--accent-dark); /* Aqui entra a cor de fundo azul escura */
-		box-shadow: 0 4px 12px rgba(var(--black), 20%);
-	}
-	h2 {
-		margin: 0;
-		font-size: 2.2em;
-		font-weight: 800;
-		letter-spacing: -0.02em;
-	}
-	h2 a,
-	h2 a.active {
-		text-decoration: none;
-		color: #ffffff; /* Letras do título em branco para dar contraste */
-	}
-	nav {
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
-	}
-	nav a {
-		padding: 0.5em 1em;
-		color: #ffffff; /* Letras dos botões em branco */
-		font-size: 1.25em;
-		font-weight: 600;
-		border-bottom: 4px solid transparent;
-		text-decoration: none;
-		border-radius: 8px;
-		transition: all 0.2s ease;
-	}
-	nav a:hover {
-		background: rgba(255, 255, 255, 0.15); /* Fundo levemente claro ao passar o mouse */
-		color: #ffffff;
-	}
-	nav a.active {
-		color: #ffffff;
-		border-bottom-color: #ffffff; /* Linha branca embaixo da página ativa */
-	}
-	.internal-links {
-		display: flex;
-		gap: 1.5em;
+	/* Efeito hover (piscar) no botão de Login */
+	.nav-links a:last-child:hover {
+		background-color: white;
+		color: #000080 !important;
 	}
 	
-	@media (max-width: 720px) {
+	/* Responsividade para o celular */
+	@media (max-width: 768px) {
 		nav {
 			flex-direction: column;
-			gap: 1em;
+			gap: 15px;
+		}
+		.nav-links {
+			gap: 15px;
+			flex-wrap: wrap;
+			justify-content: center;
 		}
 	}
 </style>
