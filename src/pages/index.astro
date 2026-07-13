@@ -6,7 +6,6 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 import fotoMarcos from '../assets/foto-marcos.jpg';
 import dicaSeguranca from '../assets/dica-de-seguranca.jpg';
 ---
-
 <!doctype html>
 <html lang="pt-br">
 	<head>
@@ -21,114 +20,83 @@ import dicaSeguranca from '../assets/dica-de-seguranca.jpg';
 				font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 			}
 			
-			main {
-				width: 100%;
-				padding: 0;
-			}
-
 			.hero-section {
-				position: relative;
-				/* Apontando para a sua nova imagem "limpa" na pasta assets */
-				background-image: url('../assets/Imagem-principal-tecnologia-60-mais.jpg');
+				background-image: linear-gradient(rgba(0, 0, 128, 0.4), rgba(0, 0, 128, 0.6)), url('../assets/Imagem-principal-tecnologia-60-mais.jpg');
 				background-size: cover;
 				background-position: center;
-				height: 550px;
-				display: flex;
-				align-items: center;
-				justify-content: center;
-				text-align: center;
 				color: white;
-				padding: 0 20px;
-				width: 100vw;
-				margin-left: calc(-50vw + 50%);
+				padding: 100px 20px;
+				text-align: center;
 			}
 			.hero-content {
 				max-width: 800px;
-				margin-bottom: 60px;
+				margin: 0 auto;
 			}
 			.hero-content h1 {
-				font-size: 3.8rem;
-				font-weight: 700;
+				font-size: 3.5rem;
 				margin-bottom: 20px;
-				text-shadow: 2px 2px 8px rgba(0,0,0,0.4);
+				text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
 			}
 			.hero-content p {
-				font-size: 1.4rem;
-				margin-bottom: 35px;
-				line-height: 1.5;
-				text-shadow: 1px 1px 5px rgba(0,0,0,0.4);
+				font-size: 1.2rem;
+				margin-bottom: 30px;
 			}
-			.btn-coral {
+			.btn-primary {
 				background-color: #ff7f50;
 				color: white;
-				padding: 16px 45px;
-				border-radius: 35px;
+				padding: 15px 30px;
+				border-radius: 30px;
 				text-decoration: none;
+				font-size: 1.2rem;
 				font-weight: bold;
-				font-size: 1.3rem;
+				transition: background-color 0.3s ease;
 				display: inline-block;
-				transition: all 0.3s ease;
-				box-shadow: 0 4px 15px rgba(255, 127, 80, 0.4);
 			}
-			.btn-coral:hover {
-				background-color: #e0663a;
-				transform: translateY(-2px);
+			.btn-primary:hover {
+				background-color: #ff6347;
 			}
 
-			.features-wrapper {
-				max-width: 1100px;
-				margin: -90px auto 60px;
-				padding: 0 20px;
-				display: grid;
-				grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+			.features-section {
+				display: flex;
+				justify-content: center;
 				gap: 30px;
-				position: relative;
-				z-index: 10;
+				padding: 0 20px;
+				margin-top: -50px;
+				flex-wrap: wrap;
 			}
 			.feature-card {
 				background: white;
-				border-radius: 20px;
-				padding: 40px 25px;
+				padding: 30px;
+				border-radius: 15px;
+				box-shadow: 0 10px 20px rgba(0,0,0,0.1);
 				text-align: center;
-				box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-				border-bottom: 5px solid #ff7f50;
-				transition: transform 0.3s ease;
-			}
-			.feature-card:hover {
-				transform: translateY(-5px);
+				max-width: 300px;
+				flex: 1;
+				min-width: 250px;
 			}
 			.feature-card img {
-				width: 70px;
-				height: 70px;
-				margin-bottom: 20px;
+				width: 60px;
+				margin-bottom: 15px;
 			}
 			.feature-card h3 {
 				color: #000080;
-				font-size: 1.5rem;
-				margin-bottom: 15px;
-				font-weight: bold;
-			}
-			.feature-card p {
-				color: #555;
-				font-size: 1.05rem;
-				line-height: 1.5;
-				margin: 0;
+				margin-bottom: 10px;
 			}
 
-			.blog-section {
+			.blog-section, .about-section {
 				max-width: 1100px;
-				margin: 80px auto;
+				margin: 60px auto;
 				padding: 0 20px;
 			}
 			.section-title {
 				color: #000080;
-				font-size: 2.2rem;
-				font-weight: bold;
-				margin-bottom: 30px;
+				font-size: 2rem;
 				border-bottom: 3px solid #ff7f50;
 				display: inline-block;
+				margin-bottom: 30px;
 				padding-bottom: 5px;
 			}
+			
 			.blog-grid {
 				display: grid;
 				grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -138,108 +106,69 @@ import dicaSeguranca from '../assets/dica-de-seguranca.jpg';
 				background: white;
 				border-radius: 15px;
 				overflow: hidden;
-				box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+				box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+				transition: transform 0.3s ease;
+			}
+			.blog-card:hover {
+				transform: translateY(-5px);
 			}
 			.blog-card img {
 				width: 100%;
-				height: 220px;
+				height: 200px;
 				object-fit: cover;
 			}
 			.blog-card-content {
-				padding: 25px;
-			}
-			.blog-card-content h4 {
-				color: #111;
-				font-size: 1.3rem;
-				font-weight: bold;
-				margin: 0 0 15px 0;
-				line-height: 1.4;
-			}
-			.blog-card-content p {
-				color: #666;
-				font-size: 1rem;
-				margin-bottom: 20px;
-				line-height: 1.5;
+				padding: 20px;
 			}
 			.blog-link {
 				color: #000080;
-				font-weight: bold;
 				text-decoration: none;
-				font-size: 1.05rem;
-			}
-			.blog-link:hover {
-				text-decoration: underline;
+				font-weight: bold;
+				display: inline-block;
+				margin-top: 15px;
 			}
 
-			.about-section {
-				max-width: 1100px;
-				margin: 80px auto 100px;
-				padding: 0 20px;
+			.about-content {
 				display: flex;
+				gap: 40px;
 				align-items: center;
-				gap: 50px;
 			}
 			.about-image {
-				width: 250px;
-				height: 250px;
-				border-radius: 20px;
-				object-fit: cover;
-				box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+				width: 300px;
+				border-radius: 15px;
+				box-shadow: 0 10px 20px rgba(0,0,0,0.1);
 			}
-			.about-content h2 {
-				color: #000080;
-				font-size: 2.2rem;
-				font-weight: bold;
-				margin: 0 0 20px 0;
-			}
-			.about-content p {
-				color: #444;
-				font-size: 1.15rem;
-				line-height: 1.7;
-				margin-bottom: 15px;
-			}
-			.about-content a {
-				color: #ff7f50;
-				font-weight: bold;
-				text-decoration: none;
-			}
-			.about-content a:hover {
-				text-decoration: underline;
-			}
-
+			
 			@media (max-width: 768px) {
 				.hero-content h1 { font-size: 2.5rem; }
-				.hero-content p { font-size: 1.1rem; }
-				.features-wrapper { margin-top: -50px; }
-				.about-section { flex-direction: column; text-align: center; }
+				.about-content { flex-direction: column; }
 			}
 		</style>
 	</head>
 	<body>
 		<Header />
-		
 		<main>
 			<section class="hero-section">
 				<div class="hero-content">
-					<h1>Seja bem-vindo ao Tecnologia 60 Mais!</h1>
-					<p>Tecnologia descomplicada para sua jornada digital, com segurança e paciência. Guia: Marcos Fonseca.</p>
-					<a href="/blog" class="btn-coral">Explore Tutoriais</a>
+					<h1>Seja bem-vindo ao<br>Tecnologia 60 Mais!</h1>
+					<p>Tecnologia descomplicada para sua jornada digital, com segurança e paciência.<br>Guia: Marcos Fonseca.</p>
+					<a href="/blog" class="btn-primary">Explore Tutoriais</a>
 				</div>
 			</section>
 
-			<section class="features-wrapper">
+			<section class="features-section">
 				<div class="feature-card">
-					<img src="https://api.iconify.design/flat-color-icons:calendar.svg" alt="Ícone Calendário">
+					<img src="https://cdn-icons-png.flaticon.com/512/2857/2857415.png" alt="Dicas Práticas">
 					<h3>Dicas Práticas</h3>
 					<p>Pequenas dicas diárias para facilitar o uso do celular e do seu computador em casa.</p>
 				</div>
 				<div class="feature-card">
-					<img src="https://api.iconify.design/flat-color-icons:privacy.svg" alt="Ícone Segurança">
+					<img src="https://cdn-icons-png.flaticon.com/512/3064/3064197.png" alt="Passo a Passo">
 					<h3>Passo a Passo Seguro</h3>
 					<p>Navegação na internet, bancos e aplicativos com total segurança e confiança.</p>
 				</div>
 				<div class="feature-card">
-					<img src="https://api.iconify.design/flat-color-icons:touchscreen-smartphone.svg" alt="Ícone Independência">
+					<img src="https://cdn-icons-png.flaticon.com/512/2857/2857438.png" alt="Independência">
 					<h3>Tutoriais de Independência</h3>
 					<p>Aprenda a resolver problemas digitais sozinho e ser muito mais autônomo.</p>
 				</div>
@@ -258,15 +187,15 @@ import dicaSeguranca from '../assets/dica-de-seguranca.jpg';
 						</div>
 					</div>
 
-					<!-- Cartão do meio (Golpes) -->
-				<div class="blog-card">
-					<img src={dicaSeguranca.src} alt="Cadeado Digital de Segurança no Notebook">
-					<div class="blog-card-content">
-						<h4>Como identificar mensagens falsas e golpes</h4>
-						<p>Nossa aula completa sobre como blindar seu celular contra os perigos da internet.</p>
-						<a href="/blog/golpes-whatsapp/" class="blog-link">Ler Mais &rarr;</a>
+					<!-- Cartão do meio (Golpes - Com a nova imagem!) -->
+					<div class="blog-card">
+						<img src={dicaSeguranca.src} alt="Cadeado Digital de Segurança no Notebook">
+						<div class="blog-card-content">
+							<h4>Como identificar mensagens falsas e golpes</h4>
+							<p>Nossa aula completa sobre como blindar seu celular contra os perigos da internet.</p>
+							<a href="/blog/golpes-whatsapp/" class="blog-link">Ler Mais &rarr;</a>
+						</div>
 					</div>
-				</div>
 
 					<div class="blog-card">
 						<img src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&w=600&q=80" alt="Aplicativos">
@@ -281,15 +210,16 @@ import dicaSeguranca from '../assets/dica-de-seguranca.jpg';
 			</section>
 
 			<section class="about-section">
-				<img src={fotoMarcos.src} alt="Marcos Fonseca" class="about-image">
 				<div class="about-content">
-					<h2>Sobre o Guia</h2>
-					<p>Sou o <strong>Marcos Fonseca</strong>. Com décadas de experiência em sala de aula, desenvolvi um método focado inteiramente na paciência e na simplicidade.</p>
-					<p>Minha missão é construir uma ponte segura e acolhedora para que o público 60+ explore o mundo digital com autonomia, sem o medo de apertar o botão errado e aproveitando o melhor que a tecnologia tem a oferecer.</p>
-					<a href="/about">Conheça mais sobre minha história</a>
+					<img src={fotoMarcos.src} alt="Marcos Fonseca" class="about-image">
+					<div>
+						<h2 class="section-title">Sobre o Guia</h2>
+						<p>Sou o <strong>Marcos Fonseca</strong>. Com décadas de experiência em sala de aula, desenvolvi um método focado inteiramente na paciência e na simplicidade.</p>
+						<p>Minha missão é construir uma ponte segura e acolhedora para que o público 60+ explore o mundo digital com autonomia, sem o medo de apertar o botão errado e aproveitando o melhor que a tecnologia tem a oferecer.</p>
+						<a href="/about" style="color: #ff7f50; font-weight: bold; text-decoration: none;">Conheça mais sobre minha história</a>
+					</div>
 				</div>
 			</section>
-
 		</main>
 		<Footer />
 	</body>
