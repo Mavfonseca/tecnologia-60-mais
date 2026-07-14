@@ -2,25 +2,54 @@
 const today = new Date();
 ---
 
-<footer>
-	<div class="footer-content">
-		&copy; {today.getFullYear()} Tecnologia 60 Mais por Marcos Fonseca.<br>
-        Todos os direitos reservados.
-	</div>
-</footer>
+<footer style="background-color: #000080; color: #ffffff; padding: 50px 20px; margin-top: 50px; width: 100%;">
+  <div style="max-width: 1000px; margin: 0 auto;">
+    
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px;">
+      
+      <!-- Coluna 1 -->
+      <div style="margin-bottom: 20px;">
+        <h3 style="color: #ff7f50; margin-top: 0;">Tecnologia 60 Mais</h3>
+        <p style="font-size: 0.9rem; line-height: 1.6;">Tecnologia descomplicada e com paciência. Nosso objetivo é dar autonomia digital com segurança e clareza.</p>
+      </div>
 
-<style>
-	footer {
-		padding: 2.5em 1em;
-		background: var(--accent-dark);
-		color: #ffffff;
-		text-align: center;
-		margin-top: 4em;
-        box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.1);
-	}
-	.footer-content {
-		font-size: 1.2em;
-        line-height: 1.6;
-        font-weight: 500;
-	}
-</style>
+      <!-- Coluna 2 -->
+      <div style="margin-bottom: 20px;">
+        <h4 style="color: #ff7f50; margin-top: 0; text-transform: uppercase; font-size: 0.9rem;">Conteúdos</h4>
+        <ul style="list-style: none; padding: 0; margin: 0;">
+          <li style="margin-bottom: 8px;"><a href="/blog" style="color: #ffffff; text-decoration: none; font-size: 0.9rem;">Todos os Tutoriais</a></li>
+          <li style="margin-bottom: 8px;"><a href="/blog" style="color: #ffffff; text-decoration: none; font-size: 0.9rem;">Segurança Digital</a></li>
+          <li style="margin-bottom: 8px;"><a href="/blog" style="color: #ffffff; text-decoration: none; font-size: 0.9rem;">Dicas de WhatsApp</a></li>
+        </ul>
+      </div>
+
+      <!-- Coluna 3 -->
+      <div style="margin-bottom: 20px;">
+        <h4 style="color: #ff7f50; margin-top: 0; text-transform: uppercase; font-size: 0.9rem;">Sobre</h4>
+        <ul style="list-style: none; padding: 0; margin: 0;">
+          <li style="margin-bottom: 8px;"><a href="/sobre" style="color: #ffffff; text-decoration: none; font-size: 0.9rem;">Sobre o Guia</a></li>
+          <li style="margin-bottom: 8px;"><a href="#" style="color: #ffffff; text-decoration: none; font-size: 0.9rem;">Privacidade</a></li>
+          <li style="margin-bottom: 8px;"><a href="#" style="color: #ffffff; text-decoration: none; font-size: 0.9rem;">Termos de Uso</a></li>
+        </ul>
+      </div>
+
+      <!-- Coluna 4 -->
+      <div style="margin-bottom: 20px;">
+        <h4 style="color: #ff7f50; margin-top: 0; text-transform: uppercase; font-size: 0.9rem;">Mais</h4>
+        <ul style="list-style: none; padding: 0; margin: 0;">
+          <li style="margin-bottom: 8px;"><a href="#" style="color: #ffffff; text-decoration: none; font-size: 0.9rem;">Biblioteca Digital</a></li>
+          <li style="margin-bottom: 8px;"><a href="/contato" style="color: #ffffff; text-decoration: none; font-size: 0.9rem;">Contato</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <!-- Rodapé Inferior -->
+    <div style="border-top: 1px solid rgba(255,255,255,0.2); margin-top: 30px; padding-top: 20px; text-align: center; font-size: 0.85rem;">
+      &copy; {today.getFullYear()} Tecnologia 60 Mais. Todos os direitos reservados.
+      <br>
+      <span style="opacity: 0.8;">Desenvolvido com ❤️ por Marcos Fonseca</span>
+    </div>
+
+  </div>
+</footer>
