@@ -1,0 +1,72 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+<html lang="pt-br">
+  <head>
+    <BaseHead title="Contato" description="Fale com o Marcos Fonseca" />
+  </head>
+  <body>
+    <Header />
+    
+    <main style="max-width: 600px; margin: 40px auto; padding: 20px;">
+      <h1 style="text-align: center; color: #000080; margin-bottom: 20px;">Fale comigo</h1>
+      <p style="text-align: center; margin-bottom: 40px;">
+        Tem alguma dúvida sobre um tutorial ou quer sugerir um novo tema? Preencha o formulário abaixo:
+      </p>
+
+      <!-- INÍCIO DO CÓDIGO MAILERLITE -->
+      <style type="text/css">
+        @import url("https://assets.mlcdn.com/fonts.css?version=1783937");
+        .ml-form-embedSubmitLoad { display: inline-block; width: 20px; height: 20px; }
+        .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
+        .ml-form-embedSubmitLoad:after { content: " "; display: block; width: 11px; height: 11px; margin: 1px; border-radius: 50%; border: 4px solid #fff; border-color: #ffffff #ffffff #ffffff transparent; animation: ml-form-embedSubmitLoad 1.2s linear infinite; }
+        @keyframes ml-form-embedSubmitLoad { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        #mlb2-43753732.ml-form-embedContainer { box-sizing: border-box; display: table; margin: 0 auto; position: static; width: 100% !important; }
+        #mlb2-43753732.ml-form-embedContainer .ml-form-embedWrapper { background-color: #f6f6f6; border-width: 0px; border-radius: 4px; box-sizing: border-box; display: inline-block !important; margin: 0; padding: 0; position: relative; width: 100%; max-width: 400px; }
+        #mlb2-43753732.ml-form-embedContainer .ml-form-align-center { text-align: center; }
+        #mlb2-43753732.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody { padding: 20px 20px 0 20px; }
+        #mlb2-43753732.ml-form-embedContainer .ml-form-embedBody .ml-form-embedContent h4 { color: #000000; font-family: 'Open Sans', Arial, sans-serif; font-size: 30px; margin: 0 0 10px 0; }
+        #mlb2-43753732.ml-form-embedContainer .ml-form-embedBody .ml-form-fieldRow input { background-color: #ffffff !important; border: 1px solid #cccccc !important; border-radius: 4px !important; padding: 10px !important; width: 100% !important; margin-bottom: 10px; }
+        #mlb2-43753732.ml-form-embedContainer .ml-form-embedBody .ml-form-embedSubmit button { background-color: #000000 !important; color: #ffffff !important; border-radius: 4px !important; padding: 10px !important; width: 100% !important; cursor: pointer; }
+      </style>
+
+      <div id="mlb2-43753732" class="ml-form-embedContainer ml-subscribe-form ml-subscribe-form-43753732">
+        <div class="ml-form-align-center">
+          <div class="ml-form-embedWrapper embedForm">
+            <div class="ml-form-embedBody row-form">
+              <div class="ml-form-embedContent">
+                <h4>Fale Conosco!</h4>
+                <p>Tem alguma dúvida ou sugestão? Deixe sua mensagem abaixo.</p>
+              </div>
+              <form class="ml-block-form" action="https://assets.mailerlite.com/jsonp/2268293/forms/193015547708835181/subscribe" method="post" target="_blank">
+                <div class="ml-form-formContent">
+                  <div class="ml-form-fieldRow"><input type="text" class="form-control" name="fields[name]" placeholder="Nome"></div>
+                  <div class="ml-form-fieldRow ml-last-item"><input type="email" class="form-control" name="fields[email]" placeholder="Email"></div>
+                </div>
+                <input type="hidden" name="ml-submit" value="1">
+                <div class="ml-form-embedSubmit"><button type="submit" class="primary">Enviar Mensagem</button></div>
+                <input type="hidden" name="anticsrf" value="true">
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- FIM DO CÓDIGO MAILERLITE -->
+
+    </main>
+
+    <Footer />
+
+    <!-- Scripts de funcionamento -->
+    <script is:inline>
+      function ml_webform_success_43753732() {
+        var $ = ml_jQuery || jQuery;
+        $('.ml-subscribe-form-43753732 .row-success').show();
+        $('.ml-subscribe-form-43753732 .row-form').hide();
+      }
+    </script>
+    <script is:inline src="https://groot.mailerlite.com/js/w/webforms.min.js?v83147fa8ce2d95cb73ece7f28b469519"></script>
+  </body>
+</html>
