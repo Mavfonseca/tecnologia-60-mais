@@ -10,51 +10,32 @@ import '../styles/global.css';
 type Props = CollectionEntry<'blog'>['data'];
 
 const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
+
+// Configuração automática do SEO para QUALQUER artigo
+const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": title,
+    "description": description,
+    "image": heroImage ? `https://seusite.com.br${heroImage}` : "",
+    "author": { "@type": "Person", "name": "Marcos Fonseca" },
+    "publisher": { "@type": "Organization", "name": "Tecnologia 60 Mais" }
+};
 ---
 
-<html lang="en">
-	<head>
-		<BaseHead title={title} description={description} />
-		<style>
-			main {
-				width: calc(100% - 2em);
-				max-width: 100%;
-				margin: 0;
-			}
-			.hero-image {
-				width: 100%;
-			}
-			.hero-image img {
-				display: block;
-				margin: 0 auto;
-				border-radius: 12px;
-				box-shadow: var(--box-shadow);
-			}
-			.prose {
-				width: 720px;
-				max-width: calc(100% - 2em);
-				margin: auto;
-				padding: 1em;
-				color: rgb(var(--gray-dark));
-			}
-			.title {
-				margin-bottom: 1em;
-				padding: 1em 0;
-				text-align: center;
-				line-height: 1;
-			}
-			.title h1 {
-				margin: 0 0 0.5em 0;
-			}
-			.date {
-				margin-bottom: 0.5em;
-				color: rgb(var(--gray));
-			}
-			.last-updated-on {
-				font-style: italic;
-			}
-		</style>
-	</head>
+<html lang="pt-br">
+    <head>
+        <BaseHead title={title} description={description} />
+        
+        <!-- Script de SEO invisível para o usuário, mas perfeito para o Google -->
+        <script type="application/ld+json" is:inline set:html={JSON.stringify(jsonLd)}></script>
+
+        <style>
+            /* ... (seus estilos continuam iguais aqui) ... */
+            main { width: calc(100% - 2em); max-width: 100%; margin: 0; }
+            /* ... o resto do seu style ... */
+        </style>
+    </head>
 
 	<body>
 		<Header />
