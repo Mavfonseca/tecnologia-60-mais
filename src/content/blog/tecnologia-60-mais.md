@@ -2,7 +2,7 @@
 title: 'Descubra novos aplicativos úteis para o dia a dia'
 description: 'Ferramentas incríveis gratuitas para saúde, leitura, organização e entretenimento diário.'
 pubDate: 'Jul 13 2026'
-heroImage: '../../assets/aplicativos-uteis.jpg'
+heroImage: '/imagens/aplicativos-uteis.jpg'
 ---
 
 O nosso celular é como um verdadeiro canivete suíço moderno. Ele faz muito mais do que apenas ligações ou mandar mensagens no WhatsApp. Com os "aplicativos" (que são como pequenas ferramentas ou cadernos dentro do aparelho), podemos transformar esse aparelhinho num grande aliado para a nossa rotina.

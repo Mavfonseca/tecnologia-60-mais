@@ -3,206 +3,48 @@ import BaseHead from '../components/BaseHead.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
-import fotoMarcos from '../assets/foto-marcos.jpg';
-import imagemPrincipal from '../assets/imagem-principal-tecnologia-60-mais.jpg';
-import dicaSeguranca from '../assets/dica-de-seguranca.jpg';
-import videoChamada from '../assets/video-chamada-whatsapp.jpg';
-import aplicativosUteis from '../assets/aplicativos-uteis.jpg';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('blog'))
+	.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+	.slice(0, 3);
 ---
 
 <!doctype html>
 <html lang="pt-br">
   <head>
     <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-    <style>
-      html, body {
-        margin: 0 !important;
-        padding: 0 !important;
-        width: 100%;
-        overflow-x: hidden;
-        background-color: #f8f9fa;
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        box-sizing: border-box;
-      }
-      *, *:before, *:after {
-        box-sizing: inherit;
-      }
-      .hero-section {
-        background-size: cover;
-        background-position: center right 15%;
-        color: white;
-        padding: 100px 20px;
-        text-align: center;
-      }
-      .hero-content {
-        max-width: 800px;
-        margin: 0 auto;
-      }
-      .hero-content h1 {
-        font-size: 3.5rem;
-        margin-bottom: 20px;
-        text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-      }
-      .hero-content p {
-        font-size: 1.2rem;
-        margin-bottom: 30px;
-      }
-      .cta-button {
-        display: inline-block;
-        background-color: #ff7f50;
-        color: white;
-        padding: 15px 30px;
-        border-radius: 25px;
-        text-decoration: none;
-        font-weight: bold;
-        font-size: 1.2rem;
-        transition: background-color 0.3s;
-      }
-      .cta-button:hover {
-        background-color: #ff6347;
-      }
-
-      .features-section {
-        display: flex;
-        justify-content: center;
-        gap: 20px;
-        padding: 0 20px;
-        margin-top: -80px; /* Essa é a mágica que puxa eles para cima da imagem! */
-        flex-wrap: wrap;
-        position: relative;
-        z-index: 10;
-      }
-      .feature-card {
-        background: white;
-        padding: 30px;
-        border-radius: 15px;
-        box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-        text-align: center;
-        width: 300px;
-        transition: transform 0.3s ease, box-shadow 0.3s ease; /* Prepara a decolagem */
-      }
-      .feature-card:hover {
-        transform: translateY(-10px); /* O efeito de flutuar ao passar o mouse! */
-        box-shadow: 0 15px 30px rgba(0,0,0,0.2);
-      }
-
-	  .feature-icon {
-        font-size: 3.5rem; /* A vitamina que faz eles crescerem! */
-        margin-bottom: 15px;
-        display: block;
-      }
-	  
-      }
-      .feature-icon {
-        font-size: 3rem;
-        margin-bottom: 15px;
-        display: block;
-      }
-      .feature-card h3 {
-        color: #000080;
-        margin-bottom: 10px;
-      }
-
-      .blog-section {
-        padding: 40px 20px;
-        max-width: 1000px;
-        margin: 0 auto;
-      }
-      .blog-section h2 {
-        color: #000080;
-        border-bottom: 2px solid #ff7f50;
-        padding-bottom: 10px;
-        margin-bottom: 30px;
-        display: inline-block;
-      }
-      .blog-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        gap: 30px;
-      }
-      .blog-card {
-        background: white;
-        border-radius: 10px;
-        overflow: hidden;
-        box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-        transition: transform 0.3s;
-      }
-      .blog-card:hover {
-        transform: translateY(-5px);
-      }
-      .blog-card img {
-        width: 100%;
-        height: 200px;
-        object-fit: cover;
-      }
-      .blog-card-content {
-        padding: 20px;
-      }
-      .blog-card-content h4 {
-        margin: 0 0 10px 0;
-        color: #333;
-      }
-      .blog-card-content p {
-        color: #666;
-        font-size: 0.9rem;
-        margin-bottom: 15px;
-      }
-      .blog-link {
-        color: #000080;
-        text-decoration: none;
-        font-weight: bold;
-        font-size: 0.9rem;
-      }
-
-      .about-preview {
-        display: flex;
-        align-items: center;
-        gap: 40px;
-        padding: 60px 20px;
-        max-width: 1000px;
-        margin: 0 auto;
-        flex-wrap: wrap;
-      }
-      .about-image {
-        flex: 1;
-        min-width: 300px;
-      }
-      .about-image img {
-        width: 100%;
-        border-radius: 20px;
-        box-shadow: 0 10px 20px rgba(0,0,0,0.15);
-      }
-      .about-text {
-        flex: 1;
-        min-width: 300px;
-      }
-      .about-text h2 {
-        color: #000080;
-        margin-bottom: 20px;
-      }
-      .about-link {
-        color: #ff7f50;
-        text-decoration: none;
-        font-weight: bold;
-        display: inline-block;
-        margin-top: 15px;
-      }
+    <style is:global>
+      body { margin: 0; padding: 0; font-family: 'Segoe UI', sans-serif; background-color: #f8f9fa; }
       
-      @media (max-width: 768px) {
-        .hero-content h1 {
-          font-size: 2.2rem;
-        }
-        .features-section {
-          margin-top: 20px;
-        }
-      }
+      /* Banner Principal */
+      .hero-section { background-size: cover; background-position: center; color: white; padding: 100px 20px; text-align: center; }
+      .hero-content { max-width: 800px; margin: 0 auto; }
+      .hero-content h1 { font-size: 3.5rem; margin-bottom: 20px; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); }
+      .hero-content p { font-size: 1.2rem; margin-bottom: 30px; text-shadow: 1px 1px 2px rgba(0,0,0,0.5); }
+      .cta-button { display: inline-block; background-color: #ff7f50; color: white; padding: 15px 30px; border-radius: 25px; text-decoration: none; font-weight: bold; font-size: 1.2rem; transition: background 0.3s; }
+      .cta-button:hover { background-color: #ff6347; }
+      
+      /* Cards com movimento */
+      .features-section { display: flex; justify-content: center; gap: 20px; padding: 0 20px; margin-top: -80px; flex-wrap: wrap; z-index: 10; position: relative; }
+      .feature-card { background: white; padding: 40px 30px; border-radius: 15px; box-shadow: 0 10px 20px rgba(0,0,0,0.1); text-align: center; width: 300px; transition: transform 0.3s ease; }
+      .feature-card:hover { transform: translateY(-10px); }
+      .feature-icon { font-size: 3rem; margin-bottom: 15px; display: block; }
+      
+      /* Blog Grid */
+      .blog-section { padding: 80px 20px; max-width: 1000px; margin: 0 auto; }
+      .blog-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+      .blog-card { background: white; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+      .blog-card img { width: 100%; height: 200px; object-fit: cover; }
+      .blog-card-content { padding: 20px; }
+      .blog-link { color: #000080; font-weight: bold; text-decoration: none; }
     </style>
   </head>
   <body>
     <Header />
     <main>
-      <!-- AQUI ESTÁ A MÁGICA: A IMAGEM AMARRADA NA VARIÁVEL -->
-      <section class="hero-section" style={`background-image: linear-gradient(rgba(0, 0, 128, 0.4), rgba(0, 0, 128, 0.8)), url(${imagemPrincipal.src});`}>
+      <!-- Hero Section Restaurada -->
+      <section class="hero-section" style="background-image: linear-gradient(rgba(0, 0, 128, 0.6), rgba(0, 0, 128, 0.6)), url('/imagens/imagem-principal-tecnologia-60-mais.jpg');">
         <div class="hero-content">
           <h1>Seja bem-vindo ao Tecnologia 60 Mais!</h1>
           <p>Tecnologia descomplicada para sua jornada digital, com segurança e paciência.<br> Guia: Marcos Fonseca.</p>
@@ -210,6 +52,7 @@ import aplicativosUteis from '../assets/aplicativos-uteis.jpg';
         </div>
       </section>
 
+      <!-- Cards com efeito hover -->
       <section class="features-section">
         <div class="feature-card">
           <span class="feature-icon">🎯</span>
@@ -228,49 +71,20 @@ import aplicativosUteis from '../assets/aplicativos-uteis.jpg';
         </div>
       </section>
 
+      <!-- Seção Automática do Blog -->
       <section class="blog-section">
-        <h2>Do Nosso Blog</h2>
+        <h2>Dicas e Tutoriais</h2>
         <div class="blog-grid">
-          
-          <div class="blog-card">
-            <img src={videoChamada.src} alt="Pessoa fazendo uma vídeo-chamada">
-            <div class="blog-card-content">
-              <h4>Como fazer uma vídeo-chamada no WhatsApp</h4>
-              <p>Aprenda o passo a passo seguro para se conectar com a família usando a câmera do seu celular.</p>
-              <a href="/blog/bem-vindo-ao-digital/" class="blog-link">Ler Mais &rarr;</a>
+          {posts.map((post) => (
+            <div class="blog-card">
+              <img src={post.data.heroImage} alt={post.data.title} />
+              <div class="blog-card-content">
+                <h4>{post.data.title}</h4>
+                <p>{post.data.description}</p>
+                <a href={`/blog/${post.id}/`} class="blog-link">Ler Mais &rarr;</a>
+              </div>
             </div>
-          </div>
-
-          <div class="blog-card">
-            <img src={dicaSeguranca.src} alt="Cadeado Digital de Segurança no Notebook">
-            <div class="blog-card-content">
-              <h4>Como identificar mensagens falsas e golpes</h4>
-              <p>Nossa aula completa sobre como blindar seu celular contra os perigos da internet.</p>
-              <a href="/blog/golpes-whatsapp/" class="blog-link">Ler Mais &rarr;</a>
-            </div>
-          </div>
-
-          <div class="blog-card">
-            <img src={aplicativosUteis.src} alt="Celular mostrando vários aplicativos na tela">
-            <div class="blog-card-content">
-              <h4>Descubra novos aplicativos úteis</h4>
-              <p>Ferramentas incríveis gratuitas para saúde, leitura, organização e entretenimento diário.</p>
-              <a href="/blog/tecnologia-60-mais/" class="blog-link">Ler Mais &rarr;</a>
-            </div>
-          </div>
-
-        </div>
-      </section>
-
-      <section class="about-preview">
-        <div class="about-image">
-          <img src={fotoMarcos.src} alt="Marcos Fonseca no seu escritório">
-        </div>
-        <div class="about-text">
-          <h2>Sobre o Guia</h2>
-          <p>Sou o <strong>Marcos Fonseca</strong>. Com décadas de experiência em sala de aula, desenvolvi um método focado inteiramente na paciência e na simplicidade.</p>
-          <p>Minha missão é construir uma ponte segura e acolhedora para que o público 60+ explore o mundo digital com autonomia, sem o medo de apertar o botão errado e aproveitando o melhor que a tecnologia tem a oferecer.</p>
-          <a href="/sobre" class="about-link">Conheça mais sobre minha história</a>
+          ))}
         </div>
       </section>
     </main>
