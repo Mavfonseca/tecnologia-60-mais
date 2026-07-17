@@ -1,7 +1,7 @@
 ---
 title: 'Descubra novos aplicativos úteis para o dia a dia'
 description: 'Ferramentas incríveis gratuitas para saúde, leitura, organização e entretenimento diário.'
-pubDate: 'Jul 13 2026'
+pubDate: '2026-07-13'
 heroImage: '/imagens/aplicativos-uteis.jpg'
 ---
 

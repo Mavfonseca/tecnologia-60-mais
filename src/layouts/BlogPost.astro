@@ -9,7 +9,7 @@ import '../styles/global.css';
 
 type Props = CollectionEntry<'blog'>['data'];
 
-const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
+const { title, description, pubDate, updatedDate, heroImage, heroAlt, heroCaption } = Astro.props;
 
 // Configuração automática do SEO para QUALQUER artigo
 const jsonLd = {
@@ -69,6 +69,24 @@ const jsonLd = {
 
 <style is:global>
 	/* ... outros estilos que já existem aí ... */
+	/* Ajuste de tipografia para maior legibilidade */
+	.title h1 {
+    	font-size: 2.2rem !important; /* Diminuído para um tamanho mais confortável */
+    	line-height: 1.2;
+    	margin: 0 0 0.5em 0;
+	}
+
+	.prose h2 {
+    	font-size: 1.6rem !important; /* H2 proporcionalmente menor que o H1 */
+    	margin-top: 1.5em;
+    	margin-bottom: 0.5em;
+    	color: #333;
+	}
+
+		.prose p {
+    	font-size: 1.1rem; /* Aumentar um pouco o corpo do texto ajuda na leitura */
+    	line-height: 1.6;
+	}
 	
 	/* Mágica para os vídeos (YouTube, etc) não vazarem da tela no celular */
 	iframe, video {

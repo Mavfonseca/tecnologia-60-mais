@@ -1,7 +1,7 @@
 ---
 title: 'Como fazer uma vídeo-chamada no WhatsApp'
 description: 'Aprenda o passo a passo seguro para se conectar com a família usando a câmera do seu celular.'
-pubDate: 'Jul 13 2026'
+pubDate: '2026-07-13'
 heroImage: '/imagens/video-chamada-whatsapp.jpg'
 ---
 
