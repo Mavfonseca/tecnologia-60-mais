@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://tecnologia60mais.netlify.app/sitemap-index.xml

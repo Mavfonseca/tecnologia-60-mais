@@ -6,10 +6,10 @@ import { defineConfig, fontProviders } from 'astro/config';
 
 // https://astro.build/config
 export default defineConfig({
-	site: 'https://example.com',
-	integrations: [mdx(), sitemap()],
-	fonts: [
-		{
+    site: 'https://tecnologia60mais.netlify.app',
+    integrations: [mdx(), sitemap()],
+    fonts: [
+        {
 			provider: fontProviders.local(),
 			name: 'Atkinson',
 			cssVariable: '--font-atkinson',
@@ -33,3 +33,4 @@ export default defineConfig({
 		},
 	],
 });
+

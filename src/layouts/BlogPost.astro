@@ -6,6 +6,8 @@ import Footer from '../components/Footer.astro';
 import FormattedDate from '../components/FormattedDate.astro';
 import Header from '../components/Header.astro';
 import '../styles/global.css';
+import SEO from '../components/SEO.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
 
 type Props = CollectionEntry<'blog'>['data'];
 
@@ -26,6 +28,7 @@ const jsonLd = {
 <html lang="pt-br">
     <head>
         <BaseHead title={title} description={description} />
+		<SEO title={title} description={description} image={heroImage} />
         
         <!-- Script de SEO invisível para o usuário, mas perfeito para o Google -->
         <script type="application/ld+json" is:inline set:html={JSON.stringify(jsonLd)}></script>
@@ -40,6 +43,11 @@ const jsonLd = {
 	<body>
 		<Header />
 		<main>
+			<Breadcrumbs items={[
+  			{ name: 'Início', url: '/' },
+  			{ name: 'Blog', url: '/blog' },
+  			{ name: title, url: Astro.url.href }
+			]} />
 			<article>
 				<div class="hero-image">
 					{heroImage && <Image width={1020} height={510} src={heroImage} alt="" />}

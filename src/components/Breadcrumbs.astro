@@ -1,0 +1,21 @@
+---
+interface Item { name: string; url: string; }
+interface Props { items: Item[]; }
+const { items } = Astro.props;
+---
+<nav aria-label="breadcrumb" style="margin-bottom: 1rem; font-size: 0.9rem; color: #555;">
+  {items.map((item: any, i: any) => (
+    <span>{i > 0 && ' > '}<a href={item.url} style="color: #000080; text-decoration: none;">{item.name}</a></span>
+  ))}
+</nav>
+
+<script type="application/ld+json" set:html={JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": items.map((item: any, i: any) => ({
+    "@type": "ListItem",
+    "position": i + 1,
+    "name": item.name,
+    "item": item.url
+  }))
+})} />

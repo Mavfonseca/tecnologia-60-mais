@@ -1,0 +1,35 @@
+---
+interface Props {
+  title: string;
+  description: string; // 148–160 caracteres
+  image?: string;
+  canonicalUrl?: string;
+}
+
+const {
+  title,
+  description,
+  image = '/imagens/og-default.jpg',
+  canonicalUrl = Astro.url.href,
+} = Astro.props;
+
+const siteUrl = 'https://tecnologia60mais.netlify.app';
+---
+
+<title>{title}</title>
+<meta name="description" content={description} />
+<link rel="canonical" href={canonicalUrl} />
+
+<!-- Open Graph -->
+<meta property="og:type" content="article" />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:image" content={`${siteUrl}${image}`} />
+<meta property="og:url" content={canonicalUrl} />
+<meta property="og:locale" content="pt_BR" />
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={`${siteUrl}${image}`} />
