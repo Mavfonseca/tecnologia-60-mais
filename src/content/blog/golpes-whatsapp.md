@@ -57,9 +57,13 @@ Se já transferiu dinheiro, ligue imediatamente para o banco e solicite o bloque
 
 [🌐 Acesse meu Portal Completo](https://marcosvfonseca.com)
 
-[Vídeo: Como identificar golpes no WhatsApp](https://www.youtube.com/embed/ToVUXKexbUg?si=nPeGavr58FM-Jkvl)
+<iframe
+  src="https://www.youtube.com/embed/ToVUXKexbUg?si=nPeGavr58FM-Jkvl"
+  title="Como identificar golpes no WhatsApp"
+  allowfullscreen>
+</iframe>
 
-### Quer mais proteção digital para você e sua família?
+## Quer mais proteção digital para você e sua família?
 
 Baixe gratuitamente o guia **"10 Primeiros Passos para a Segurança Digital"** na nossa [Biblioteca Digital](https://saudecomequilibrio.com.br/biblioteca-digital/). É o próximo passo depois deste artigo.
 
@@ -71,17 +75,17 @@ Compartilhe este artigo com um familiar que também usa WhatsApp, essa é a melh
 
 ## Perguntas Frequentes sobre Golpes no WhatsApp
 
-**Como sei se uma mensagem no WhatsApp é golpe?**
+**1. Como sei se uma mensagem no WhatsApp é golpe?**
 Desconfie de pedidos de dinheiro urgentes, números desconhecidos se passando por familiares e links de promoções muito vantajosas. Confirme sempre por ligação de voz antes de agir.
 
-**Posso recuperar dinheiro enviado por PIX para um golpista?**
+**2. Posso recuperar dinheiro enviado por PIX para um golpista?**
 É possível em alguns casos através do mecanismo MED do Banco Central, mas a chance diminui com o tempo. Ligue para o banco imediatamente após perceber o golpe.
 
-**Devo compartilhar código de verificação recebido por SMS?**
+**3. Devo compartilhar código de verificação recebido por SMS?**
 Nunca. Esse código protege sua conta do WhatsApp e nenhuma empresa séria pede esse número por telefone ou mensagem.
 
-**Como ativar a verificação em duas etapas no WhatsApp?**
+**4. Como ativar a verificação em duas etapas no WhatsApp?**
 Vá em Configurações, depois Conta, depois Confirmação em Duas Etapas, e crie um PIN de 6 dígitos. Isso impede que outra pessoa acesse sua conta mesmo com seu número.
 
-**O que fazer se um golpista já usou minha foto para enganar outras pessoas?**
+**5. O que fazer se um golpista já usou minha foto para enganar outras pessoas?**
 Avise seus contatos por outro canal que sua imagem está sendo usada indevidamente e denuncie o número falso dentro do próprio WhatsApp.
