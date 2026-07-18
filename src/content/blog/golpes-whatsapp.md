@@ -3,7 +3,7 @@ title: "Golpes no WhatsApp: Como Identificar Mensagens Falsas"
 description: "Aprenda a identificar os 3 golpes mais comuns no WhatsApp e proteja sua família com dicas práticas de um professor com 32 anos de experiência."
 pubDate: 2026-07-11
 updatedDate: 2026-07-17
-image: "/imagens/dica-de-seguranca.jpg"
+image: "/imagens/video-chamada-whatsapp.jpg"
 destaque: true
 keywords: ["golpes no whatsapp", "segurança digital idosos", "pix golpe whatsapp"]
 ---
