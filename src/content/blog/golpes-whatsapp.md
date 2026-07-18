@@ -3,9 +3,30 @@ title: "Golpes no WhatsApp: Como Identificar Mensagens Falsas"
 description: "Aprenda a identificar os 3 golpes mais comuns no WhatsApp e proteja sua família com dicas práticas de um professor com 32 anos de experiência."
 pubDate: 2026-07-11
 updatedDate: 2026-07-17
-image: "/imagens/dica-de-seguranca-whatsapp.jpg"
+heroImage: "/imagens/dica-de-seguranca-whatsapp.jpg"
+heroAlt: "Idoso verificando mensagem suspeita de golpe no WhatsApp"
+heroCaption: "Sempre confirme por chamada de voz antes de qualquer transferência"
 destaque: true
 keywords: ["golpes no whatsapp", "segurança digital idosos", "pix golpe whatsapp"]
+itemListName: "Os 3 golpes mais comuns no WhatsApp"
+itemListElements:
+  - name: "O Novo Número do Filho ou Neto"
+    description: "Golpista usa foto de parente e número estranho para pedir PIX urgente."
+  - name: "O Falso Suporte ou Pesquisa"
+    description: "Ligação fingindo ser banco ou órgão público pedindo código de SMS."
+  - name: "Promoções Irresistíveis"
+    description: "Links de prêmios e produtos grátis que roubam dados pessoais."
+faqItems:
+  - question: "Como sei se uma mensagem no WhatsApp é golpe?"
+    answer: "Desconfie de pedidos de dinheiro urgentes, números desconhecidos se passando por familiares e links de promoções muito vantajosas. Confirme sempre por ligação de voz antes de agir."
+  - question: "Posso recuperar dinheiro enviado por PIX para um golpista?"
+    answer: "É possível em alguns casos através do mecanismo MED do Banco Central, mas a chance diminui com o tempo. Ligue para o banco imediatamente após perceber o golpe."
+  - question: "Devo compartilhar código de verificação recebido por SMS?"
+    answer: "Nunca. Esse código protege sua conta do WhatsApp e nenhuma empresa séria pede esse número por telefone ou mensagem."
+  - question: "Como ativar a verificação em duas etapas no WhatsApp?"
+    answer: "Vá em Configurações, depois Conta, depois Confirmação em Duas Etapas, e crie um PIN de 6 dígitos. Isso impede que outra pessoa acesse sua conta mesmo com seu número."
+  - question: "O que fazer se um golpista já usou minha foto para enganar outras pessoas?"
+    answer: "Avise seus contatos por outro canal que sua imagem está sendo usada indevidamente e denuncie o número falso dentro do próprio WhatsApp."
 ---
 
 Você já recebeu uma mensagem de um número desconhecido dizendo ser seu familiar com um "novo número"? Ou um link prometendo um prêmio imperdível de uma loja famosa? Golpe no WhatsApp é hoje a fraude digital mais comum contra o público 60+ no Brasil, e a boa notícia é que dá para se proteger em minutos, sabendo o que observar.
