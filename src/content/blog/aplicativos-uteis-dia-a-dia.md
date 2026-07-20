@@ -71,17 +71,17 @@ Escolha um para explorar hoje mesmo e vá se acostumando aos poucos. Já usa alg
 
 ## Perguntas Frequentes sobre Aplicativos Úteis
 
-**Qual o melhor aplicativo gratuito para lembrar de tomar remédio?**
+**1. Qual o melhor aplicativo gratuito para lembrar de tomar remédio?**
 O Medisafe é uma opção gratuita popular, mas o alarme padrão do próprio celular também funciona bem para quem prefere simplicidade.
 
-**É seguro baixar aplicativos de rádio pela internet?**
+**2. É seguro baixar aplicativos de rádio pela internet?**
 Sim, desde que baixados pela Play Store ou App Store. Apps como RadiosNet são conhecidos e usados por milhões de pessoas no Brasil.
 
-**Jogos de memória no celular realmente ajudam o cérebro?**
+**3. Jogos de memória no celular realmente ajudam o cérebro?**
 Sim, exercícios como palavras cruzadas e sudoku estimulam o raciocínio e a memória, além de serem uma forma leve de passar o tempo.
 
-**Como saber se um aplicativo é seguro antes de instalar?**
+**4. Como saber se um aplicativo é seguro antes de instalar?**
 Baixe sempre pelas lojas oficiais (Play Store ou App Store), confira o número de downloads e as avaliações antes de instalar.
 
-**Preciso pagar para usar esses aplicativos?**
+**5. Preciso pagar para usar esses aplicativos?**
 Não. Medisafe, RadiosNet e a maioria dos jogos de memória têm versões gratuitas completas, sem necessidade de cadastro de cartão.
