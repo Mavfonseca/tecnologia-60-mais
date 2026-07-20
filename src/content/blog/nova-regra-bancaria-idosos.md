@@ -3,7 +3,7 @@ title: "Nova regra bancária quer proteger idosos 60+ contra golpes financeiros:
 description: "PL 1453/26 propõe sistema opcional de autenticação em dois fatores assistida para clientes com 60 anos ou mais. Entenda como funciona e o que ainda não mudou."
 pubDate: 2026-07-18
 updatedDate: 2026-07-18
-heroImage: "/imagens/idoso-app-bancario-seguranca.jpg"
+heroImage: "/imagens/idoso-app-bancario-seguranca.webp"
 tags: ["pl 1453/26", "golpes financeiros idosos", "segurança bancária idosos", "autenticação dois fatores assistida", "pix seguro idosos", "proteção contra golpes 60 mais", "câmara dos deputados idosos", "fraudes digitais terceira idade"]
 author: "Marcos Fonseca"
 draft: false
