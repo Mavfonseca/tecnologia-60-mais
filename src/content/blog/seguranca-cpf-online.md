@@ -74,17 +74,17 @@ Já verificou seu CPF no Registrato este ano? Ficou com alguma dúvida sobre o p
 
 ## Perguntas Frequentes sobre Segurança do CPF
 
-**O que fazer se descobri uma dívida no meu CPF?**
+**1. O que fazer se descobri uma dívida no meu CPF?**
 Entre em contato imediatamente com o órgão de proteção ao crédito (Serasa ou Boa Vista) e faça um Boletim de Ocorrência digital.
 
-**Recebi uma mensagem do banco pedindo confirmação. O que faço?**
+**2. Recebi uma mensagem do banco pedindo confirmação. O que faço?**
 Nunca responda. Ligue para o número oficial que está atrás do seu cartão físico.
 
-**Sites de compras são seguros?**
+**3. Sites de compras são seguros?**
 Apenas os grandes e conhecidos. Se for um site novo, pesquise o nome dele no Reclame Aqui antes de comprar.
 
-**Posso salvar senhas no navegador?**
+**4. Posso salvar senhas no navegador?**
 Evite. Use um gerenciador de senhas ou anote em um caderninho físico, guardado em local seguro.
 
-**O que é engenharia social?**
+**5. O que é engenharia social?**
 É a técnica que golpistas usam para ganhar sua confiança e fazer você mesmo entregar seus dados.
