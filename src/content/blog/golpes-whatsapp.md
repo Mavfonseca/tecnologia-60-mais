@@ -2,7 +2,7 @@
 title: 'Como identificar mensagens falsas e golpes no WhatsApp'
 description: 'Aprenda a proteger sua conta e seu dinheiro contra os golpes mais comuns da internet de forma simples e direta.'
 pubDate: '2026-07-11'
-heroImage: '/imagens/dica-de-seguranca.jpg'
+heroImage: '/imagens/dica-de-seguranca.webp'
 ---
 
 Você já recebeu uma mensagem de um número desconhecido dizendo ser seu familiar com um "novo número"? Ou um link prometendo um prêmio imperdível de uma loja famosa?

@@ -1,5 +1,5 @@
 {
-  "name": "",
+  "name": "tecnologia-60-mais",
   "type": "module",
   "version": "0.0.1",
   "engines": {
@@ -9,8 +9,11 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "converter-webp": "node scripts/converter-webp.js",
+    "atualizar-referencias": "node scripts/atualizar-referencias.js"
   },
+
   "dependencies": {
     "@astrojs/mdx": "^7.0.2",
     "@astrojs/rss": "^4.0.19",

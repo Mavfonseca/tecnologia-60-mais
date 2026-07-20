@@ -2,7 +2,7 @@
 title: "IA no seu Bolso: Como Assistentes de Voz podem dar mais autonomia para você"
 description: "Descubra como a tecnologia invisível dos assistentes de voz (Alexa, Google, Siri) pode simplificar sua rotina, organizar sua saúde e dar mais independência no dia a dia."
 pubDate: "2026-07-16"
-heroImage: "/imagens/assistente-voz-autonomia.jpg"
+heroImage: "/imagens/assistente-voz-autonomia.webp"
 tags: ["inteligencia artificial", "assistente de voz", "autonomia", "idosos", "tecnologia", "alexa", "google assistente", "rotina", "saúde", "acessibilidade"]
 heroAlt: "Professor de informática Marcos Fonseca demonstrando o uso de assistente de voz em smartphone para aluna idosa, focando em acessibilidade e autonomia digital."
 heroCaption: "A tecnologia invisível: aprenda a usar sua voz para simplificar tarefas diárias, organizar sua saúde e ganhar mais independência no dia a dia."

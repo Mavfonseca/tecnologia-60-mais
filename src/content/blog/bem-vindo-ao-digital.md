@@ -2,7 +2,7 @@
 title: 'Como fazer uma vídeo-chamada no WhatsApp'
 description: 'Aprenda o passo a passo seguro para se conectar com a família usando a câmera do seu celular.'
 pubDate: '2026-07-13'
-heroImage: '/imagens/video-chamada-whatsapp.jpg'
+heroImage: '/imagens/video-chamada-whatsapp.webp'
 ---
 
 Poder ver o sorriso da nossa família ou acompanhar o crescimento dos netos mesmo de longe é, sem dúvida, uma das maiores maravilhas que o celular nos trouxe. Se antes dependíamos de ligações caras ou de cartas que demoravam a chegar, hoje basta um toque na tela.

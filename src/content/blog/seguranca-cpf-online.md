@@ -2,7 +2,7 @@
 title: "Como proteger seu CPF e documentos online: Guia de Segurança Digital para Idosos"
 description: "Aprenda a monitorar seu CPF e proteger sua identidade digital contra golpes. Dicas práticas de quem ensina informática há mais de 30 anos."
 pubDate: "2026-07-16"
-heroImage: "/imagens/seguranca-cpf-idosos-marcos-fonseca.jpg"
+heroImage: "/imagens/seguranca-cpf-idosos-marcos-fonseca.webp"
 tags: ["segurança digital", "CPF", "golpes", "idosos", "proteção", "privacidade", "internet segura", "cidadania digital", "autonomia", "informática"]
 ---
 
