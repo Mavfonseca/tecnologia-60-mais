@@ -11,17 +11,73 @@ import Breadcrumbs from '../components/Breadcrumbs.astro';
 
 type Props = CollectionEntry<'blog'>['data'];
 
-const { title, description, pubDate, updatedDate, heroImage, heroAlt, heroCaption } = Astro.props;
+const {
+	title,
+	description,
+	pubDate,
+	updatedDate,
+	heroImage,
+	heroAlt,
+	heroCaption,
+	// Novos campos opcionais — só existem se o artigo tiver lista e FAQ
+	itemListName,
+	itemListElements, // array: [{ name, description }]
+	faqItems,          // array: [{ question, answer }]
+} = Astro.props;
 
-// Configuração automática do SEO para QUALQUER artigo
+const siteUrl = 'https://tecnologia60mais.netlify.app';
+
+// Bloco Article — sempre presente
+const articleSchema = {
+	"@type": "Article",
+	"headline": title,
+	"description": description,
+	"image": heroImage ? `${siteUrl}${heroImage}` : "",
+	"author": {
+		"@type": "Person",
+		"name": "Marcos Fonseca",
+		"url": `${siteUrl}/sobre/`,
+	},
+	"publisher": {
+		"@type": "Organization",
+		"name": "Tecnologia 60 Mais",
+		"logo": { "@type": "ImageObject", "url": `${siteUrl}/imagens/logo.png` },
+	},
+	"datePublished": pubDate?.toISOString(),
+	"dateModified": (updatedDate ?? pubDate)?.toISOString(),
+	"mainEntityOfPage": { "@type": "WebPage", "@id": Astro.url.href },
+	"inLanguage": "pt-BR",
+};
+
+// Bloco ItemList — só entra se o artigo passar itemListElements no frontmatter
+const itemListSchema = itemListElements
+	? {
+			"@type": "ItemList",
+			"name": itemListName ?? title,
+			"itemListElement": itemListElements.map((item: any, i: number) => ({
+				"@type": "ListItem",
+				"position": i + 1,
+				"name": item.name,
+				"description": item.description,
+			})),
+	  }
+	: null;
+
+// Bloco FAQPage — só entra se o artigo passar faqItems no frontmatter
+const faqSchema = faqItems
+	? {
+			"@type": "FAQPage",
+			"mainEntity": faqItems.map((item: any) => ({
+				"@type": "Question",
+				"name": item.question,
+				"acceptedAnswer": { "@type": "Answer", "text": item.answer },
+			})),
+	  }
+	: null;
+
 const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "Article",
-    "headline": title,
-    "description": description,
-    "image": heroImage ? `https://seusite.com.br${heroImage}` : "",
-    "author": { "@type": "Person", "name": "Marcos Fonseca" },
-    "publisher": { "@type": "Organization", "name": "Tecnologia 60 Mais" }
+	"@context": "https://schema.org",
+	"@graph": [articleSchema, itemListSchema, faqSchema].filter(Boolean),
 };
 ---
 
@@ -29,14 +85,12 @@ const jsonLd = {
     <head>
         <BaseHead title={title} description={description} />
 		<SEO title={title} description={description} image={heroImage} />
-        
+
         <!-- Script de SEO invisível para o usuário, mas perfeito para o Google -->
         <script type="application/ld+json" is:inline set:html={JSON.stringify(jsonLd)}></script>
 
         <style>
-            /* ... (seus estilos continuam iguais aqui) ... */
             main { width: calc(100% - 2em); max-width: 100%; margin: 0; }
-            /* ... o resto do seu style ... */
         </style>
     </head>
 
@@ -44,13 +98,13 @@ const jsonLd = {
 		<Header />
 		<main>
 			<Breadcrumbs items={[
-  			{ name: 'Início', url: '/' },
-  			{ name: 'Blog', url: '/blog' },
-  			{ name: title, url: Astro.url.href }
+  				{ name: 'Início', url: `${Astro.site}` },
+  				{ name: 'Blog', url: `${Astro.site}blog` },
+  				{ name: title, url: Astro.url.href }
 			]} />
 			<article>
 				<div class="hero-image">
-					{heroImage && <Image width={1020} height={510} src={heroImage} alt="" />}
+					{heroImage && <Image width={1020} height={510} src={heroImage} alt={heroAlt ?? ''} />}
 				</div>
 				<div class="prose">
 					<div class="title">
@@ -76,31 +130,37 @@ const jsonLd = {
 </html>
 
 <style is:global>
-	/* ... outros estilos que já existem aí ... */
-	/* Ajuste de tipografia para maior legibilidade */
 	.title h1 {
-    	font-size: 2.2rem !important; /* Diminuído para um tamanho mais confortável */
+    	font-size: 2.2rem !important;
     	line-height: 1.2;
     	margin: 0 0 0.5em 0;
 	}
 
 	.prose h2 {
-    	font-size: 1.6rem !important; /* H2 proporcionalmente menor que o H1 */
+    	font-size: 1.6rem !important;
     	margin-top: 1.5em;
     	margin-bottom: 0.5em;
     	color: #333;
 	}
 
-		.prose p {
-    	font-size: 1.1rem; /* Aumentar um pouco o corpo do texto ajuda na leitura */
+	.prose h3 {
+    	font-size: 1.15rem !important;
+    	line-height: 1.4;
+    	margin-top: 1.5em;
+    	margin-bottom: 0.5em;
+    	color: #333;
+    	font-weight: 600;
+	}
+
+	.prose p {
+    	font-size: 1.1rem;
     	line-height: 1.6;
 	}
-	
-	/* Mágica para os vídeos (YouTube, etc) não vazarem da tela no celular */
+
 	iframe, video {
 		max-width: 100% !important;
 		height: auto !important;
 		aspect-ratio: 16 / 9;
-		border-radius: 10px; /* Dá um toque profissional com bordas arredondadas! */
+		border-radius: 10px;
 	}
 </style>
