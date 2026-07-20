@@ -2,7 +2,7 @@
 title: "Aplicativos Úteis para Celular: Ferramentas Gratuitas para o Dia a Dia"
 description: "Descubra aplicativos gratuitos para remédios, música e memória no celular, com dicas de segurança de um professor com 32 anos de experiência."
 pubDate: 2026-07-13
-updatedDate: 2026-07-19
+updatedDate: 2026-07-20
 heroImage: "/imagens/aplicativos-uteis.webp"
 heroAlt: "Idoso sorridente usando aplicativos úteis no celular"
 heroCaption: "Um app por vez, no seu ritmo, sem pressa"

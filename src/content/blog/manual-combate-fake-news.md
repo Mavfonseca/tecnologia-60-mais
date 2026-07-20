@@ -1,7 +1,8 @@
 ---
 title: "Manual de Combate às Fake News: Como identificar e não compartilhar boatos"
 description: "Aprenda técnicas práticas de um professor de informática para identificar notícias falsas, checar fontes e manter a segurança digital da sua família no WhatsApp."
-pubDate: "2026-07-16"
+pubDate: 2026-07-16
+updatedDate: 2026-07-20
 heroImage: "/imagens/combate-fake-news-idosos.webp"
 tags: ["fake news", "segurança digital", "whatsapp", "checagem", "idosos", "cidadania digital", "internet segura", "informática", "desinformação", "educação"]
 heroAlt: "Professor de informática analisando notícia duvidosa no celular"

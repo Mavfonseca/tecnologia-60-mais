@@ -2,7 +2,7 @@
 title: "Como Proteger seu CPF e Documentos Online"
 description: "Aprenda a monitorar seu CPF, ativar a verificação em duas etapas e proteger seus documentos online. Dicas de um professor com 32 anos de experiência."
 pubDate: 2026-07-16
-updatedDate: 2026-07-19
+updatedDate: 2026-07-20
 heroImage: "/imagens/seguranca-cpf-online.webp"
 heroAlt: "Idoso verificando dados pessoais com segurança no celular"
 heroCaption: "Sua segurança digital começa com um hábito simples e semestral"

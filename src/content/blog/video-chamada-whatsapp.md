@@ -2,7 +2,7 @@
 title: "Como Fazer uma Vídeo-Chamada no WhatsApp: Passo a Passo"
 description: "Aprenda a fazer sua primeira vídeo-chamada no WhatsApp em 4 passos simples, com dicas de segurança de um professor com 32 anos de experiência."
 pubDate: 2026-07-13
-updatedDate: 2026-07-19
+updatedDate: 2026-07-20
 heroImage: "/imagens/video-chamada-whatsapp.webp"
 heroAlt: "Idoso sorridente fazendo vídeo-chamada no WhatsApp com a família"
 heroCaption: "Ver o sorriso da família, a um toque de distância"
@@ -71,17 +71,17 @@ Faça o teste hoje mesmo e surpreenda alguém que você ama com uma chamada de v
 
 ## Perguntas Frequentes sobre Vídeo-Chamada no WhatsApp
 
-**Como faço para atender uma vídeo-chamada no WhatsApp?**
+**1. Como faço para atender uma vídeo-chamada no WhatsApp?**
 Quando o celular tocar, deslize ou toque no botão verde com a câmera para atender. O rosto de quem ligou aparece na tela em poucos segundos.
 
-**Como faço para desligar a vídeo-chamada?**
+**2. Como faço para desligar a vídeo-chamada?**
 Procure o botão vermelho com um telefone na parte de baixo da tela e toque nele. A ligação desliga na mesma hora.
 
-**Preciso pagar para fazer vídeo-chamada no WhatsApp?**
+**3. Preciso pagar para fazer vídeo-chamada no WhatsApp?**
 Não. Vídeo-chamadas no WhatsApp são gratuitas, mas consomem dados de internet. Usar com Wi-Fi evita gastar seu pacote de dados do celular.
 
-**Por que a vídeo-chamada não conecta?**
+**4. Por que a vídeo-chamada não conecta?**
 Geralmente é falta de internet estável ou o WhatsApp desatualizado. Verifique sua conexão Wi-Fi e, se precisar, atualize o aplicativo pela loja oficial.
 
-**É possível fazer vídeo-chamada com mais de uma pessoa ao mesmo tempo?**
+**5. É possível fazer vídeo-chamada com mais de uma pessoa ao mesmo tempo?**
 Sim, o WhatsApp permite vídeo-chamada em grupo com até 32 pessoas. Basta adicionar mais contatos durante a chamada.
