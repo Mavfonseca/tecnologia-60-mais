@@ -1,5 +1,4 @@
 ---
-import { Image } from 'astro:assets';
 import type { CollectionEntry } from 'astro:content';
 import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
@@ -12,81 +11,79 @@ import Breadcrumbs from '../components/Breadcrumbs.astro';
 type Props = CollectionEntry<'blog'>['data'];
 
 const {
-	title,
-	description,
-	pubDate,
-	updatedDate,
-	heroImage,
-	heroAlt,
-	heroCaption,
-	// Novos campos opcionais — só existem se o artigo tiver lista e FAQ
-	itemListName,
-	itemListElements, // array: [{ name, description }]
-	faqItems,          // array: [{ question, answer }]
+    title,
+    description,
+    pubDate,
+    updatedDate,
+    heroImage,
+    heroAlt,
+    heroCaption,
+    itemListName,
+    itemListElements,
+    faqItems,
 } = Astro.props;
 
 const siteUrl = 'https://tecnologia60mais.netlify.app';
 
 // Bloco Article — sempre presente
 const articleSchema = {
-	"@type": "Article",
-	"headline": title,
-	"description": description,
-	"image": heroImage ? `${siteUrl}${heroImage}` : "",
-	"author": {
-		"@type": "Person",
-		"name": "Marcos Fonseca",
-		"url": `${siteUrl}/sobre/`,
-	},
-	"publisher": {
-		"@type": "Organization",
-		"name": "Tecnologia 60 Mais",
-		"logo": { "@type": "ImageObject", "url": `${siteUrl}/imagens/logo.png` },
-	},
-	"datePublished": pubDate?.toISOString(),
-	"dateModified": (updatedDate ?? pubDate)?.toISOString(),
-	"mainEntityOfPage": { "@type": "WebPage", "@id": Astro.url.href },
-	"inLanguage": "pt-BR",
+    "@type": "Article",
+    "headline": title,
+    "description": description,
+    "image": heroImage ? `${siteUrl}${heroImage}` : "",
+    "author": {
+        "@type": "Person",
+        "name": "Marcos Fonseca",
+        "url": `${siteUrl}/sobre/`,
+    },
+    "publisher": {
+        "@type": "Organization",
+        "name": "Tecnologia 60 Mais",
+        "logo": { "@type": "ImageObject", "url": `${siteUrl}/imagens/logo-cabecalho.webp` },
+    },
+    "datePublished": pubDate?.toISOString(),
+    "dateModified": (updatedDate ?? pubDate)?.toISOString(),
+    "mainEntityOfPage": { "@type": "WebPage", "@id": Astro.url.href },
+    "inLanguage": "pt-BR",
 };
 
-// Bloco ItemList — só entra se o artigo passar itemListElements no frontmatter
+// Bloco ItemList
 const itemListSchema = itemListElements
-	? {
-			"@type": "ItemList",
-			"name": itemListName ?? title,
-			"itemListElement": itemListElements.map((item: any, i: number) => ({
-				"@type": "ListItem",
-				"position": i + 1,
-				"name": item.name,
-				"description": item.description,
-			})),
-	  }
-	: null;
+    ? {
+            "@type": "ItemList",
+            "name": itemListName ?? title,
+            "itemListElement": itemListElements.map((item: any, i: number) => ({
+                "@type": "ListItem",
+                "position": i + 1,
+                "name": item.name,
+                "description": item.description,
+            })),
+      }
+    : null;
 
-// Bloco FAQPage — só entra se o artigo passar faqItems no frontmatter
+// Bloco FAQPage
 const faqSchema = faqItems
-	? {
-			"@type": "FAQPage",
-			"mainEntity": faqItems.map((item: any) => ({
-				"@type": "Question",
-				"name": item.question,
-				"acceptedAnswer": { "@type": "Answer", "text": item.answer },
-			})),
-	  }
-	: null;
+    ? {
+            "@type": "FAQPage",
+            "mainEntity": faqItems.map((item: any) => ({
+                "@type": "Question",
+                "name": item.question,
+                "acceptedAnswer": { "@type": "Answer", "text": item.answer },
+            })),
+      }
+    : null;
 
 const jsonLd = {
-	"@context": "https://schema.org",
-	"@graph": [articleSchema, itemListSchema, faqSchema].filter(Boolean),
+    "@context": "https://schema.org",
+    "@graph": [articleSchema, itemListSchema, faqSchema].filter(Boolean),
 };
 ---
 
 <html lang="pt-br">
     <head>
         <BaseHead title={title} description={description} />
-		<SEO title={title} description={description} image={heroImage} />
+        <SEO title={title} description={description} image={heroImage} />
 
-        <!-- Script de SEO invisível para o usuário, mas perfeito para o Google -->
         <script type="application/ld+json" is:inline set:html={JSON.stringify(jsonLd)}></script>
 
         <style>
@@ -94,73 +91,84 @@ const jsonLd = {
         </style>
     </head>
 
-	<body>
-		<Header />
-		<main>
-			<Breadcrumbs items={[
-  				{ name: 'Início', url: `${Astro.site}` },
-  				{ name: 'Blog', url: `${Astro.site}blog` },
-  				{ name: title, url: Astro.url.href }
-			]} />
-			<article>
-				<div class="hero-image">
-					{heroImage && <Image width={1020} height={510} src={heroImage} alt={heroAlt ?? ''} />}
-				</div>
-				<div class="prose">
-					<div class="title">
-						<div class="date">
-							<FormattedDate date={pubDate} />
-							{
-								updatedDate && (
-									<div class="last-updated-on">
-										Last updated on <FormattedDate date={updatedDate} />
-									</div>
-								)
-							}
-						</div>
-						<h1>{title}</h1>
-						<hr />
-					</div>
-					<slot />
-				</div>
-			</article>
-		</main>
-		<Footer />
-	</body>
+    <body>
+        <Header />
+        <main>
+            <Breadcrumbs items={[
+                { name: 'Início', url: `${Astro.site}` },
+                { name: 'Blog', url: `${Astro.site}blog` },
+                { name: title, url: Astro.url.href }
+            ]} />
+            <article>
+                <div class="hero-image">
+                    {heroImage && (
+                        <img width="1020" height="510" src={heroImage} alt={heroAlt ?? ''} style="border-radius: 12px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);" />
+                    )}
+                </div>
+                <div class="prose">
+                    <div class="title">
+                        <div class="date">
+                            <FormattedDate date={pubDate} />
+                            {
+                                updatedDate && (
+                                    <div class="last-updated-on">
+                                        Atualizado em <FormattedDate date={updatedDate} />
+                                    </div>
+                                )
+                            }
+                        </div>
+                        <h1>{title}</h1>
+                        <hr />
+                    </div>
+                    <slot />
+                </div>
+            </article>
+        </main>
+        <Footer />
+    </body>
 </html>
 
 <style is:global>
-	.title h1 {
-    	font-size: 2.2rem !important;
-    	line-height: 1.2;
-    	margin: 0 0 0.5em 0;
-	}
+    .hero-image {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 2rem;
+    }
+    .hero-image img {
+        max-width: 100%;
+        height: auto;
+    }
+    .title h1 {
+        font-size: 2.2rem !important;
+        line-height: 1.2;
+        margin: 0 0 0.5em 0;
+    }
 
-	.prose h2 {
-    	font-size: 1.6rem !important;
-    	margin-top: 1.5em;
-    	margin-bottom: 0.5em;
-    	color: #333;
-	}
+    .prose h2 {
+        font-size: 1.6rem !important;
+        margin-top: 1.5em;
+        margin-bottom: 0.5em;
+        color: #333;
+    }
 
-	.prose h3 {
-    	font-size: 1.15rem !important;
-    	line-height: 1.4;
-    	margin-top: 1.5em;
-    	margin-bottom: 0.5em;
-    	color: #333;
-    	font-weight: 600;
-	}
+    .prose h3 {
+        font-size: 1.15rem !important;
+        line-height: 1.4;
+        margin-top: 1.5em;
+        margin-bottom: 0.5em;
+        color: #333;
+        font-weight: 600;
+    }
 
-	.prose p {
-    	font-size: 1.1rem;
-    	line-height: 1.6;
-	}
+    .prose p {
+        font-size: 1.1rem;
+        line-height: 1.6;
+    }
 
-	iframe, video {
-		max-width: 100% !important;
-		height: auto !important;
-		aspect-ratio: 16 / 9;
-		border-radius: 10px;
-	}
+    iframe, video {
+        max-width: 100% !important;
+        height: auto !important;
+        aspect-ratio: 16 / 9;
+        border-radius: 10px;
+    }
 </style>

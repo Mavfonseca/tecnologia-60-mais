@@ -3,47 +3,171 @@ import HeaderLink from './HeaderLink.astro';
 import { SITE_TITLE } from '../consts';
 ---
 
-<header style="background-color: #000080; color: white; padding: 22px 20px; margin: 0; box-shadow: 0 4px 10px rgba(0,0,0,0.15); width: 100%; box-sizing: border-box;">
-    <nav style="display: flex; align-items: center; justify-content: space-between; max-width: 1100px; margin: 0 auto;">
-        
+<!-- CABEÇALHO SUPERIOR -->
+<header class="top-header">
+    <nav class="top-nav">
         <!-- LOGO E TÍTULO -->
-        <div style="display: flex; align-items: center; gap: 12px;">
-            <img src="/imagens/logo-cabecalho.webp" alt="Logotipo Tecnologia 60 Mais" style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover; box-shadow: 0 2px 4px rgba(0,0,0,0.2);" />
-            <h2 style="margin: 0; font-size: 2rem;">
-                <a href="/" style="color: white; text-decoration: none; font-weight: bold;">Tecnologia 60 Mais</a>
+        <div class="logo-container">
+            <img src="/imagens/logo-cabecalho.webp" alt="Logotipo Tecnologia 60 Mais" class="logo-img" />
+            <h2>
+                <a href="/">Tecnologia 60 Mais</a>
             </h2>
         </div>
 
-        <!-- LINKS DO MENU -->
-        <div class="nav-links" style="display: flex; align-items: center; gap: 30px;">
-            <HeaderLink href="/" style="color: white; text-decoration: none; font-size: 1.3rem; font-weight: bold;">Inicio</HeaderLink>
-            <HeaderLink href="/blog" style="color: white; text-decoration: none; font-size: 1.3rem; font-weight: bold;">Dicas e Tutoriais</HeaderLink>
-            <HeaderLink href="/sobre" style="color: white; text-decoration: none; font-size: 1.3rem; font-weight: bold;">Sobre</HeaderLink>
-            
-            <!-- Botão de Login 
-            <a href="#" style="border: 2px solid white; padding: 8px 20px; border-radius: 20px; color: white; text-decoration: none; font-weight: bold; transition: all 0.3s ease;">Login</a>
-            -->
+        <!-- LINKS DO MENU (Visível apenas no Computador) -->
+        <div class="nav-links">
+            <HeaderLink href="/">Início</HeaderLink>
+            <HeaderLink href="/blog">Dicas e Tutoriais</HeaderLink>
+            <HeaderLink href="/sobre">Sobre</HeaderLink>
         </div>
     </nav>
 </header>
 
+<!-- MENU INFERIOR (Visível apenas no Celular) -->
+<nav class="mobile-bottom-bar">
+    <a href="/" class="mobile-link">
+        <span class="mobile-icon">🏠</span>
+        <span class="mobile-text">Início</span>
+    </a>
+    <a href="/blog" class="mobile-link">
+        <span class="mobile-icon">📖</span>
+        <span class="mobile-text">Tutoriais</span>
+    </a>
+    <a href="/sobre" class="mobile-link">
+        <span class="mobile-icon">ℹ️</span>
+        <span class="mobile-text">Sobre</span>
+    </a>
+</nav>
+
+<!-- CSS GLOBAL PARA EVITAR QUE A BARRA CUBRA O CONTEÚDO -->
+<style is:global>
+    @media (max-width: 768px) {
+        body {
+            /* Empurra o rodapé um pouco para cima no celular para a barra não cobrir a tela */
+            padding-bottom: 70px !important; 
+        }
+    }
+</style>
+
+<!-- ESTILOS DO COMPONENTE -->
 <style>
-	/* Efeito hover (piscar) no botão de Login */
-	.nav-links a:last-child:hover {
-		background-color: white;
-		color: #000080 !important;
-	}
-	
-	/* Responsividade para o celular */
-	@media (max-width: 768px) {
-		nav {
-			flex-direction: column;
-			gap: 15px;
-		}
-		.nav-links {
-			gap: 15px;
-			flex-wrap: wrap;
-			justify-content: center;
-		}
-	}
+    /* Estilos do Cabeçalho Topo */
+    .top-header {
+        background-color: #000080; 
+        color: white; 
+        padding: 22px 20px; 
+        margin: 0; 
+        box-shadow: 0 4px 10px rgba(0,0,0,0.15); 
+        width: 100%; 
+        box-sizing: border-box;
+    }
+    
+    .top-nav {
+        display: flex; 
+        align-items: center; 
+        justify-content: space-between; 
+        max-width: 1100px; 
+        margin: 0 auto;
+    }
+    
+    .logo-container {
+        display: flex; 
+        align-items: center; 
+        gap: 12px;
+    }
+    
+    .logo-img {
+        width: 50px; 
+        height: 50px; 
+        border-radius: 50%; 
+        object-fit: cover; 
+        box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    }
+    
+    .logo-container h2 {
+        margin: 0; 
+        font-size: 2rem;
+    }
+    
+    .logo-container a {
+        color: white; 
+        text-decoration: none; 
+        font-weight: bold;
+    }
+    
+    /* Links do Computador */
+    .nav-links {
+        display: flex; 
+        align-items: center; 
+        gap: 30px;
+    }
+    
+    .nav-links :global(a) {
+        color: white; 
+        text-decoration: none; 
+        font-size: 1.3rem; 
+        font-weight: bold;
+    }
+
+    /* Esconde o menu de celular por padrão */
+    .mobile-bottom-bar {
+        display: none;
+    }
+
+    /* REGRAS PARA O CELULAR (Telas menores que 768px) */
+    @media (max-width: 768px) {
+        /* Ajusta o cabeçalho superior para ocupar menos espaço */
+        .top-header {
+            padding: 15px 20px;
+        }
+        .logo-container h2 {
+            font-size: 1.5rem;
+        }
+        
+        /* Oculta os links de texto lá em cima */
+        .nav-links {
+            display: none !important;
+        }
+
+        /* Exibe a barra na parte inferior da tela */
+        .mobile-bottom-bar {
+            display: flex;
+            flex-direction: row !important; /* Esta linha resolve o problema! */
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: white;
+            box-shadow: 0 -4px 15px rgba(0,0,0,0.2);
+            justify-content: space-around;
+            align-items: center;
+            padding: 12px 0;
+            z-index: 1000;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .mobile-link {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            color: #000080;
+            gap: 4px;
+            flex: 1;
+        }
+
+        .mobile-icon {
+            font-size: 1.6rem;
+        }
+
+        .mobile-text {
+            font-size: 0.85rem;
+            font-weight: bold;
+        }
+        
+        /* Leve efeito quando o botão é tocado */
+        .mobile-link:active {
+            opacity: 0.6;
+        }
+    }
 </style>

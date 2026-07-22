@@ -6,8 +6,17 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 import { getCollection } from 'astro:content';
 import SchemaOrganization from '../components/SchemaOrganization.astro';
 
-// Ordenação corrigida com "new Date()" para evitar erros do TypeScript
-const posts = (await getCollection('blog'))
+// 1. Busca todos os artigos
+const todosOsArtigos = await getCollection('blog');
+
+// 2. Cria a lista de DESTAQUES (apenas os que têm destaque: true)
+const artigosDestaque = [...todosOsArtigos]
+  .filter((post: any) => post.data.destaque === true)
+  .sort((a: any, b: any) => new Date(b.data.pubDate).valueOf() - new Date(a.data.pubDate).valueOf())
+  .slice(0, 3);
+
+// 3. Cria a lista de ÚLTIMOS TUTORIAIS (os 3 mais recentes, geral)
+const ultimosArtigos = [...todosOsArtigos]
   .sort((a: any, b: any) => new Date(b.data.pubDate).valueOf() - new Date(a.data.pubDate).valueOf())
   .slice(0, 3);
 ---
@@ -36,18 +45,17 @@ const posts = (await getCollection('blog'))
   
   /* Blog Grid */
   .blog-section { padding: 80px 20px 40px 20px; max-width: 1000px; margin: 0 auto; }
+  .section-title { color: #000080; border-bottom: 2px solid #ff7f50; padding-bottom: 10px; display: inline-block; margin-bottom: 30px; }
   .blog-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
   .blog-card { background: white; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
   .blog-card img { width: 100%; height: 200px; object-fit: cover; }
   .blog-card-content { padding: 20px; }
   .blog-link { color: #000080; font-weight: bold; text-decoration: none; }
 
-  /* Ajuste Mobile: Corrige a sobreposição do botão */
+  /* Ajuste Mobile */
   @media (max-width: 600px) {
     .hero-content h1 { font-size: 2rem !important; line-height: 1.2; }
     .hero-section { padding: 40px 10px; }
-    
-    /* Esta linha resolve o problema: empurra os cards para baixo no celular */
     .features-section { margin-top: 20px !important; }
   }
 </style>
@@ -83,11 +91,26 @@ const posts = (await getCollection('blog'))
         </div>
       </section>
 
-      <!-- Seção Automática do Blog -->
+      <!-- PRIMEIRA FILEIRA: Destaques -->
       <section class="blog-section">
-        <h2>Dicas e Tutoriais</h2>
+        <h2 class="section-title">⭐ Recomendados para Você</h2>
         <div class="blog-grid">
-          {posts.map((post: any) => (
+          {artigosDestaque.map((post: any) => (
+            <div class="blog-card">
+              <img src={post.data.heroImage} alt={post.data.title} />
+              <div class="blog-card-content">
+                <h4>{post.data.title}</h4>
+                <p>{post.data.description}</p>
+                <a href={`/blog/${post.id}/`} class="blog-link">Ler Mais &rarr;</a>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <!-- SEGUNDA FILEIRA: Últimos Tutoriais -->
+        <h2 class="section-title" style="margin-top: 80px;">🕒 Últimos Tutoriais</h2>
+        <div class="blog-grid">
+          {ultimosArtigos.map((post: any) => (
             <div class="blog-card">
               <img src={post.data.heroImage} alt={post.data.title} />
               <div class="blog-card-content">
@@ -102,7 +125,7 @@ const posts = (await getCollection('blog'))
     </main>
     <Footer />
     
-    <!-- Schema de Organização inserido aqui, invisível mas lido pelo Google -->
+    <!-- Schema de Organização -->
     <SchemaOrganization />
   </body>
 </html>
