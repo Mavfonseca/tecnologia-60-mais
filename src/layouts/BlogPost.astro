@@ -25,7 +25,7 @@ const {
 
 const siteUrl = 'https://tecnologia60mais.netlify.app';
 
-// Bloco Article — sempre presente
+// Bloco Article
 const articleSchema = {
     "@type": "Article",
     "headline": title,
@@ -119,16 +119,95 @@ const jsonLd = {
                         </div>
                         <h1>{title}</h1>
                         <hr />
+                        
+                        {/* BOTÕES DE ACESSIBILIDADE */}
+                        <div class="a11y-container">
+                            <span class="a11y-texto">Tamanho do texto:</span>
+                            <button id="btn-a-menos" class="a11y-btn" aria-label="Diminuir letra">A-</button>
+                            <button id="btn-a-mais" class="a11y-btn" aria-label="Aumentar letra">A+</button>
+                        </div>
+
                     </div>
                     <slot />
                 </div>
             </article>
         </main>
         <Footer />
+
+        {/* SCRIPT PARA CONTROLAR E SALVAR O TAMANHO DA FONTE */}
+        <script is:inline>
+            document.addEventListener('DOMContentLoaded', () => {
+                const prose = document.querySelector('.prose');
+                const btnMais = document.getElementById('btn-a-mais');
+                const btnMenos = document.getElementById('btn-a-menos');
+                
+                if (prose && btnMais && btnMenos) {
+                    // Tenta recuperar o zoom salvo, se não tiver, começa no tamanho padrão (1)
+                    let zoom = parseFloat(localStorage.getItem('texto-zoom')) || 1;
+                    prose.style.setProperty('--zoom', zoom);
+
+                    btnMais.addEventListener('click', () => {
+                        if (zoom < 1.6) { // Limite máximo para não quebrar a tela
+                            zoom += 0.1;
+                            prose.style.setProperty('--zoom', zoom.toFixed(1));
+                            localStorage.setItem('texto-zoom', zoom.toFixed(1));
+                        }
+                    });
+
+                    btnMenos.addEventListener('click', () => {
+                        if (zoom > 0.9) { // Limite mínimo
+                            zoom -= 0.1;
+                            prose.style.setProperty('--zoom', zoom.toFixed(1));
+                            localStorage.setItem('texto-zoom', zoom.toFixed(1));
+                        }
+                    });
+                }
+            });
+        </script>
+
     </body>
 </html>
 
 <style is:global>
+    /* Estilo dos Botões de Acessibilidade */
+    .a11y-container {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 0.5rem;
+        margin-top: 1rem;
+        margin-bottom: 2rem;
+    }
+    .a11y-texto {
+        font-size: 0.9rem;
+        color: #333;
+        font-weight: 600;
+        margin-right: 0.5rem;
+    }
+    .a11y-btn {
+        background-color: #000080;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        padding: 0.4rem 0.8rem;
+        font-size: 1rem;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background-color 0.2s, transform 0.1s;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    .a11y-btn:hover {
+        background-color: #ff7f50;
+    }
+    .a11y-btn:active {
+        transform: scale(0.95);
+    }
+
+    /* Regras Dinâmicas de Texto Baseadas no Zoom */
+    .prose {
+        --zoom: 1; /* Variável que o JavaScript vai alterar */
+    }
+    
     .hero-image {
         display: flex;
         justify-content: center;
@@ -144,25 +223,25 @@ const jsonLd = {
         margin: 0 0 0.5em 0;
     }
 
+    .prose p, .prose li {
+        font-size: calc(1.1rem * var(--zoom));
+        line-height: 1.6;
+    }
+
     .prose h2 {
-        font-size: 1.6rem !important;
+        font-size: calc(1.6rem * var(--zoom)) !important;
         margin-top: 1.5em;
         margin-bottom: 0.5em;
         color: #333;
     }
 
     .prose h3 {
-        font-size: 1.15rem !important;
+        font-size: calc(1.15rem * var(--zoom)) !important;
         line-height: 1.4;
         margin-top: 1.5em;
         margin-bottom: 0.5em;
         color: #333;
         font-weight: 600;
-    }
-
-    .prose p {
-        font-size: 1.1rem;
-        line-height: 1.6;
     }
 
     iframe, video {
