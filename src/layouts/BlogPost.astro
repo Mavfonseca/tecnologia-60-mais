@@ -278,10 +278,11 @@ const jsonLd = {
 
     /* Responsividade Moderna para Celular: Tabela em Formato de Cards */
     @media (max-width: 768px) {
-        /* Desmonta a estrutura de grade tradicional */
+        /* Desmonta a estrutura de grade tradicional e corrige o vazamento da margem */
         .prose table, .prose thead, .prose tbody, .prose tr, .prose th, .prose td {
             display: block !important;
             width: 100% !important;
+            box-sizing: border-box !important; /* <-- A MÁGICA ACONTECE AQUI */
         }
 
         /* Esconde o cabeçalho original para não ficar uma linha sem sentido no topo */
@@ -307,6 +308,7 @@ const jsonLd = {
             white-space: normal !important;
             text-align: left !important;
             font-size: calc(1rem * var(--zoom)) !important;
+            word-wrap: break-word !important; /* Garante que palavras longas sejam quebradas */
         }
 
         /* Tira a borda do último item para o cartão ficar com acabamento liso */
@@ -314,9 +316,9 @@ const jsonLd = {
             border-bottom: none !important;
         }
 
-        /* O Pulo do Gato: Transforma a 1ª coluna (ex: O Cadeado do Site) no TÍTULO do Cartão */
+        /* O Pulo do Gato: Transforma a 1ª coluna no TÍTULO do Cartão */
         .prose td:first-child {
-            background-color: #f3f4f6 !important; /* Fundo cinza clarinho */
+            background-color: #f3f4f6 !important; 
             font-weight: 800 !important;
             font-size: calc(1.1rem * var(--zoom)) !important;
             color: #1f2937 !important;
