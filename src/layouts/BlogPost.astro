@@ -129,8 +129,26 @@ const jsonLd = {
 
                     </div>
                     <slot />
+
+                <div class="aviso-legal">
+                    <p><strong>Aviso Importante:</strong> Este conteúdo tem finalidade exclusivamente educativa e informativa. Ele não substitui orientação jurídica, financeira ou técnica especializada. Em caso de suspeita de fraude, procure imediatamente a instituição financeira envolvida e os canais oficiais das autoridades competentes.</p>
+                    </div>
+
                 </div>
-            </article>
+                </article>
+
+                <style>
+                .aviso-legal {
+                    border-top: 1px solid #e5e7eb;
+                    border-left: 4px solid var(--accent, #f59e0b);
+                    background-color: var(--aviso-bg, #fdfbf7);
+                    padding: 1.25rem 1.25rem 1.25rem 1.5rem;
+                    margin: 2.5rem 0 1.5rem 0;
+                    font-size: 0.95rem;
+                    line-height: 1.5;
+                    border-radius: 0 4px 4px 0;
+                }
+                </style>
         </main>
         <Footer />
 
