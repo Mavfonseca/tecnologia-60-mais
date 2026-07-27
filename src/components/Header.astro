@@ -1,173 +1,104 @@
 ---
-import HeaderLink from './HeaderLink.astro';
 import { SITE_TITLE } from '../consts';
+
+const currentPath = Astro.url.pathname;
+const isActive = (href: string) =>
+  href === '/' ? currentPath === '/' : currentPath.startsWith(href);
+
+const navLinks = [
+  { href: '/', label: 'Início' },
+  { href: '/blog', label: 'Tutoriais' },
+  { href: '/sobre', label: 'Sobre Nós' },
+];
 ---
 
-<!-- CABEÇALHO SUPERIOR -->
-<header class="top-header">
-    <nav class="top-nav">
-        <!-- LOGO E TÍTULO -->
-        <div class="logo-container">
-            <img src="/imagens/logo-cabecalho.webp" alt="Logotipo Tecnologia 60 Mais" class="logo-img" />
-            <h2>
-                <a href="/">Tecnologia 60 Mais</a>
-            </h2>
-        </div>
+<header class="bg-surface border-b border-subtle sticky top-0 z-50">
+  <nav class="w-full max-w-[1440px] mx-auto flex items-center justify-between gap-6 px-6 md:px-10 py-4">
+    <!-- LOGO -->
+    <a href="/" class="flex items-center gap-3 shrink-0">
+      <img src="/imagens/logo-cabecalho.webp" alt="Logotipo Tecnologia 60 Mais" class="w-10 h-10 rounded-full object-cover shadow" />
+      <span class="font-headline-sm text-headline-sm text-primary hidden sm:inline">{SITE_TITLE || 'Tecnologia 60 Mais'}</span>
+    </a>
 
-        <!-- LINKS DO MENU (Visível apenas no Computador) -->
-        <div class="nav-links">
-            <HeaderLink href="/">Início</HeaderLink>
-            <HeaderLink href="/blog">Dicas e Tutoriais</HeaderLink>
-            <HeaderLink href="/sobre">Sobre</HeaderLink>
-        </div>
-    </nav>
+    <!-- LINKS DESKTOP -->
+    <div class="hidden md:flex items-center gap-8 font-label-lg text-label-lg">
+      {navLinks.map(link => (
+        <a
+          href={link.href}
+          class:list={[
+            'pb-1 border-b-2 transition-colors',
+            isActive(link.href)
+              ? 'text-secondary border-secondary'
+              : 'text-on-surface border-transparent hover:text-secondary',
+          ]}
+        >
+          {link.label}
+        </a>
+      ))}
+    </div>
+
+    <!-- BUSCA DESKTOP -->
+    <div class="hidden md:flex items-center bg-surface-container-low border border-outline-variant rounded-full px-4 py-2 w-64 lg:w-80">
+      <span class="material-symbols-outlined text-outline mr-2 text-[20px]" style="font-variation-settings: 'FILL' 0;">search</span>
+      <input
+        type="text"
+        placeholder="Buscar no site..."
+        aria-label="Buscar no site"
+        class="flex-grow bg-transparent border-none focus:ring-0 font-body-md text-on-surface placeholder:text-outline text-[15px] p-0"
+        id="header-search-input"
+      />
+      <button id="header-voice-btn" aria-label="Buscar por voz" class="text-outline hover:text-secondary transition-colors">
+        <span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">mic</span>
+      </button>
+    </div>
+
+    <!-- BOTÃO HAMBÚRGUER MOBILE -->
+    <button
+      id="mobile-menu-toggle"
+      class="md:hidden flex items-center justify-center w-11 h-11 rounded-full hover:bg-surface-container-low transition-colors"
+      aria-label="Abrir menu"
+      aria-expanded="false"
+    >
+      <span class="material-symbols-outlined text-primary text-[28px]">menu</span>
+    </button>
+  </nav>
+
+  <!-- MENU MOBILE (dropdown) -->
+  <div id="mobile-menu" class="hidden md:hidden border-t border-subtle bg-surface px-6 py-4 flex flex-col gap-1">
+    {navLinks.map(link => (
+      <a
+        href={link.href}
+        class:list={[
+          'py-3 font-label-lg text-label-lg rounded-lg px-3',
+          isActive(link.href) ? 'text-secondary bg-surface-container-low' : 'text-on-surface',
+        ]}
+      >
+        {link.label}
+      </a>
+    ))}
+    <div class="flex items-center bg-surface-container-low border border-outline-variant rounded-full px-4 py-2 mt-2">
+      <span class="material-symbols-outlined text-outline mr-2 text-[20px]">search</span>
+      <input
+        type="text"
+        placeholder="Buscar no site..."
+        aria-label="Buscar no site"
+        class="flex-grow bg-transparent border-none focus:ring-0 font-body-md text-on-surface placeholder:text-outline text-[15px] p-0"
+      />
+    </div>
+  </div>
 </header>
 
-<!-- MENU INFERIOR (Visível apenas no Celular) -->
-<nav class="mobile-bottom-bar">
-    <a href="/" class="mobile-link">
-        <span class="mobile-icon">🏠</span>
-        <span class="mobile-text">Início</span>
-    </a>
-    <a href="/blog" class="mobile-link">
-        <span class="mobile-icon">📖</span>
-        <span class="mobile-text">Tutoriais</span>
-    </a>
-    <a href="/sobre" class="mobile-link">
-        <span class="mobile-icon">ℹ️</span>
-        <span class="mobile-text">Sobre</span>
-    </a>
-</nav>
-
-<!-- CSS GLOBAL PARA EVITAR QUE A BARRA CUBRA O CONTEÚDO -->
-<style is:global>
-    @media (max-width: 768px) {
-        body {
-            /* Empurra o rodapé um pouco para cima no celular para a barra não cobrir a tela */
-            padding-bottom: 70px !important; 
-        }
+<script is:inline>
+  document.addEventListener('DOMContentLoaded', () => {
+    const toggleBtn = document.getElementById('mobile-menu-toggle');
+    const menu = document.getElementById('mobile-menu');
+    if (toggleBtn && menu) {
+      toggleBtn.addEventListener('click', () => {
+        const isOpen = !menu.classList.contains('hidden');
+        menu.classList.toggle('hidden');
+        toggleBtn.setAttribute('aria-expanded', String(!isOpen));
+        toggleBtn.querySelector('.material-symbols-outlined').textContent = isOpen ? 'menu' : 'close';
+      });
     }
-</style>
-
-<!-- ESTILOS DO COMPONENTE -->
-<style>
-    /* Estilos do Cabeçalho Topo */
-    .top-header {
-        background-color: #000080; 
-        color: white; 
-        padding: 22px 20px; 
-        margin: 0; 
-        box-shadow: 0 4px 10px rgba(0,0,0,0.15); 
-        width: 100%; 
-        box-sizing: border-box;
-    }
-    
-    .top-nav {
-        display: flex; 
-        align-items: center; 
-        justify-content: space-between; 
-        max-width: 1100px; 
-        margin: 0 auto;
-    }
-    
-    .logo-container {
-        display: flex; 
-        align-items: center; 
-        gap: 12px;
-    }
-    
-    .logo-img {
-        width: 50px; 
-        height: 50px; 
-        border-radius: 50%; 
-        object-fit: cover; 
-        box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-    }
-    
-    .logo-container h2 {
-        margin: 0; 
-        font-size: 2rem;
-    }
-    
-    .logo-container a {
-        color: white; 
-        text-decoration: none; 
-        font-weight: bold;
-    }
-    
-    /* Links do Computador */
-    .nav-links {
-        display: flex; 
-        align-items: center; 
-        gap: 30px;
-    }
-    
-    .nav-links :global(a) {
-        color: white; 
-        text-decoration: none; 
-        font-size: 1.3rem; 
-        font-weight: bold;
-    }
-
-    /* Esconde o menu de celular por padrão */
-    .mobile-bottom-bar {
-        display: none;
-    }
-
-    /* REGRAS PARA O CELULAR (Telas menores que 768px) */
-    @media (max-width: 768px) {
-        /* Ajusta o cabeçalho superior para ocupar menos espaço */
-        .top-header {
-            padding: 15px 20px;
-        }
-        .logo-container h2 {
-            font-size: 1.5rem;
-        }
-        
-        /* Oculta os links de texto lá em cima */
-        .nav-links {
-            display: none !important;
-        }
-
-        /* Exibe a barra na parte inferior da tela */
-        .mobile-bottom-bar {
-            display: flex;
-            flex-direction: row !important; /* Esta linha resolve o problema! */
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            background-color: white;
-            box-shadow: 0 -4px 15px rgba(0,0,0,0.2);
-            justify-content: space-around;
-            align-items: center;
-            padding: 12px 0;
-            z-index: 1000;
-            border-top: 1px solid #e0e0e0;
-        }
-
-        .mobile-link {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-decoration: none;
-            color: #000080;
-            gap: 4px;
-            flex: 1;
-        }
-
-        .mobile-icon {
-            font-size: 1.6rem;
-        }
-
-        .mobile-text {
-            font-size: 0.85rem;
-            font-weight: bold;
-        }
-        
-        /* Leve efeito quando o botão é tocado */
-        .mobile-link:active {
-            opacity: 0.6;
-        }
-    }
-</style>
+  });
+</script>

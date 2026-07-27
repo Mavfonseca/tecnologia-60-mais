@@ -12,13 +12,15 @@ const sortedPosts = allPosts.sort(
   (a, b) => new Date(b.data.pubDate).getTime() - new Date(a.data.pubDate).getTime()
 );
 
-// Lógica de Destaques
+// Lógica de Destaques (mantida igual à versão anterior)
 const recomendados = sortedPosts.filter(post => post.data.destaque === true);
 const postPrincipal = recomendados[0] || sortedPosts[0];
 const postsSecundarios = recomendados.slice(1, 3);
 
-// Lógica para os últimos tutoriais (exclui os que já estão nos destaques)
-let ultimosTutoriais = sortedPosts.filter(post => post.id !== postPrincipal?.id && !postsSecundarios.some(p => p.id === post.id));
+// Últimos tutoriais (exclui os que já estão nos destaques)
+let ultimosTutoriais = sortedPosts.filter(
+  post => post.id !== postPrincipal?.id && !postsSecundarios.some(p => p.id === post.id)
+);
 if (ultimosTutoriais.length === 0) {
   ultimosTutoriais = sortedPosts.slice(1);
 }
@@ -30,61 +32,111 @@ const todasTags = [...new Set(allPosts.flatMap(post => getPostTags(post.data)))]
   <head>
     <BaseHead title="Início" description="Aprenda tecnologia no seu ritmo com segurança e clareza." />
     <SEO title="Início - Tecnologia 60 Mais" description="Aprenda tecnologia no seu ritmo com segurança e clareza." />
-    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700;800&display=swap" rel="stylesheet">
   </head>
-  <body>
+  <body class="bg-background text-on-background font-body-md min-h-screen flex flex-col">
     <Header />
-    
-    <main>
-      <!-- HERO SECTION: BUSCA E VOZ -->
-      <section class="hero-section">
-        <div class="hero-content">
-          <h1>O que você quer aprender hoje?</h1>
-          <p>Digite sua dúvida ou use a voz para pesquisar de forma simples e rápida.</p>
-          
-          <div class="search-container">
-            <span class="search-icon">🔍</span>
-            <input type="text" placeholder="Ex: Como limpar o celular..." aria-label="Buscar tutorial" />
-            <button class="voice-btn">
-              <span>🎤</span> Pesquisar por Voz
-            </button>
+
+    <main class="flex-grow">
+      <!-- HERO SECTION -->
+      <section class="bg-primary-container text-white py-16 md:py-24 px-6 md:px-10">
+        <div class="w-full max-w-[1440px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+          <div class="flex flex-col gap-6 text-left">
+            <h1 class="font-headline-lg text-headline-lg-mobile md:text-[64px] leading-[1.1] font-extrabold text-white">
+              O que você quer aprender hoje?
+            </h1>
+            <p class="font-body-lg text-body-lg text-primary-fixed-dim max-w-xl text-white/90">
+              Digite sua dúvida ou use a voz para pesquisar de forma simples e rápida.
+            </p>
+
+            <div class="relative w-full max-w-2xl bg-surface rounded-full shadow-2xl flex items-center p-1.5 mt-8 border border-white/20">
+              <span class="material-symbols-outlined text-outline ml-4 mr-2 cursor-pointer hover:text-primary transition-colors" id="search-icon" style="font-variation-settings: 'FILL' 0;">search</span>
+              <input class="flex-grow bg-transparent border-none focus:ring-0 font-body-lg text-on-surface h-12 w-full p-2 placeholder:text-outline" id="search-input" placeholder="Ex: Como limpar o celular..." type="text" />
+              <button class="bg-secondary text-on-secondary rounded-full px-6 py-3 font-label-lg text-label-lg flex items-center gap-2 hover:bg-secondary-container transition-all active:scale-95 min-h-[3.5rem] shadow-lg" id="voice-search-btn">
+                <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">mic</span>
+                <span class="hidden sm:inline" id="voice-search-text">Pesquisar por Voz</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="relative pb-10 mt-4 lg:mt-0">
+            <div class="relative z-10 rounded-[2rem] overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.3)] border-8 border-white/10">
+              <img
+                src="/imagens/imagem-principal-tecnologia-60-mais.webp"
+                alt="Senhora sorrindo enquanto usa tablet em casa, com laptop e caderno na mesa ao lado"
+                class="w-full h-auto object-cover aspect-[4/3]"
+              />
+
+              <!-- Overlay escuro para o texto ficar legível -->
+              <div class="absolute inset-0 bg-gradient-to-r from-primary-container/70 via-primary-container/20 to-transparent"></div>
+
+              <!-- Selo com o nome do site -->
+              <div class="absolute top-6 left-6 z-20 flex items-center gap-2 bg-white/90 backdrop-blur-sm rounded-full pl-2 pr-4 py-2 shadow-lg">
+                <img src="/imagens/logo-cabecalho.webp" alt="" class="w-8 h-8 rounded-full object-cover" />
+                <span class="font-headline-sm text-[15px] font-extrabold text-primary">Tecnologia 60 Mais</span>
+              </div>
+
+              <!-- Título grande sobre a imagem -->
+              <div class="absolute inset-0 flex items-center pt-14 pb-24 px-6">
+                <h2 class="font-headline-lg text-[clamp(3.5rem,6vw,3.25rem)] leading-[1.05] font-extrabold uppercase text-[#FFE600]" style="text-shadow: 2px 2px 10px rgba(0,0,0,0.45);">
+                  Tecnologia<br />60 Mais
+                </h2>
+              </div>
+            </div>
+
+            <!-- Card flutuante: Guia do Site -->
+            <div class="absolute -bottom-8 left-4 right-4 lg:left-8 lg:right-8 z-20 bg-white rounded-2xl shadow-2xl p-5 lg:p-6 flex items-center gap-4 lg:gap-5">
+              <div class="bg-secondary-fixed text-on-secondary-fixed w-14 h-14 lg:w-16 lg:h-16 shrink-0 rounded-full flex items-center justify-center font-headline-sm text-[20px] lg:text-[24px] font-bold">MF</div>
+              <div>
+                <h3 class="font-headline-sm text-[16px] lg:text-[18px] text-primary mb-1">Guia do Site</h3>
+                <p class="font-body-md text-[13px] lg:text-[15px] leading-snug text-on-surface-variant">
+                  Aprenda tecnologia no seu ritmo com <strong>Marcos Fonseca</strong>. Segurança, clareza e muita paciência em cada tutorial.
+                </p>
+              </div>
+            </div>
+
+            <div class="hidden lg:block absolute -bottom-10 -right-10 w-48 h-48 bg-secondary/30 rounded-full blur-[80px]"></div>
+            <div class="hidden lg:block absolute -top-10 -left-10 w-48 h-48 bg-primary/40 rounded-full blur-[80px]"></div>
           </div>
         </div>
       </section>
 
-      <div class="container-central">
-        <!-- SEÇÃO: RECOMENDADOS -->
-        <section class="section-recomendados">
-          <div class="section-header">
-            <span class="star-icon">⭐</span>
-            <h2>Recomendados para Você</h2>
+      <div class="w-full max-w-[1440px] mx-auto px-6 md:px-10 py-20 flex flex-col gap-20">
+        <!-- RECOMENDADOS PARA VOCÊ -->
+        <section aria-labelledby="recomendados-title">
+          <div class="flex items-center gap-3 mb-12">
+            <span class="material-symbols-outlined text-on-tertiary-container text-3xl" style="font-variation-settings: 'FILL' 1;">star</span>
+            <h2 class="font-headline-md text-headline-md text-primary" id="recomendados-title">Recomendados para Você</h2>
           </div>
 
-          <div class="grid-destaques">
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
             {postPrincipal && (
-              <a href={`/blog/${postPrincipal.id}/`} class="card-principal">
-                <div class="image-wrapper">
-                  <img src={postPrincipal.data.heroImage} alt={postPrincipal.data.heroAlt} />
-                  <span class="badge-principal">Destaque Principal</span>
+              <a class="lg:col-span-8 group block bg-surface-soft border border-subtle rounded-2xl overflow-hidden hover:shadow-2xl transition-all focus:outline-none focus:ring-4 focus:ring-primary/20" href={`/blog/${postPrincipal.id}/`}>
+                <div class="relative h-64 md:h-80 lg:h-[520px] w-full overflow-hidden">
+                  <img alt={postPrincipal.data.heroAlt} class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" src={postPrincipal.data.heroImage} />
+                  <div class="absolute top-6 left-6 bg-error text-white px-4 py-1.5 rounded-full font-label-md text-label-md uppercase tracking-widest shadow-md">Destaque Principal</div>
                 </div>
-                <div class="card-body">
-                  <h3>{postPrincipal.data.title}</h3>
-                  <p>{postPrincipal.data.description}</p>
-                  <span class="link-action">Ler Artigo Completo <span>→</span></span>
+                <div class="p-8 md:p-12 flex flex-col gap-4">
+                  <h3 class="font-headline-lg text-headline-md md:text-[36px] leading-tight text-primary group-hover:text-secondary transition-colors">{postPrincipal.data.title}</h3>
+                  <p class="font-body-lg text-body-lg text-on-surface-variant line-clamp-3">{postPrincipal.data.description}</p>
+                  <div class="mt-4 flex items-center gap-2 text-secondary font-label-lg text-label-lg font-bold">
+                    Ler Artigo Completo <span class="material-symbols-outlined transition-transform group-hover:translate-x-2">arrow_forward</span>
+                  </div>
                 </div>
               </a>
             )}
 
-            <div class="coluna-secundarios">
+            <div class="lg:col-span-4 flex flex-col gap-10">
               {postsSecundarios.map(post => (
-                <a href={`/blog/${post.id}/`} class="card-secundario">
-                  <div class="image-wrapper-sm">
-                    <img src={post.data.heroImage} alt={post.data.heroAlt} />
-                    <span class="badge-destaque">Destaque</span>
+                <a class="group block bg-surface-soft border border-subtle rounded-2xl overflow-hidden hover:shadow-xl transition-all flex flex-col h-full focus:outline-none focus:ring-4 focus:ring-primary/20" href={`/blog/${post.id}/`}>
+                  <div class="relative h-48 lg:h-56 w-full overflow-hidden">
+                    <img alt={post.data.heroAlt} class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" src={post.data.heroImage} />
+                    <div class="absolute top-4 left-4 bg-tertiary-fixed text-on-tertiary-fixed-variant px-3 py-1 rounded-full font-label-md text-[12px] uppercase tracking-wider font-bold">Destaque</div>
                   </div>
-                  <div class="card-body-sm">
-                    <h4>{post.data.title}</h4>
-                    <span class="link-action-sm">Ler Artigo <span>→</span></span>
+                  <div class="p-6 flex flex-col gap-3 flex-grow">
+                    <h3 class="font-headline-sm text-[22px] leading-tight text-primary group-hover:text-secondary transition-colors">{post.data.title}</h3>
+                    <div class="mt-auto pt-4 flex items-center gap-2 text-secondary font-label-md text-label-md font-bold">
+                      Ler Artigo <span class="material-symbols-outlined text-[18px] transition-transform group-hover:translate-x-1">arrow_forward</span>
+                    </div>
                   </div>
                 </a>
               ))}
@@ -92,62 +144,88 @@ const todasTags = [...new Set(allPosts.flatMap(post => getPostTags(post.data)))]
           </div>
         </section>
 
-        <!-- SEÇÃO: TUTORIAIS + SIDEBAR -->
-        <div class="layout-split">
-          <section class="main-content">
-            <div class="section-header">
-              <h2>Últimos Tutoriais</h2>
-            </div>
+        <!-- ÚLTIMOS TUTORIAIS + SIDEBAR -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 w-full">
+          <section aria-labelledby="tutoriais-title" class="lg:col-span-8 flex flex-col gap-10 w-full">
+            <h2 class="font-headline-md text-headline-md text-primary border-b-2 border-surface-container-high pb-6" id="tutoriais-title">Últimos Tutoriais</h2>
 
-            <div class="tutoriais-grid">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 w-full">
               {ultimosTutoriais.map(post => (
-                <a href={`/blog/${post.id}/`} class="tutorial-card">
-                  <div class="thumb-wrap">
-                    <img src={post.data.heroImage} alt={post.data.heroAlt} />
+                <a class="group flex flex-col bg-surface border border-subtle rounded-2xl overflow-hidden hover:shadow-lg transition-all focus:outline-none focus:ring-4 focus:ring-primary/20" href={`/blog/${post.id}/`}>
+                  <div class="h-56 w-full overflow-hidden">
+                    <img alt={post.data.heroAlt} class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src={post.data.heroImage} />
                   </div>
-                  <div class="tutorial-info">
-                    <span class="pub-date">
+                  <div class="p-6 flex flex-col gap-4 flex-grow">
+                    <time class="font-label-md text-[14px] text-outline">
                       {new Date(post.data.pubDate).toLocaleDateString('pt-BR', { day: '2-digit', month: 'long', year: 'numeric' })}
-                    </span>
-                    <h4>{post.data.title}</h4>
-                    <p>{post.data.description}</p>
+                    </time>
+                    <h3 class="font-headline-sm text-[22px] leading-tight text-primary group-hover:text-secondary transition-colors">{post.data.title}</h3>
+                    <p class="font-body-md text-[17px] leading-relaxed text-on-surface-variant line-clamp-3">{post.data.description}</p>
                   </div>
                 </a>
               ))}
             </div>
 
-            <div class="view-all-container">
-              <a href="/blog" class="btn-all">Ver Todos os Tutoriais <span>→</span></a>
+            <div class="mt-8 flex justify-center w-full">
+              <a class="bg-primary text-on-primary rounded-full px-10 py-5 font-label-lg text-label-lg flex items-center gap-3 hover:bg-secondary transition-all active:scale-95 shadow-lg group" href="/blog">
+                Ver Todos os Tutoriais
+                <span class="material-symbols-outlined transition-transform group-hover:translate-x-1">arrow_forward</span>
+              </a>
             </div>
           </section>
 
-          <aside class="sidebar">
-            <!-- Widget: Autor/Guia -->
-            <div class="widget">
-              <div class="author-header">
-                <div class="author-avatar">MF</div>
-                <h3>Guia do Site</h3>
+          <aside class="lg:col-span-4 flex flex-col gap-10 w-full">
+            <div class="bg-surface-soft p-8 border border-subtle rounded-2xl flex flex-col gap-6 shadow-sm w-full">
+              <div class="flex items-center gap-5">
+                <div class="bg-secondary-fixed text-on-secondary-fixed w-20 h-20 rounded-full flex items-center justify-center font-headline-md text-[32px] font-bold shadow-inner">MF</div>
+                <h3 class="font-headline-sm text-headline-sm text-primary">Guia do Site</h3>
               </div>
-              <p>Aprenda tecnologia no seu ritmo com <strong>Marcos Fonseca</strong>. Segurança, clareza e muita paciência em cada tutorial.</p>
+              <p class="font-body-md text-[18px] leading-relaxed text-on-surface-variant">
+                Aprenda tecnologia no seu ritmo com <strong>Marcos Fonseca</strong>. Segurança, clareza e muita paciência em cada tutorial.
+              </p>
             </div>
 
-            <!-- Widget: Tópicos -->
-            <div class="widget">
-              <h3>🏷️ Tópicos Populares</h3>
-              <div class="tags-container">
+            <div class="bg-surface p-8 border border-subtle rounded-2xl shadow-sm w-full">
+              <h3 class="font-headline-sm text-headline-sm text-primary mb-6 flex items-center gap-3">
+                <span class="material-symbols-outlined text-secondary">sell</span>
+                Tópicos Populares
+              </h3>
+              <div class="flex flex-wrap gap-3">
                 {todasTags.map(tag => (
-                  <a href={`/tag/${slugifyTag(tag)}/`} class="tag-link">{tag}</a>
+                  <a class="bg-surface-container-low border border-outline-variant text-on-surface font-label-md text-[15px] px-6 py-3 rounded-full hover:bg-primary hover:text-white hover:border-primary transition-all focus:ring-4 focus:ring-primary/20 focus:outline-none min-h-[3rem] flex items-center font-bold" href={`/tag/${slugifyTag(tag)}/`}>
+                    {tag}
+                  </a>
                 ))}
               </div>
             </div>
 
-            <!-- Widget: Projetos -->
-            <div class="widget">
-              <h3>🔗 Conheça Também</h3>
-              <ul class="projects-list">
-                <li><a href="https://saudecomequilibrio.com.br" target="_blank" rel="noopener">🍏 Saúde com Equilíbrio</a></li>
-                <li><a href="https://temperosdonordeste.saudecomequilibrio.com.br" target="_blank" rel="noopener">🌶️ Temperos do Nordeste</a></li>
-                <li><a href="https://marcosvfonseca.com" target="_blank" rel="noopener">🌐 Marcos Fonseca</a></li>
+            <div class="bg-surface p-8 border border-subtle rounded-2xl shadow-sm w-full">
+              <h3 class="font-headline-sm text-headline-sm text-primary mb-6 flex items-center gap-3">
+                <span class="material-symbols-outlined text-secondary">link</span>
+                Conheça Também
+              </h3>
+              <ul class="flex flex-col gap-4">
+                <li>
+                  <a class="flex items-center gap-4 p-4 border border-outline-variant/30 hover:bg-surface-container-low hover:border-primary rounded-xl transition-all group focus:outline-none focus:ring-4 focus:ring-primary/20 min-h-[4rem]" href="https://saudecomequilibrio.com.br" rel="noopener noreferrer" target="_blank">
+                    <span aria-hidden="true" class="text-3xl">🍏</span>
+                    <span class="font-body-md text-[18px] text-on-surface group-hover:text-primary font-bold">Saúde com Equilíbrio</span>
+                    <span class="material-symbols-outlined ml-auto text-outline group-hover:text-primary transition-transform group-hover:scale-110">open_in_new</span>
+                  </a>
+                </li>
+                <li>
+                  <a class="flex items-center gap-4 p-4 border border-outline-variant/30 hover:bg-surface-container-low hover:border-primary rounded-xl transition-all group focus:outline-none focus:ring-4 focus:ring-primary/20 min-h-[4rem]" href="https://temperosdonordeste.saudecomequilibrio.com.br" rel="noopener noreferrer" target="_blank">
+                    <span aria-hidden="true" class="text-3xl">🌶️</span>
+                    <span class="font-body-md text-[18px] text-on-surface group-hover:text-primary font-bold">Temperos do Nordeste</span>
+                    <span class="material-symbols-outlined ml-auto text-outline group-hover:text-primary transition-transform group-hover:scale-110">open_in_new</span>
+                  </a>
+                </li>
+                <li>
+                  <a class="flex items-center gap-4 p-4 border border-outline-variant/30 hover:bg-surface-container-low hover:border-primary rounded-xl transition-all group focus:outline-none focus:ring-4 focus:ring-primary/20 min-h-[4rem]" href="https://marcosvfonseca.com" rel="noopener noreferrer" target="_blank">
+                    <span aria-hidden="true" class="text-3xl">🌐</span>
+                    <span class="font-body-md text-[18px] text-on-surface group-hover:text-primary font-bold">Marcos Fonseca</span>
+                    <span class="material-symbols-outlined ml-auto text-outline group-hover:text-primary transition-transform group-hover:scale-110">open_in_new</span>
+                  </a>
+                </li>
               </ul>
             </div>
           </aside>
@@ -156,407 +234,71 @@ const todasTags = [...new Set(allPosts.flatMap(post => getPostTags(post.data)))]
     </main>
 
     <Footer />
+
+    <script is:inline>
+      document.addEventListener('DOMContentLoaded', () => {
+        const searchInput = document.getElementById('search-input');
+        const searchIcon = document.getElementById('search-icon');
+        const voiceSearchBtn = document.getElementById('voice-search-btn');
+        const voiceSearchText = document.getElementById('voice-search-text');
+
+        const performSearch = () => {
+          const query = searchInput?.value.trim();
+          if (query) {
+            alert(`Busca iniciada por: "${query}"`);
+          } else {
+            alert('Por favor, digite algo para buscar.');
+          }
+        };
+
+        if (searchInput) {
+          searchInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') performSearch();
+          });
+        }
+        if (searchIcon) searchIcon.addEventListener('click', performSearch);
+
+        if (voiceSearchBtn && voiceSearchText) {
+          let isListening = false;
+          const originalText = voiceSearchText.textContent;
+
+          voiceSearchBtn.addEventListener('click', () => {
+            if (!isListening) {
+              isListening = true;
+              voiceSearchText.textContent = 'Ouvindo...';
+              voiceSearchBtn.classList.add('bg-error', 'animate-pulse');
+              voiceSearchBtn.classList.remove('bg-secondary');
+
+              setTimeout(() => {
+                isListening = false;
+                voiceSearchText.textContent = originalText;
+                voiceSearchBtn.classList.remove('bg-error', 'animate-pulse');
+                voiceSearchBtn.classList.add('bg-secondary');
+
+                if (searchInput) searchInput.value = 'Como limpar o celular';
+                setTimeout(() => performSearch(), 500);
+              }, 3000);
+            }
+          });
+        }
+      });
+    </script>
   </body>
 </html>
 
 <style>
-  :root {
-    --primary: #000080;
-    --primary-light: #1a23e8;
-    --surface: #f9f9ff;
-    --text-main: #1a1c1e;
-    --text-muted: #666;
-    --white: #ffffff;
-    --accent: #f97316;
-  }
-
-  body {
-    background-color: var(--surface);
-    color: var(--text-main);
-    font-family: 'Manrope', sans-serif;
-    margin: 0;
-  }
-
-  /* HERO SECTION */
-  .hero-section {
-    background-color: var(--primary);
-    color: var(--white);
-    padding: 80px 24px;
-    text-align: center;
-  }
-
-  .hero-content {
-    max-width: 800px;
-    margin: 0 auto;
-  }
-
-  .hero-section h1 {
-    font-size: 3rem;
-    font-weight: 800;
-    margin: 0 0 24px;
-    line-height: 1.1;
-  }
-
-  .hero-section p {
-    font-size: 1.25rem;
-    opacity: 0.9;
-    margin-bottom: 40px;
-  }
-
-  .search-container {
-    background: var(--white);
-    border-radius: 50px;
-    padding: 8px;
-    display: flex;
-    align-items: center;
-    max-width: 650px;
-    margin: 0 auto;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-  }
-
-  .search-icon {
-    padding: 0 16px;
-    color: #999;
-  }
-
-  .search-container input {
-    border: none;
-    flex-grow: 1;
-    font-size: 1.1rem;
-    padding: 12px;
-    outline: none;
-    color: #333;
-  }
-
-  .voice-btn {
-    background-color: var(--primary-light);
-    color: var(--white);
-    border: none;
-    padding: 12px 24px;
-    border-radius: 50px;
-    font-weight: 700;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    cursor: pointer;
-    transition: background 0.3s ease;
-  }
-
-  .voice-btn:hover {
-    background-color: #0000a0;
-  }
-
-  /* CONTAINER CENTRAL */
-  .container-central {
-    max-width: 1280px;
-    margin: 0 auto;
-    padding: 60px 24px;
-  }
-
-  .section-header {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 32px;
-  }
-
-  .section-header h2 {
-    font-size: 2rem;
-    font-weight: 700;
-    color: var(--primary);
-    margin: 0;
-  }
-
-  .star-icon {
-    font-size: 1.5rem;
-  }
-
-  /* GRID DESTAQUES */
-  .grid-destaques {
-    display: grid;
-    grid-template-columns: 1.8fr 1fr;
-    gap: 32px;
-    margin-bottom: 80px;
-  }
-
-  .card-principal, .card-secundario, .tutorial-card {
-    text-decoration: none;
-    color: inherit;
-    background: var(--white);
-    border-radius: 20px;
-    overflow: hidden;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
-
-  .card-principal:hover, .card-secundario:hover, .tutorial-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 12px 30px rgba(0,0,0,0.1);
-  }
-
-  .image-wrapper {
-    position: relative;
-    height: 400px;
-  }
-
-  .image-wrapper img, .image-wrapper-sm img, .thumb-wrap img {
+  /* O global.css força <main> a 720px (largura de artigo de blog).
+     Aqui sobrescrevemos só na home, sem mexer nas páginas de post. */
+  main {
     width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-
-  .badge-principal {
-    position: absolute;
-    top: 20px;
-    left: 20px;
-    background: #c2410c;
-    color: var(--white);
-    font-size: 0.75rem;
-    font-weight: 700;
-    padding: 6px 12px;
-    border-radius: 4px;
-    text-transform: uppercase;
-  }
-
-  .card-body {
-    padding: 32px;
-  }
-
-  .card-body h3 {
-    font-size: 1.75rem;
-    margin: 0 0 16px;
-    line-height: 1.2;
-    color: var(--primary);
-  }
-
-  .card-body p {
-    color: var(--text-muted);
-    font-size: 1.1rem;
-    line-height: 1.6;
-    margin-bottom: 24px;
-  }
-
-  .link-action {
-    color: var(--primary-light);
-    font-weight: 700;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-
-  .coluna-secundarios {
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
-  }
-
-  .image-wrapper-sm {
-    position: relative;
-    height: 200px;
-  }
-
-  .badge-destaque {
-    position: absolute;
-    top: 16px;
-    left: 16px;
-    background: var(--accent);
-    color: var(--white);
-    font-size: 0.7rem;
-    font-weight: 700;
-    padding: 4px 10px;
-    border-radius: 4px;
-    text-transform: uppercase;
-  }
-
-  .card-body-sm {
-    padding: 24px;
-  }
-
-  .card-body-sm h4 {
-    font-size: 1.25rem;
-    margin: 0 0 12px;
-    line-height: 1.3;
-  }
-
-  /* LAYOUT SPLIT */
-  .layout-split {
-    display: grid;
-    grid-template-columns: 2fr 1fr;
-    gap: 60px;
-  }
-
-  .tutoriais-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 24px;
-  }
-
-  .tutorial-card {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .thumb-wrap {
-    height: 180px;
-  }
-
-  .tutorial-info {
-    padding: 24px;
-  }
-
-  .pub-date {
-    font-size: 0.85rem;
-    color: #999;
-    margin-bottom: 8px;
-    display: block;
-  }
-
-  .tutorial-info h4 {
-    margin: 0 0 12px;
-    font-size: 1.15rem;
-    line-height: 1.4;
-  }
-
-  .tutorial-info p {
-    font-size: 0.95rem;
-    color: var(--text-muted);
-    line-height: 1.5;
+    max-width: none;
     margin: 0;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-  }
-
-  .view-all-container {
-    margin-top: 48px;
-    text-align: center;
-  }
-
-  .btn-all {
-    display: inline-block;
-    background: #000040;
-    color: var(--white);
-    padding: 16px 40px;
-    border-radius: 50px;
-    text-decoration: none;
-    font-weight: 700;
-    transition: background 0.3s;
-  }
-
-  .btn-all:hover {
-    background: #000;
-  }
-
-  /* SIDEBAR */
-  .sidebar {
-    display: flex;
-    flex-direction: column;
-    gap: 32px;
-  }
-
-  .widget {
-    background: var(--white);
-    padding: 32px;
-    border-radius: 24px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.03);
-    border: 1px solid rgba(0,0,0,0.05);
-  }
-
-  .author-header {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    margin-bottom: 20px;
-  }
-
-  .author-avatar {
-    width: 48px;
-    height: 48px;
-    background: var(--primary);
-    color: var(--white);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 800;
-  }
-
-  .widget h3 {
-    margin: 0;
-    font-size: 1.25rem;
-  }
-
-  .widget p {
-    color: var(--text-muted);
-    line-height: 1.6;
-    margin: 0;
-  }
-
-  .tags-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin-top: 16px;
-  }
-
-  .tag-link {
-    background: #f1f3f9;
-    color: var(--primary);
-    padding: 6px 16px;
-    border-radius: 50px;
-    text-decoration: none;
-    font-size: 0.9rem;
-    transition: all 0.2s;
-  }
-
-  .tag-link:hover {
-    background: #e0e7ff;
-    color: var(--accent);
-  }
-
-  .projects-list {
-    list-style: none;
     padding: 0;
-    margin: 16px 0 0;
   }
 
-  .projects-list li {
-    margin-bottom: 12px;
-  }
-
-  .projects-list a {
-    text-decoration: none;
-    color: var(--text-main);
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-weight: 500;
-    transition: color 0.2s;
-  }
-
-  .projects-list a:hover {
-    color: var(--accent);
-  }
-
-  /* RESPONSIVO */
-  @media (max-width: 1024px) {
-    .grid-destaques, .layout-split {
-      grid-template-columns: 1fr;
-    }
-    
-    .hero-section h1 {
-      font-size: 2.25rem;
-    }
-  }
-
-  @media (max-width: 768px) {
-    .tutoriais-grid {
-      grid-template-columns: 1fr;
-    }
-    
-    .image-wrapper {
-      height: 250px;
-    }
+  /* Reset do espaçamento padrão de <p> do global.css, já controlado
+     pelos gaps do Tailwind nesta página */
+  main p {
+    margin: 0;
   }
 </style>
