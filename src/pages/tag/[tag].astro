@@ -1,0 +1,136 @@
+---
+import { getCollection } from 'astro:content';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import BaseHead from '../../components/BaseHead.astro';
+import SEO from '../../components/SEO.astro';
+import { slugifyTag, getPostTags } from '../../utils/tags';
+import '../../styles/global.css';
+
+export async function getStaticPaths() {
+  const allPosts = await getCollection('blog');
+  const tagsMap = new Map<string, string>();
+
+  allPosts.forEach(post => {
+    getPostTags(post.data).forEach(tag => {
+      tagsMap.set(slugifyTag(tag), tag);
+    });
+  });
+
+  return Array.from(tagsMap.entries()).map(([slug, originalTag]) => {
+    const postsComTag = allPosts.filter(post =>
+      getPostTags(post.data).some(t => slugifyTag(t) === slug)
+    );
+
+    return {
+      params: { tag: slug },
+      props: { tagName: originalTag, posts: postsComTag },
+    };
+  });
+}
+
+const { tagName, posts } = Astro.props;
+const sortedPosts = posts.sort(
+  (a, b) => new Date(b.data.pubDate).getTime() - new Date(a.data.pubDate).getTime()
+);
+---
+
+<html lang="pt-br">
+  <head>
+    <BaseHead title={`Artigos sobre ${tagName}`} description={`Confira todos os tutoriais e artigos sobre ${tagName} no Tecnologia 60 Mais.`} />
+    <SEO title={`Artigos sobre ${tagName}`} description={`Confira todos os tutoriais e artigos sobre ${tagName} no Tecnologia 60 Mais.`} />
+  </head>
+  <body>
+    <Header />
+    <main class="container-tag">
+      <h1>Artigos sobre: <span>{tagName}</span></h1>
+      <p class="tag-subtitulo">Total de {sortedPosts.length} {sortedPosts.length === 1 ? 'artigo encontrado' : 'artigos encontrados'}.</p>
+
+      <div class="lista-tutoriais-horizontais">
+        {sortedPosts.map(post => (
+          <a href={`/blog/${post.id}/`} class="item-tutorial-horizontal">
+            <img src={post.data.heroImage} alt={post.data.heroAlt} class="thumb-mini" />
+            <div class="texto-tutorial">
+              <h4>{post.data.title}</h4>
+              <p>{post.data.description}</p>
+              <span class="data">
+                {new Date(post.data.pubDate).toLocaleDateString('pt-BR', { day: '2-digit', month: 'long', year: 'numeric' })}
+              </span>
+            </div>
+          </a>
+        ))}
+      </div>
+    </main>
+    <Footer />
+  </body>
+</html>
+
+<style>
+  .container-tag {
+    max-width: 900px;
+    margin: 3rem auto;
+    padding: 0 1rem;
+  }
+  .container-tag h1 {
+    font-size: 2rem;
+    color: #1e1b4b;
+    margin-bottom: 0.5rem;
+  }
+  .container-tag h1 span {
+    color: #f97316;
+  }
+  .tag-subtitulo {
+    color: #555;
+    margin-bottom: 2rem;
+    font-size: 1rem;
+  }
+  .lista-tutoriais-horizontais {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .item-tutorial-horizontal {
+    display: flex;
+    gap: 1rem;
+    background: #fff;
+    border-radius: 12px;
+    padding: 0.75rem;
+    text-decoration: none;
+    color: inherit;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    transition: box-shadow 0.2s ease;
+  }
+  .item-tutorial-horizontal:hover {
+    box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+  }
+  .thumb-mini {
+    width: 140px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 8px;
+    flex-shrink: 0;
+  }
+  .texto-tutorial h4 {
+    margin: 0 0 0.4rem;
+    font-size: 1.05rem;
+    color: #1e1b4b;
+  }
+  .texto-tutorial p {
+    font-size: 0.9rem;
+    color: #555;
+    margin: 0 0 0.4rem;
+  }
+  .texto-tutorial .data {
+    font-size: 0.8rem;
+    color: #999;
+  }
+  @media (max-width: 768px) {
+    .item-tutorial-horizontal {
+      flex-direction: column;
+    }
+    .thumb-mini {
+      width: 100%;
+      height: 180px;
+    }
+  }
+</style>

@@ -1,131 +1,455 @@
 ---
-import BaseHead from '../components/BaseHead.astro';
+import { getCollection } from 'astro:content';
+import { slugifyTag, getPostTags } from '../utils/tags';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
-import { getCollection } from 'astro:content';
-import SchemaOrganization from '../components/SchemaOrganization.astro';
+import BaseHead from '../components/BaseHead.astro';
+import SEO from '../components/SEO.astro';
+import '../styles/global.css';
 
-// 1. Busca todos os artigos
-const todosOsArtigos = await getCollection('blog');
+const allPosts = await getCollection('blog');
+const sortedPosts = allPosts.sort(
+  (a, b) => new Date(b.data.pubDate).getTime() - new Date(a.data.pubDate).getTime()
+);
 
-// 2. Cria a lista de DESTAQUES (apenas os que têm destaque: true)
-const artigosDestaque = [...todosOsArtigos]
-  .filter((post: any) => post.data.destaque === true)
-  .sort((a: any, b: any) => new Date(b.data.pubDate).valueOf() - new Date(a.data.pubDate).valueOf())
-  .slice(0, 3);
+const recomendados = sortedPosts.filter(post => post.data.destaque === true);
+const postPrincipal = recomendados[0] || sortedPosts[0];
+const postsSecundarios = recomendados.slice(1, 3);
 
-// 3. Cria a lista de ÚLTIMOS TUTORIAIS (os 3 mais recentes, geral)
-const ultimosArtigos = [...todosOsArtigos]
-  .sort((a: any, b: any) => new Date(b.data.pubDate).valueOf() - new Date(a.data.pubDate).valueOf())
-  .slice(0, 3);
+// Lógica para os últimos tutoriais
+let ultimosTutoriais = sortedPosts.filter(post => post.id !== postPrincipal?.id && !postsSecundarios.some(p => p.id === post.id));
+if (ultimosTutoriais.length === 0) {
+  ultimosTutoriais = sortedPosts.slice(1);
+}
+
+const todasTags = [...new Set(allPosts.flatMap(post => getPostTags(post.data)))].slice(0, 6);
 ---
 
-<!doctype html>
 <html lang="pt-br">
   <head>
-    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-    <style is:global>
-  /* Reset e Body */
-  body { margin: 0; padding: 0; font-family: 'Segoe UI', sans-serif; background-color: #f8f9fa; }
-  
-  /* Banner Principal */
-  .hero-section { background-size: cover; background-position: center; color: white; padding: 100px 20px; text-align: center; }
-  .hero-content { max-width: 800px; margin: 0 auto; }
-  .hero-content h1 { font-size: 3.5rem; margin-bottom: 20px; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); }
-  .hero-content p { font-size: 1.2rem; margin-bottom: 30px; text-shadow: 1px 1px 2px rgba(0,0,0,0.5); }
-  .cta-button { display: inline-block; background-color: #ff7f50; color: white; padding: 15px 30px; border-radius: 25px; text-decoration: none; font-weight: bold; font-size: 1.2rem; transition: background 0.3s; }
-  .cta-button:hover { background-color: #ff6347; }
-  
-  /* Cards */
-  .features-section { display: flex !important; justify-content: center !important; gap: 20px !important; padding: 0 20px !important; margin-top: -80px !important; flex-wrap: wrap !important; position: relative !important; z-index: 10 !important; }
-  .feature-card { background: white !important; padding: 30px !important; border-radius: 15px !important; box-shadow: 0 10px 20px rgba(0,0,0,0.1) !important; text-align: center !important; width: 300px !important; transition: transform 0.3s ease; }
-  .feature-card:hover { transform: translateY(-10px); }
-  .feature-icon { font-size: 3rem; margin-bottom: 15px; display: block; }
-  
-  /* Blog Grid */
-  .blog-section { padding: 80px 20px 40px 20px; max-width: 1000px; margin: 0 auto; }
-  .section-title { color: #000080; border-bottom: 2px solid #ff7f50; padding-bottom: 10px; display: inline-block; margin-bottom: 30px; }
-  .blog-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
-  .blog-card { background: white; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
-  .blog-card img { width: 100%; height: 200px; object-fit: cover; }
-  .blog-card-content { padding: 20px; }
-  .blog-link { color: #000080; font-weight: bold; text-decoration: none; }
-
-  /* Ajuste Mobile */
-  @media (max-width: 600px) {
-    .hero-content h1 { font-size: 2rem !important; line-height: 1.2; }
-    .hero-section { padding: 40px 10px; }
-    .features-section { margin-top: 20px !important; }
-  }
-</style>
+    <BaseHead title="Início" description="Aprenda tecnologia no seu ritmo com segurança e clareza." />
+    <SEO title="Início - Tecnologia 60 Mais" description="Aprenda tecnologia no seu ritmo com segurança e clareza." />
   </head>
   <body>
     <Header />
-    <main>
-      <!-- Hero Section Restaurada -->
-      <section class="hero-section" style="background-image: linear-gradient(rgba(0, 0, 128, 0.6), rgba(0, 0, 128, 0.6)), url('/imagens/imagem-principal-tecnologia-60-mais.webp');">
-        <div class="hero-content">
-          <h1>Seja bem-vindo ao Tecnologia 60 Mais!</h1>
-          <p>Tecnologia descomplicada para sua jornada digital, com segurança e paciência.<br> Guia: Marcos Fonseca.</p>
-          <a href="/blog" class="cta-button">Explore Tutoriais</a>
-        </div>
-      </section>
-
-      <!-- Cards com efeito hover -->
-      <section class="features-section">
-        <div class="feature-card">
-          <span class="feature-icon">🎯</span>
-          <h3>Dicas Práticas</h3>
-          <p>Pequenas dicas diárias para facilitar o uso do celular e do seu computador em casa.</p>
-        </div>
-        <div class="feature-card">
-          <span class="feature-icon">🔒</span>
-          <h3>Passo a Passo Seguro</h3>
-          <p>Navegação na internet, bancos e aplicativos com total segurança e confiança.</p>
-        </div>
-        <div class="feature-card">
-          <span class="feature-icon">📱</span>
-          <h3>Tutoriais de Independência</h3>
-          <p>Aprenda a resolver problemas digitais sozinho e ser muito mais autônomo.</p>
-        </div>
-      </section>
-
-      <!-- PRIMEIRA FILEIRA: Destaques -->
-      <section class="blog-section">
-        <h2 class="section-title">⭐ Recomendados para Você</h2>
-        <div class="blog-grid">
-          {artigosDestaque.map((post: any) => (
-            <div class="blog-card">
-              <img src={post.data.heroImage} alt={post.data.title} />
-              <div class="blog-card-content">
-                <h4>{post.data.title}</h4>
-                <p>{post.data.description}</p>
-                <a href={`/blog/${post.id}/`} class="blog-link">Ler Mais &rarr;</a>
-              </div>
-            </div>
-          ))}
-        </div>
-
-        <!-- SEGUNDA FILEIRA: Últimos Tutoriais -->
-        <h2 class="section-title" style="margin-top: 80px;">🕒 Últimos Tutoriais</h2>
-        <div class="blog-grid">
-          {ultimosArtigos.map((post: any) => (
-            <div class="blog-card">
-              <img src={post.data.heroImage} alt={post.data.title} />
-              <div class="blog-card-content">
-                <h4>{post.data.title}</h4>
-                <p>{post.data.description}</p>
-                <a href={`/blog/${post.id}/`} class="blog-link">Ler Mais &rarr;</a>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-    </main>
-    <Footer />
     
-    <!-- Schema de Organização -->
-    <SchemaOrganization />
+    <main class="home-container">
+      <!-- SEÇÃO 1: RECOMENDADOS (IMAGEM EM CIMA, TEXTO EMBAIXO) -->
+      <section class="recomendados-section">
+        <h2 class="titulo-secao">Recomendados para Você</h2>
+
+        {postPrincipal && (
+          <a href={`/blog/${postPrincipal.id}/`} class="card-destaque-principal">
+            <div class="destaque-imagem-wrap">
+              <img src={postPrincipal.data.heroImage} alt={postPrincipal.data.heroAlt} class="destaque-imagem" />
+              <span class="badge">Destaque Principal</span>
+            </div>
+            <div class="destaque-conteudo">
+              <h3>{postPrincipal.data.title}</h3>
+              <p>{postPrincipal.data.description}</p>
+              <span class="btn-ler-mais">Ler Artigo Completo &rarr;</span>
+            </div>
+          </a>
+        )}
+
+        {postsSecundarios.length > 0 && (
+          <div class="destaque-secundarios-grid">
+            {postsSecundarios.map(post => (
+              <a href={`/blog/${post.id}/`} class="card-destaque-secundario">
+                <div class="destaque-imagem-wrap">
+                  <img src={post.data.heroImage} alt={post.data.heroAlt} class="destaque-imagem" />
+                  <span class="badge-secundaria">Destaque</span>
+                </div>
+                <div class="destaque-conteudo">
+                  <h4>{post.data.title}</h4>
+                  <p>{post.data.description}</p>
+                  <span class="btn-ler-mais">Ler Artigo &rarr;</span>
+                </div>
+              </a>
+            ))}
+          </div>
+        )}
+      </section>
+
+      <!-- SEÇÃO 2: ÚLTIMOS TUTORIAIS + SIDEBAR -->
+      <div class="grid-com-sidebar">
+        <div class="coluna-artigos">
+          <h2 class="titulo-secao">Últimos Tutoriais</h2>
+
+          <div class="lista-tutoriais-horizontais">
+            {ultimosTutoriais.map(post => (
+              <a href={`/blog/${post.id}/`} class="item-tutorial-horizontal">
+                <img src={post.data.heroImage} alt={post.data.heroAlt} class="thumb-mini" />
+                <div class="texto-tutorial">
+                  <h4>{post.data.title}</h4>
+                  <p>{post.data.description}</p>
+                  <span class="data">
+                    {new Date(post.data.pubDate).toLocaleDateString('pt-BR', { day: '2-digit', month: 'long', year: 'numeric' })}
+                  </span>
+                </div>
+              </a>
+            ))}
+          </div>
+        </div>
+
+        <aside class="barra-lateral">
+          <div class="widget widget-autor">
+            <div class="autor-perfil">
+              <img src="/imagens/marcos-fonseca.webp" alt="Marcos Fonseca" class="autor-foto" onerror="this.style.display='none'" />
+              <div>
+                <h3>Guia do Site</h3>
+                <p>Aprenda tecnologia no seu ritmo com <strong>Marcos Fonseca</strong>. Segurança, clareza e muita paciência em cada tutorial.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="widget widget-topicos">
+            <h3>Tópicos Populares</h3>
+            <div class="tags-lista">
+              {todasTags.map(tag => (
+                <a href={`/tag/${slugifyTag(tag)}/`} class="tag-pill">{tag}</a>
+              ))}
+            </div>
+          </div>
+
+          <div class="widget widget-outros-projetos">
+            <h3>Conheça Também</h3>
+            <ul class="lista-projetos">
+              <li><a href="https://saudecomequilibrio.com.br" target="_blank" rel="noopener">Saúde com Equilíbrio</a></li>
+              <li><a href="https://temperosdonordeste.saudecomequilibrio.com.br" target="_blank" rel="noopener">Temperos do Nordeste</a></li>
+              <li><a href="https://marcosvfonseca.com" target="_blank" rel="noopener">Marcos Fonseca</a></li>
+            </ul>
+          </div>
+        </aside>
+      </div>
+    </main>
+
+    <Footer />
   </body>
 </html>
+
+<style>
+  .home-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+  }
+
+  .titulo-secao {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    color: #1e1b4b;
+  }
+
+  /* ===== SEÇÃO DE DESTAQUES (IMAGEM EM CIMA, TEXTO EMBAIXO) ===== */
+  .recomendados-section {
+    margin: 3rem 0;
+  }
+
+  /* Card Principal (Largura Total da Página) */
+  .card-destaque-principal {
+    display: flex;
+    flex-direction: column;
+    background: #fff;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+    text-decoration: none;
+    color: inherit;
+    margin-bottom: 1.5rem;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .card-destaque-principal:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 28px rgba(0,0,0,0.12);
+  }
+
+  .card-destaque-principal .destaque-imagem-wrap {
+    position: relative;
+    width: 100%;
+    height: 380px; /* Altura ideal para a grande imagem de capa */
+  }
+
+  .card-destaque-principal .destaque-conteudo {
+    padding: 2rem 2.5rem 2.5rem 2.5rem;
+  }
+
+  .card-destaque-principal h3 {
+    font-size: 1.8rem;
+    margin: 0 0 0.75rem;
+    color: #1e1b4b;
+    line-height: 1.3;
+  }
+
+  .card-destaque-principal p {
+    font-size: 1.05rem;
+    color: #444;
+    margin-bottom: 1.25rem;
+    line-height: 1.6;
+  }
+
+  /* Grid para Destaques Secundários */
+  .destaque-secundarios-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+
+  .card-destaque-secundario {
+    display: flex;
+    flex-direction: column;
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .card-destaque-secundario:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+  }
+
+  .card-destaque-secundario .destaque-imagem-wrap {
+    position: relative;
+    width: 100%;
+    height: 220px; /* Altura perfeita para os dois cards abaixo */
+  }
+
+  .card-destaque-secundario .destaque-conteudo {
+    padding: 1.5rem;
+  }
+
+  .card-destaque-secundario h4 {
+    font-size: 1.2rem;
+    margin: 0 0 0.5rem;
+    color: #1e1b4b;
+    line-height: 1.3;
+  }
+
+  .card-destaque-secundario p {
+    font-size: 0.95rem;
+    color: #555;
+    margin-bottom: 1rem;
+    line-height: 1.5;
+  }
+
+  /* Imagens e Badges */
+  .destaque-imagem-wrap {
+    background: #f3f4f6;
+  }
+
+  .destaque-imagem {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  .badge {
+    position: absolute;
+    top: 14px;
+    left: 14px;
+    background: #f97316;
+    color: #fff;
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 5px 12px;
+    border-radius: 20px;
+    z-index: 2;
+  }
+
+  .badge-secundaria {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    background: #1e1b4b;
+    color: #fff;
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 16px;
+    z-index: 2;
+  }
+
+  .btn-ler-mais {
+    display: inline-block;
+    font-weight: 600;
+    color: #f97316;
+    font-size: 0.95rem;
+  }
+
+  /* ===== BLOCO 2: LISTA + SIDEBAR ===== */
+  .grid-com-sidebar {
+    display: grid;
+    grid-template-columns: 7fr 3fr;
+    gap: 2rem;
+    margin: 3rem 0;
+    align-items: start;
+  }
+
+  .lista-tutoriais-horizontais {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .item-tutorial-horizontal {
+    display: flex;
+    gap: 1rem;
+    background: #fff;
+    border-radius: 12px;
+    padding: 0.75rem;
+    text-decoration: none;
+    color: inherit;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    transition: box-shadow 0.2s ease;
+  }
+
+  .item-tutorial-horizontal:hover {
+    box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+  }
+
+  .thumb-mini {
+    width: 140px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 8px;
+    flex-shrink: 0;
+  }
+
+  .texto-tutorial h4 {
+    margin: 0 0 0.4rem;
+    font-size: 1.05rem;
+    color: #1e1b4b;
+  }
+
+  .texto-tutorial p {
+    font-size: 0.9rem;
+    color: #555;
+    margin: 0 0 0.4rem;
+  }
+
+  .texto-tutorial .data {
+    font-size: 0.8rem;
+    color: #999;
+  }
+
+  /* Sidebar */
+  .barra-lateral {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    position: sticky;
+    top: 1.5rem;
+  }
+
+  .widget {
+    background: #fff;
+    border-radius: 12px;
+    padding: 1.25rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  }
+
+  .autor-perfil {
+    display: flex;
+    gap: 0.85rem;
+    align-items: flex-start;
+  }
+
+  .autor-foto {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+  }
+
+  .widget h3 {
+    font-size: 1rem;
+    color: #1e1b4b;
+    margin: 0 0 0.5rem;
+  }
+
+  .widget-autor p {
+    font-size: 0.88rem;
+    color: #444;
+    line-height: 1.45;
+    margin: 0;
+  }
+
+  .tags-lista {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .tag-pill {
+    background: #eef0ff;
+    color: #1e1b4b;
+    font-size: 0.8rem;
+    padding: 4px 12px;
+    border-radius: 20px;
+    text-decoration: none;
+    transition: background 0.2s;
+  }
+
+  .tag-pill:hover {
+    background: #e0e4ff;
+    color: #f97316;
+  }
+
+  .lista-projetos {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  .lista-projetos a {
+    text-decoration: none;
+    color: #1e1b4b;
+    font-size: 0.9rem;
+    transition: color 0.2s;
+  }
+
+  .lista-projetos a:hover {
+    color: #f97316;
+  }
+
+  /* ===== RESPONSIVO ===== */
+  @media (max-width: 900px) {
+    .destaque-secundarios-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .card-destaque-principal .destaque-imagem-wrap {
+      height: 240px;
+    }
+
+    .grid-com-sidebar {
+      grid-template-columns: 1fr;
+    }
+
+    .barra-lateral {
+      position: static;
+    }
+
+    .item-tutorial-horizontal {
+      flex-direction: column;
+    }
+
+    .thumb-mini {
+      width: 100%;
+      height: 180px;
+    }
+  }
+</style>
