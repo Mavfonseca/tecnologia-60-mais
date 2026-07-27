@@ -12,11 +12,12 @@ const sortedPosts = allPosts.sort(
   (a, b) => new Date(b.data.pubDate).getTime() - new Date(a.data.pubDate).getTime()
 );
 
+// Lógica de Destaques
 const recomendados = sortedPosts.filter(post => post.data.destaque === true);
 const postPrincipal = recomendados[0] || sortedPosts[0];
 const postsSecundarios = recomendados.slice(1, 3);
 
-// Lógica para os últimos tutoriais
+// Lógica para os últimos tutoriais (exclui os que já estão nos destaques)
 let ultimosTutoriais = sortedPosts.filter(post => post.id !== postPrincipal?.id && !postsSecundarios.some(p => p.id === post.id));
 if (ultimosTutoriais.length === 0) {
   ultimosTutoriais = sortedPosts.slice(1);
@@ -29,98 +30,128 @@ const todasTags = [...new Set(allPosts.flatMap(post => getPostTags(post.data)))]
   <head>
     <BaseHead title="Início" description="Aprenda tecnologia no seu ritmo com segurança e clareza." />
     <SEO title="Início - Tecnologia 60 Mais" description="Aprenda tecnologia no seu ritmo com segurança e clareza." />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700;800&display=swap" rel="stylesheet">
   </head>
   <body>
     <Header />
     
-    <main class="home-container">
-      <!-- SEÇÃO 1: RECOMENDADOS (IMAGEM EM CIMA, TEXTO EMBAIXO) -->
-      <section class="recomendados-section">
-        <h2 class="titulo-secao">Recomendados para Você</h2>
-
-        {postPrincipal && (
-          <a href={`/blog/${postPrincipal.id}/`} class="card-destaque-principal">
-            <div class="destaque-imagem-wrap">
-              <img src={postPrincipal.data.heroImage} alt={postPrincipal.data.heroAlt} class="destaque-imagem" />
-              <span class="badge">Destaque Principal</span>
-            </div>
-            <div class="destaque-conteudo">
-              <h3>{postPrincipal.data.title}</h3>
-              <p>{postPrincipal.data.description}</p>
-              <span class="btn-ler-mais">Ler Artigo Completo &rarr;</span>
-            </div>
-          </a>
-        )}
-
-        {postsSecundarios.length > 0 && (
-          <div class="destaque-secundarios-grid">
-            {postsSecundarios.map(post => (
-              <a href={`/blog/${post.id}/`} class="card-destaque-secundario">
-                <div class="destaque-imagem-wrap">
-                  <img src={post.data.heroImage} alt={post.data.heroAlt} class="destaque-imagem" />
-                  <span class="badge-secundaria">Destaque</span>
-                </div>
-                <div class="destaque-conteudo">
-                  <h4>{post.data.title}</h4>
-                  <p>{post.data.description}</p>
-                  <span class="btn-ler-mais">Ler Artigo &rarr;</span>
-                </div>
-              </a>
-            ))}
-          </div>
-        )}
-      </section>
-
-      <!-- SEÇÃO 2: ÚLTIMOS TUTORIAIS + SIDEBAR -->
-      <div class="grid-com-sidebar">
-        <div class="coluna-artigos">
-          <h2 class="titulo-secao">Últimos Tutoriais</h2>
-
-          <div class="lista-tutoriais-horizontais">
-            {ultimosTutoriais.map(post => (
-              <a href={`/blog/${post.id}/`} class="item-tutorial-horizontal">
-                <img src={post.data.heroImage} alt={post.data.heroAlt} class="thumb-mini" />
-                <div class="texto-tutorial">
-                  <h4>{post.data.title}</h4>
-                  <p>{post.data.description}</p>
-                  <span class="data">
-                    {new Date(post.data.pubDate).toLocaleDateString('pt-BR', { day: '2-digit', month: 'long', year: 'numeric' })}
-                  </span>
-                </div>
-              </a>
-            ))}
+    <main>
+      <!-- HERO SECTION: BUSCA E VOZ -->
+      <section class="hero-section">
+        <div class="hero-content">
+          <h1>O que você quer aprender hoje?</h1>
+          <p>Digite sua dúvida ou use a voz para pesquisar de forma simples e rápida.</p>
+          
+          <div class="search-container">
+            <span class="search-icon">🔍</span>
+            <input type="text" placeholder="Ex: Como limpar o celular..." aria-label="Buscar tutorial" />
+            <button class="voice-btn">
+              <span>🎤</span> Pesquisar por Voz
+            </button>
           </div>
         </div>
+      </section>
 
-        <aside class="barra-lateral">
-          <div class="widget widget-autor">
-            <div class="autor-perfil">
-              <img src="/imagens/marcos-fonseca.webp" alt="Marcos Fonseca" class="autor-foto" onerror="this.style.display='none'" />
-              <div>
-                <h3>Guia do Site</h3>
-                <p>Aprenda tecnologia no seu ritmo com <strong>Marcos Fonseca</strong>. Segurança, clareza e muita paciência em cada tutorial.</p>
-              </div>
-            </div>
+      <div class="container-central">
+        <!-- SEÇÃO: RECOMENDADOS -->
+        <section class="section-recomendados">
+          <div class="section-header">
+            <span class="star-icon">⭐</span>
+            <h2>Recomendados para Você</h2>
           </div>
 
-          <div class="widget widget-topicos">
-            <h3>Tópicos Populares</h3>
-            <div class="tags-lista">
-              {todasTags.map(tag => (
-                <a href={`/tag/${slugifyTag(tag)}/`} class="tag-pill">{tag}</a>
+          <div class="grid-destaques">
+            {postPrincipal && (
+              <a href={`/blog/${postPrincipal.id}/`} class="card-principal">
+                <div class="image-wrapper">
+                  <img src={postPrincipal.data.heroImage} alt={postPrincipal.data.heroAlt} />
+                  <span class="badge-principal">Destaque Principal</span>
+                </div>
+                <div class="card-body">
+                  <h3>{postPrincipal.data.title}</h3>
+                  <p>{postPrincipal.data.description}</p>
+                  <span class="link-action">Ler Artigo Completo <span>→</span></span>
+                </div>
+              </a>
+            )}
+
+            <div class="coluna-secundarios">
+              {postsSecundarios.map(post => (
+                <a href={`/blog/${post.id}/`} class="card-secundario">
+                  <div class="image-wrapper-sm">
+                    <img src={post.data.heroImage} alt={post.data.heroAlt} />
+                    <span class="badge-destaque">Destaque</span>
+                  </div>
+                  <div class="card-body-sm">
+                    <h4>{post.data.title}</h4>
+                    <span class="link-action-sm">Ler Artigo <span>→</span></span>
+                  </div>
+                </a>
               ))}
             </div>
           </div>
+        </section>
 
-          <div class="widget widget-outros-projetos">
-            <h3>Conheça Também</h3>
-            <ul class="lista-projetos">
-              <li><a href="https://saudecomequilibrio.com.br" target="_blank" rel="noopener">Saúde com Equilíbrio</a></li>
-              <li><a href="https://temperosdonordeste.saudecomequilibrio.com.br" target="_blank" rel="noopener">Temperos do Nordeste</a></li>
-              <li><a href="https://marcosvfonseca.com" target="_blank" rel="noopener">Marcos Fonseca</a></li>
-            </ul>
-          </div>
-        </aside>
+        <!-- SEÇÃO: TUTORIAIS + SIDEBAR -->
+        <div class="layout-split">
+          <section class="main-content">
+            <div class="section-header">
+              <h2>Últimos Tutoriais</h2>
+            </div>
+
+            <div class="tutoriais-grid">
+              {ultimosTutoriais.map(post => (
+                <a href={`/blog/${post.id}/`} class="tutorial-card">
+                  <div class="thumb-wrap">
+                    <img src={post.data.heroImage} alt={post.data.heroAlt} />
+                  </div>
+                  <div class="tutorial-info">
+                    <span class="pub-date">
+                      {new Date(post.data.pubDate).toLocaleDateString('pt-BR', { day: '2-digit', month: 'long', year: 'numeric' })}
+                    </span>
+                    <h4>{post.data.title}</h4>
+                    <p>{post.data.description}</p>
+                  </div>
+                </a>
+              ))}
+            </div>
+
+            <div class="view-all-container">
+              <a href="/blog" class="btn-all">Ver Todos os Tutoriais <span>→</span></a>
+            </div>
+          </section>
+
+          <aside class="sidebar">
+            <!-- Widget: Autor/Guia -->
+            <div class="widget">
+              <div class="author-header">
+                <div class="author-avatar">MF</div>
+                <h3>Guia do Site</h3>
+              </div>
+              <p>Aprenda tecnologia no seu ritmo com <strong>Marcos Fonseca</strong>. Segurança, clareza e muita paciência em cada tutorial.</p>
+            </div>
+
+            <!-- Widget: Tópicos -->
+            <div class="widget">
+              <h3>🏷️ Tópicos Populares</h3>
+              <div class="tags-container">
+                {todasTags.map(tag => (
+                  <a href={`/tag/${slugifyTag(tag)}/`} class="tag-link">{tag}</a>
+                ))}
+              </div>
+            </div>
+
+            <!-- Widget: Projetos -->
+            <div class="widget">
+              <h3>🔗 Conheça Também</h3>
+              <ul class="projects-list">
+                <li><a href="https://saudecomequilibrio.com.br" target="_blank" rel="noopener">🍏 Saúde com Equilíbrio</a></li>
+                <li><a href="https://temperosdonordeste.saudecomequilibrio.com.br" target="_blank" rel="noopener">🌶️ Temperos do Nordeste</a></li>
+                <li><a href="https://marcosvfonseca.com" target="_blank" rel="noopener">🌐 Marcos Fonseca</a></li>
+              </ul>
+            </div>
+          </aside>
+        </div>
       </div>
     </main>
 
@@ -129,327 +160,403 @@ const todasTags = [...new Set(allPosts.flatMap(post => getPostTags(post.data)))]
 </html>
 
 <style>
-  .home-container {
-    max-width: 1200px;
+  :root {
+    --primary: #000080;
+    --primary-light: #1a23e8;
+    --surface: #f9f9ff;
+    --text-main: #1a1c1e;
+    --text-muted: #666;
+    --white: #ffffff;
+    --accent: #f97316;
+  }
+
+  body {
+    background-color: var(--surface);
+    color: var(--text-main);
+    font-family: 'Manrope', sans-serif;
+    margin: 0;
+  }
+
+  /* HERO SECTION */
+  .hero-section {
+    background-color: var(--primary);
+    color: var(--white);
+    padding: 80px 24px;
+    text-align: center;
+  }
+
+  .hero-content {
+    max-width: 800px;
     margin: 0 auto;
-    padding: 0 1rem;
   }
 
-  .titulo-secao {
-    font-size: 1.5rem;
-    font-weight: 700;
-    margin-bottom: 1.5rem;
-    color: #1e1b4b;
+  .hero-section h1 {
+    font-size: 3rem;
+    font-weight: 800;
+    margin: 0 0 24px;
+    line-height: 1.1;
   }
 
-  /* ===== SEÇÃO DE DESTAQUES (IMAGEM EM CIMA, TEXTO EMBAIXO) ===== */
-  .recomendados-section {
-    margin: 3rem 0;
+  .hero-section p {
+    font-size: 1.25rem;
+    opacity: 0.9;
+    margin-bottom: 40px;
   }
 
-  /* Card Principal (Largura Total da Página) */
-  .card-destaque-principal {
+  .search-container {
+    background: var(--white);
+    border-radius: 50px;
+    padding: 8px;
     display: flex;
-    flex-direction: column;
-    background: #fff;
-    border-radius: 16px;
-    overflow: hidden;
-    box-shadow: 0 6px 20px rgba(0,0,0,0.08);
-    text-decoration: none;
-    color: inherit;
-    margin-bottom: 1.5rem;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    align-items: center;
+    max-width: 650px;
+    margin: 0 auto;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
   }
 
-  .card-destaque-principal:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 12px 28px rgba(0,0,0,0.12);
-  }
-
-  .card-destaque-principal .destaque-imagem-wrap {
-    position: relative;
-    width: 100%;
-    height: 380px; /* Altura ideal para a grande imagem de capa */
-  }
-
-  .card-destaque-principal .destaque-conteudo {
-    padding: 2rem 2.5rem 2.5rem 2.5rem;
-  }
-
-  .card-destaque-principal h3 {
-    font-size: 1.8rem;
-    margin: 0 0 0.75rem;
-    color: #1e1b4b;
-    line-height: 1.3;
-  }
-
-  .card-destaque-principal p {
-    font-size: 1.05rem;
-    color: #444;
-    margin-bottom: 1.25rem;
-    line-height: 1.6;
-  }
-
-  /* Grid para Destaques Secundários */
-  .destaque-secundarios-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1.5rem;
-  }
-
-  .card-destaque-secundario {
-    display: flex;
-    flex-direction: column;
-    background: #fff;
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.06);
-    text-decoration: none;
-    color: inherit;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-  }
-
-  .card-destaque-secundario:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-  }
-
-  .card-destaque-secundario .destaque-imagem-wrap {
-    position: relative;
-    width: 100%;
-    height: 220px; /* Altura perfeita para os dois cards abaixo */
-  }
-
-  .card-destaque-secundario .destaque-conteudo {
-    padding: 1.5rem;
-  }
-
-  .card-destaque-secundario h4 {
-    font-size: 1.2rem;
-    margin: 0 0 0.5rem;
-    color: #1e1b4b;
-    line-height: 1.3;
-  }
-
-  .card-destaque-secundario p {
-    font-size: 0.95rem;
-    color: #555;
-    margin-bottom: 1rem;
-    line-height: 1.5;
-  }
-
-  /* Imagens e Badges */
-  .destaque-imagem-wrap {
-    background: #f3f4f6;
-  }
-
-  .destaque-imagem {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    position: absolute;
-    top: 0;
-    left: 0;
-  }
-
-  .badge {
-    position: absolute;
-    top: 14px;
-    left: 14px;
-    background: #f97316;
-    color: #fff;
-    font-size: 0.8rem;
-    font-weight: 600;
-    padding: 5px 12px;
-    border-radius: 20px;
-    z-index: 2;
-  }
-
-  .badge-secundaria {
-    position: absolute;
-    top: 12px;
-    left: 12px;
-    background: #1e1b4b;
-    color: #fff;
-    font-size: 0.75rem;
-    font-weight: 600;
-    padding: 4px 10px;
-    border-radius: 16px;
-    z-index: 2;
-  }
-
-  .btn-ler-mais {
-    display: inline-block;
-    font-weight: 600;
-    color: #f97316;
-    font-size: 0.95rem;
-  }
-
-  /* ===== BLOCO 2: LISTA + SIDEBAR ===== */
-  .grid-com-sidebar {
-    display: grid;
-    grid-template-columns: 7fr 3fr;
-    gap: 2rem;
-    margin: 3rem 0;
-    align-items: start;
-  }
-
-  .lista-tutoriais-horizontais {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-  }
-
-  .item-tutorial-horizontal {
-    display: flex;
-    gap: 1rem;
-    background: #fff;
-    border-radius: 12px;
-    padding: 0.75rem;
-    text-decoration: none;
-    color: inherit;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-    transition: box-shadow 0.2s ease;
-  }
-
-  .item-tutorial-horizontal:hover {
-    box-shadow: 0 6px 16px rgba(0,0,0,0.1);
-  }
-
-  .thumb-mini {
-    width: 140px;
-    height: 100px;
-    object-fit: cover;
-    border-radius: 8px;
-    flex-shrink: 0;
-  }
-
-  .texto-tutorial h4 {
-    margin: 0 0 0.4rem;
-    font-size: 1.05rem;
-    color: #1e1b4b;
-  }
-
-  .texto-tutorial p {
-    font-size: 0.9rem;
-    color: #555;
-    margin: 0 0 0.4rem;
-  }
-
-  .texto-tutorial .data {
-    font-size: 0.8rem;
+  .search-icon {
+    padding: 0 16px;
     color: #999;
   }
 
-  /* Sidebar */
-  .barra-lateral {
+  .search-container input {
+    border: none;
+    flex-grow: 1;
+    font-size: 1.1rem;
+    padding: 12px;
+    outline: none;
+    color: #333;
+  }
+
+  .voice-btn {
+    background-color: var(--primary-light);
+    color: var(--white);
+    border: none;
+    padding: 12px 24px;
+    border-radius: 50px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+
+  .voice-btn:hover {
+    background-color: #0000a0;
+  }
+
+  /* CONTAINER CENTRAL */
+  .container-central {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 60px 24px;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 32px;
+  }
+
+  .section-header h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--primary);
+    margin: 0;
+  }
+
+  .star-icon {
+    font-size: 1.5rem;
+  }
+
+  /* GRID DESTAQUES */
+  .grid-destaques {
+    display: grid;
+    grid-template-columns: 1.8fr 1fr;
+    gap: 32px;
+    margin-bottom: 80px;
+  }
+
+  .card-principal, .card-secundario, .tutorial-card {
+    text-decoration: none;
+    color: inherit;
+    background: var(--white);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .card-principal:hover, .card-secundario:hover, .tutorial-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.1);
+  }
+
+  .image-wrapper {
+    position: relative;
+    height: 400px;
+  }
+
+  .image-wrapper img, .image-wrapper-sm img, .thumb-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .badge-principal {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background: #c2410c;
+    color: var(--white);
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 6px 12px;
+    border-radius: 4px;
+    text-transform: uppercase;
+  }
+
+  .card-body {
+    padding: 32px;
+  }
+
+  .card-body h3 {
+    font-size: 1.75rem;
+    margin: 0 0 16px;
+    line-height: 1.2;
+    color: var(--primary);
+  }
+
+  .card-body p {
+    color: var(--text-muted);
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 24px;
+  }
+
+  .link-action {
+    color: var(--primary-light);
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .coluna-secundarios {
     display: flex;
     flex-direction: column;
-    gap: 1.25rem;
-    position: sticky;
-    top: 1.5rem;
+    gap: 24px;
+  }
+
+  .image-wrapper-sm {
+    position: relative;
+    height: 200px;
+  }
+
+  .badge-destaque {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    background: var(--accent);
+    color: var(--white);
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 4px;
+    text-transform: uppercase;
+  }
+
+  .card-body-sm {
+    padding: 24px;
+  }
+
+  .card-body-sm h4 {
+    font-size: 1.25rem;
+    margin: 0 0 12px;
+    line-height: 1.3;
+  }
+
+  /* LAYOUT SPLIT */
+  .layout-split {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 60px;
+  }
+
+  .tutoriais-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+
+  .tutorial-card {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .thumb-wrap {
+    height: 180px;
+  }
+
+  .tutorial-info {
+    padding: 24px;
+  }
+
+  .pub-date {
+    font-size: 0.85rem;
+    color: #999;
+    margin-bottom: 8px;
+    display: block;
+  }
+
+  .tutorial-info h4 {
+    margin: 0 0 12px;
+    font-size: 1.15rem;
+    line-height: 1.4;
+  }
+
+  .tutorial-info p {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+    margin: 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .view-all-container {
+    margin-top: 48px;
+    text-align: center;
+  }
+
+  .btn-all {
+    display: inline-block;
+    background: #000040;
+    color: var(--white);
+    padding: 16px 40px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 700;
+    transition: background 0.3s;
+  }
+
+  .btn-all:hover {
+    background: #000;
+  }
+
+  /* SIDEBAR */
+  .sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
   }
 
   .widget {
-    background: #fff;
-    border-radius: 12px;
-    padding: 1.25rem;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    background: var(--white);
+    padding: 32px;
+    border-radius: 24px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+    border: 1px solid rgba(0,0,0,0.05);
   }
 
-  .autor-perfil {
+  .author-header {
     display: flex;
-    gap: 0.85rem;
-    align-items: flex-start;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 20px;
   }
 
-  .autor-foto {
-    width: 50px;
-    height: 50px;
+  .author-avatar {
+    width: 48px;
+    height: 48px;
+    background: var(--primary);
+    color: var(--white);
     border-radius: 50%;
-    object-fit: cover;
-    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
   }
 
   .widget h3 {
-    font-size: 1rem;
-    color: #1e1b4b;
-    margin: 0 0 0.5rem;
+    margin: 0;
+    font-size: 1.25rem;
   }
 
-  .widget-autor p {
-    font-size: 0.88rem;
-    color: #444;
-    line-height: 1.45;
+  .widget p {
+    color: var(--text-muted);
+    line-height: 1.6;
     margin: 0;
   }
 
-  .tags-lista {
+  .tags-container {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.5rem;
+    gap: 8px;
+    margin-top: 16px;
   }
 
-  .tag-pill {
-    background: #eef0ff;
-    color: #1e1b4b;
-    font-size: 0.8rem;
-    padding: 4px 12px;
-    border-radius: 20px;
+  .tag-link {
+    background: #f1f3f9;
+    color: var(--primary);
+    padding: 6px 16px;
+    border-radius: 50px;
     text-decoration: none;
-    transition: background 0.2s;
+    font-size: 0.9rem;
+    transition: all 0.2s;
   }
 
-  .tag-pill:hover {
-    background: #e0e4ff;
-    color: #f97316;
+  .tag-link:hover {
+    background: #e0e7ff;
+    color: var(--accent);
   }
 
-  .lista-projetos {
+  .projects-list {
     list-style: none;
     padding: 0;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 0.6rem;
+    margin: 16px 0 0;
   }
 
-  .lista-projetos a {
+  .projects-list li {
+    margin-bottom: 12px;
+  }
+
+  .projects-list a {
     text-decoration: none;
-    color: #1e1b4b;
-    font-size: 0.9rem;
+    color: var(--text-main);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 500;
     transition: color 0.2s;
   }
 
-  .lista-projetos a:hover {
-    color: #f97316;
+  .projects-list a:hover {
+    color: var(--accent);
   }
 
-  /* ===== RESPONSIVO ===== */
-  @media (max-width: 900px) {
-    .destaque-secundarios-grid {
+  /* RESPONSIVO */
+  @media (max-width: 1024px) {
+    .grid-destaques, .layout-split {
       grid-template-columns: 1fr;
     }
-
-    .card-destaque-principal .destaque-imagem-wrap {
-      height: 240px;
+    
+    .hero-section h1 {
+      font-size: 2.25rem;
     }
+  }
 
-    .grid-com-sidebar {
+  @media (max-width: 768px) {
+    .tutoriais-grid {
       grid-template-columns: 1fr;
     }
-
-    .barra-lateral {
-      position: static;
-    }
-
-    .item-tutorial-horizontal {
-      flex-direction: column;
-    }
-
-    .thumb-mini {
-      width: 100%;
-      height: 180px;
+    
+    .image-wrapper {
+      height: 250px;
     }
   }
 </style>
