@@ -82,6 +82,33 @@ Você já tentou pedir isenção de IPVA no seu estado? Conta aqui nos comentár
 
 ---
 
+### Leia também
+
+- [Nova regra bancária quer proteger idosos 60+ contra golpes financeiros: entenda o que muda](https://tecnologia60mais.netlify.app/blog/nova-regra-bancaria-idosos/)
+- [Golpes do Pix: Como Identificar e se Proteger com Segurança](https://tecnologia60mais.netlify.app/blog/golpes-pix-como-se-proteger/)
+- [Como Proteger seu CPF e Documentos Online](https://tecnologia60mais.netlify.app/blog/seguranca-cpf-online/)
+
+---
+
+## FAQ: Perguntas Frequentes
+
+**1. Idoso paga IPVA em 2026?**
+Depende do estado e da situação do veículo. Sem enquadramento em doença ou PCD, a idade sozinha normalmente não gera isenção, exceto quando o carro tem 20 anos ou mais de fabricação.
+
+**2. O PL 2937/2020 já está em vigor?**
+Não. Até julho de 2026 ainda aguardava relator na Comissão de Finanças e Tributação da Câmara, precisa passar pelo Senado e receber sanção presidencial.
+
+**3. Qual o valor máximo do carro para isenção de ICMS de PCD?**
+Isenção integral até R$ 70 mil, com desconto proporcional para veículos entre R$ 70 mil e R$ 120 mil.
+
+**4. Carro com 20 anos de fabricação está isento de IPVA em qualquer estado?**
+Sim, desde a Emenda Constitucional 137 de dezembro de 2025, essa isenção é nacional e não depende da idade do dono do veículo.
+
+**5. Onde eu peço isenção de IPVA para idoso no meu estado?**
+Diretamente na Secretaria da Fazenda (Sefaz) do estado onde o veículo está registrado, apresentando laudo médico quando exigido.
+
+---
+
 ### Referências
 
 1. [Comissão aprova proposta que permite compra de carro por idoso com isenção do IPI - Câmara dos Deputados](https://www.camara.leg.br/noticias/781650-COMISSAO-APROVA-PROPOSTA-QUE-PERMITE-COMPRA-DE-CARRO-POR-IDOSO-COM-ISENCAO-DO-IPI)
@@ -89,3 +116,4 @@ Você já tentou pedir isenção de IPVA no seu estado? Conta aqui nos comentár
 3. [Confira quais carros estão isentos de pagar IPVA em 2026 - CNN Brasil](https://www.cnnbrasil.com.br/auto/confira-quais-carros-estao-isentos-de-pagar-ipva-em-2026/)
 4. [Isenção de ICMS na Aquisição de Veículo Novo para Portadores de Deficiência - Portal da Fazenda de São Paulo](https://portal.fazenda.sp.gov.br/servicos/isencao-icms-veiculos/Paginas/PaginaGuiaDoUsuario.aspx)
 5. [Carros PcD 2026: Isenção de IPI, ICMS e IPVA](https://www.pcd.com.br/carros-para-deficientes-com-isencoes-de-ipi-icms-e-ipva-para-deficientes-e-nao-condutores___55.html)
+
