@@ -7,7 +7,7 @@ heroImage: "/imagens/assistente-voz-autonomia.webp"
 tags: ["inteligencia artificial", "assistente de voz", "autonomia", "idosos", "tecnologia", "alexa", "google assistente", "rotina", "saúde", "acessibilidade"]
 heroAlt: "Professor de informática Marcos Fonseca demonstrando o uso de assistente de voz em smartphone para aluna idosa, focando em acessibilidade e autonomia digital."
 heroCaption: "A tecnologia invisível: aprenda a usar sua voz para simplificar tarefas diárias, organizar sua saúde e ganhar mais independência no dia a dia."
-destaque: true
+destaque: false
 itemListName: "Exemplos de Comandos de Voz para o Dia a Dia"
 itemListElements:
   - name: "Gestão de Saúde"

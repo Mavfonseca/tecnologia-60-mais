@@ -6,7 +6,7 @@ updatedDate: 2026-07-21
 heroImage: "/imagens/limpar-memoria-celular.webp"
 heroAlt: "Pessoa idosa sorridente e aliviada segurando um smartphone após liberar espaço na memória do aparelho"
 heroCaption: "Celular rápido e organizado: tranquilidade na palma da mão"
-destaque: true
+destaque: false
 keywords: ["limpar memória do celular", "celular travando", "apagar cache", "liberar espaço"]
 howToName: "Como Limpar a Memória e o Cache do Celular"
 howToDescription: "Passo a passo simples para apagar o lixo eletrônico e liberar espaço no seu aparelho sem deletar arquivos importantes."

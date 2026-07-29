@@ -4,7 +4,7 @@ description: "Aprenda a identificar sites confiáveis e fuja das falsas promessa
 pubDate: 2026-07-22
 heroImage: "/imagens/pesquisa-segura.webp"
 heroAlt: "Pessoa idosa sorridente segurando um tablet com um ícone de escudo verde na tela, simbolizando segurança"
-destaque: true
+destaque: false
 author: "Marcos Fonseca"
 itemListName: "Dicas para identificar sites confiáveis"
 itemListElements:

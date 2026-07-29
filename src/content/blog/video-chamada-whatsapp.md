@@ -6,7 +6,7 @@ updatedDate: 2026-07-20
 heroImage: "/imagens/video-chamada-whatsapp.webp"
 heroAlt: "Idoso sorridente fazendo vídeo-chamada no WhatsApp com a família"
 heroCaption: "Ver o sorriso da família, a um toque de distância"
-destaque: true
+destaque: false
 keywords: ["vídeo-chamada whatsapp", "como fazer chamada de vídeo", "whatsapp para iniciantes"]
 howToName: "Como Fazer uma Vídeo-Chamada no WhatsApp"
 howToDescription: "Passo a passo simples para fazer sua primeira vídeo-chamada pelo WhatsApp e ver a família mesmo à distância."

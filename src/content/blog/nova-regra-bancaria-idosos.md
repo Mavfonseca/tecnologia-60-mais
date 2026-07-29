@@ -7,7 +7,7 @@ heroImage: "/imagens/idoso-app-bancario-seguranca.webp"
 tags: ["pl 1453/26", "golpes financeiros idosos", "segurança bancária idosos", "autenticação dois fatores assistida", "pix seguro idosos", "proteção contra golpes 60 mais", "câmara dos deputados idosos", "fraudes digitais terceira idade"]
 author: "Marcos Fonseca"
 draft: false
-destaque: true
+destaque: false
 itemListName: "Mitos e Verdades sobre o PL 1453/26"
 itemListElements:
   - name: "Perda de Autonomia"

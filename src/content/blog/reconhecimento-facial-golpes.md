@@ -5,7 +5,7 @@ pubDate: 2026-07-24
 updatedDate: 2026-07-24
 heroImage: "/imagens/reconhecimento-facial-golpes-financeiros.webp"
 heroAlt: "Pessoa idosa usando um smartphone para fazer reconhecimento facial, com um escudo de segurança digital na tela"
-destaque: true
+destaque: false
 author: "Marcos Fonseca"
 itemListName: "8 cuidados antes de fazer uma validação facial"
 itemListElements:

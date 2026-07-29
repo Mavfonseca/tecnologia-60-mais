@@ -6,7 +6,7 @@ updatedDate: 2026-07-20
 heroImage: "/imagens/dica-de-seguranca.webp"
 heroAlt: "Idoso verificando mensagem suspeita de golpe no WhatsApp"
 heroCaption: "Sempre confirme por chamada de voz antes de qualquer transferência"
-destaque: true
+destaque: false
 keywords: ["golpes no whatsapp", "segurança digital idosos", "pix golpe whatsapp"]
 itemListName: "Os 3 golpes mais comuns no WhatsApp"
 itemListElements:

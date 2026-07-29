@@ -6,7 +6,7 @@ updatedDate: 2026-07-20
 heroImage: "/imagens/seguranca-cpf-online.webp"
 heroAlt: "Idoso verificando dados pessoais com segurança no celular"
 heroCaption: "Sua segurança digital começa com um hábito simples e semestral"
-destaque: true
+destaque: false
 keywords: ["proteger cpf online", "segurança digital idosos", "verificação duas etapas gov.br"]
 itemListName: "3 sinais de alerta em sites que pedem seu CPF"
 itemListElements:

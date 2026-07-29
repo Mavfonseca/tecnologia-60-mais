@@ -39,7 +39,7 @@ Vale reforçar: baixar aplicativos apenas pelas lojas oficiais (Google Play e Ap
 
 ---
 
-### Conclusão: a tecnologia que vai vencer é a que for feita para essa geração, não adaptada depois
+## Conclusão: a tecnologia que vai vencer é a que for feita para essa geração, não adaptada depois
 
 A economia da longevidade não vai crescer só com mais produtos, vai crescer com produtos pensados desde a origem para quem tem 60 anos ou mais. Saúde monitorada à distância, pagamento simplificado e segurança como prioridade são os três pilares que já estão em construção.
 
