@@ -8,6 +8,17 @@ destaque: true
 tags: ["CNH idosos", "renovação CNH", "Detran 2026", "CNH 70 anos", "exame de aptidão", "Contran", "direção segura terceira idade", "CNH digital", "resolução Contran 1020", "código de trânsito brasileiro"]
 heroAlt: "Motorista idoso dirigindo com atenção, ilustrando as regras de renovação da CNH em 2026"
 heroCaption: "Envelhecer não tira o direito de dirigir, mas muda a frequência dos exames."
+faqItems:
+  - question: "Posso perder a CNH só por causa da idade?"
+    answer: "Não. A idade sozinha não é motivo para negar a renovação..."
+  - question: "Depois dos 70 anos, sou obrigado a fazer o exame presencial?"
+    answer: "Sim. A partir de 2026, condutores com 70 anos ou mais não participam da renovação automática..."
+  - question: "Quanto tempo antes do vencimento devo iniciar a renovação da CNH?"
+    answer: "O recomendado é iniciar entre 30 e 60 dias antes do vencimento, já que o agendamento de exames pode levar algumas semanas dependendo do estado."
+  - question: "O uso de remédios controlados impede a renovação da CNH?"
+    answer: "Não impede automaticamente, mas o médico perito avalia se a medicação afeta reflexos, atenção ou nível de consciência, e pode reduzir o prazo de validade ou pedir acompanhamento adicional."
+  - question: "A CNH digital substitui a renovação presencial para idosos?"
+    answer: "Não. O aplicativo CNH Digital serve para consultar validade e portar o documento no celular, mas não substitui o exame presencial obrigatório para condutores com 70 anos ou mais."
 ---
 
 Muita gente com mais de 60 anos se pergunta se vai chegar uma idade em que vão simplesmente tirar a carteira de motorista. A resposta é não. O que muda com o tempo não é o direito de dirigir, é a frequência com que você precisa provar que ainda está apto. E em 2026 essa diferença ficou ainda mais clara, porque parte das novidades na renovação da CNH não vale para quem tem 70 anos ou mais.

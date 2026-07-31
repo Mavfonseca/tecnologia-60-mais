@@ -8,6 +8,17 @@ destaque: true
 tags: ["estatuto da pessoa idosa", "direitos do idoso", "carteira do idoso", "gratuidade no transporte", "disque 100", "inclusão digital", "tecnologia para idosos", "aplicativos para idosos", "direitos humanos", "60 mais"]
 heroAlt: "Pessoa idosa usando smartphone para acessar serviços digitais garantidos pelo Estatuto da Pessoa Idosa"
 heroCaption: "Muitos direitos da Lei 10.741 já podem ser resolvidos direto no celular"
+faqItems:
+  - question: "Quem tem direito à Carteira do Idoso?"
+    answer: "Pessoas com 60 anos ou mais, com renda individual de até dois salários mínimos, inscritas no Cadastro Único (CadÚnico) do Governo Federal."
+  - question: "A gratuidade no transporte urbano vale a partir de qual idade?"
+    answer: "Depende do município. Em São Paulo, por exemplo, a gratuidade vale a partir dos 60 anos, enquanto em outras cidades o benefício integral começa aos 65."
+  - question: "É preciso se identificar para denunciar maus-tratos pelo Disque 100?"
+    answer: "Não. A denúncia pode ser feita de forma anônima, por telefone, WhatsApp, Telegram ou pelo aplicativo Proteja Brasil."
+  - question: "A Carteira do Idoso substitui o RG?"
+    answer: "Não. Ela é um documento complementar, específico para comprovar o direito à gratuidade ou desconto em transporte interestadual."
+  - question: "O que fazer se um órgão público negar atendimento preferencial?"
+    answer: "O Estatuto garante esse direito por lei. Vale registrar a situação e, se necessário, buscar a Ouvidoria do órgão ou o Disque 100."
 ---
 
 O Estatuto da Pessoa Idosa completa mais de duas décadas de existência, mas boa parte de quem tem 60 anos ou mais ainda não sabe que vários dos direitos previstos na Lei 10.741/2003 hoje se resolvem pelo celular, sem precisar enfrentar fila. Neste artigo você vai ver quatro desses direitos e o caminho digital para cada um.
