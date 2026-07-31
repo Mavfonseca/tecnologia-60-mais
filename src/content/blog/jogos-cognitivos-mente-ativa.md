@@ -6,7 +6,7 @@ updatedDate: 2026-07-28
 heroImage: "/imagens/jogos-cognitivos-mente-ativa.webp"
 heroAlt: "Idosa sorridente exercitando a mente com um jogo de quebra-cabeça em um tablet"
 heroCaption: "Mente ativa e saudável: a tecnologia a favor da sua memória"
-destaque: true
+destaque: false
 keywords: ["jogos cognitivos", "memória", "terceira idade", "neuroplasticidade", "aplicativos para idosos", "saúde mental"]
 howToName: "Como Começar a Treinar a Mente com Jogos Digitais"
 howToDescription: "Passo a passo simples para incluir os jogos cognitivos na sua rotina diária e colher os benefícios para a memória."
