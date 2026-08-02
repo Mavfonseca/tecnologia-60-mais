@@ -34,6 +34,16 @@ const blog = defineCollection({
 					})
 				)
 				.optional(),
+
+			// Campo novo — Schema JSON-LD (HowTo, só para artigos tutoriais)
+			howToSteps: z
+				.array(
+					z.object({
+						name: z.string(),
+						text: z.string(),
+					})
+				)
+				.optional(),
 		}),
 });
 
